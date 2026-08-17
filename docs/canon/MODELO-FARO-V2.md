@@ -8,9 +8,22 @@
 
 ## STATUS DESTE DOCUMENTO
 
-Este é o **canon** do FARO: a especificação consolidada que resulta da fusão do modelo v1
+Este é o **canon do PRODUTO**: a especificação consolidada que resulta da fusão do modelo v1
 do fundador (preservado em `DOSSIE-V1.md`) com as emendas da Junta de Juízes externa
-(3 pareceres em `../junta/`, sínteses em `../junta/QUADRO-DE-VEREDITOS.md`).
+(3 pareceres em `../junta/`, sínteses em `../junta/QUADRO-DE-VEREDITOS.md`), mais as
+emendas da 2ª rodada (Fossa das Marianas, `../junta/marianas/`).
+
+O canon do **NEGÓCIO** — rota de entrada, tamanho de mercado, fronteira legal, economia
+unitária e pricing — está em [`MODELO-DE-NEGOCIO.md`](./MODELO-DE-NEGOCIO.md). Os documentos
+são irmãos: este descreve o que o produto faz; aquele, por que ele se paga.
+
+| Documento | Cobre |
+|---|---|
+| **Este** | O produto: leis, score, evidência, fontes, watch, tribunal, MVP |
+| [`MODELO-DE-NEGOCIO.md`](./MODELO-DE-NEGOCIO.md) | O negócio: decisão selada, iceberg, economia unitária, pricing |
+| [`LEI-DE-DADOS.md`](./LEI-DE-DADOS.md) | A fronteira entre o dado da casa e o do assinante |
+| [`CANAL-OPERADOR-PARCEIRO.md`](./CANAL-OPERADOR-PARCEIRO.md) | A rota (b), o muro legal e o ground truth loop |
+| [`CATALOGO-DE-TESES-DA-CASA.md`](./CATALOGO-DE-TESES-DA-CASA.md) | As teses que a casa opera, com proveniência |
 
 **O que existe hoje:** este modelo + uma maquete de interface com dados fictícios.
 **O que não existe hoje:** motor, coleta, banco, score real, cobrança, qualquer produto rodando.
@@ -166,6 +179,88 @@ e pode discordar da ponderação. Discordar alimenta o Thesis Engine (§9).
 Consequência de venda: é isso que torna o produto vendável a contador, advogado tributarista,
 consultor e M&A — gente que vive de sustentar tese diante de terceiros.
 
+### 4.1 O NÚMERO-MESTRE DA FICHA É O EV LÍQUIDO — NÃO O BRUTO
+
+*(emenda da rodada Fossa das Marianas — origem: parecer Manus)*
+
+O score mede **aderência à tese**. Ele não responde à pergunta que o assinante
+realmente faz: *quanto disso vira dinheiro?* Para isso existe o **valor esperado
+líquido**, e ele é o número em destaque na ficha.
+
+```
+EV LÍQUIDO =
+      oportunidade bruta
+    × probabilidade de elegibilidade
+    × probabilidade de homologação/uso
+    × ajuste de prazo de caixa
+    − custo de documentação
+    − honorários do habilitado
+```
+
+> ### "Um produto que acusa R$ 3 milhões e converte R$ 100 mil líquidos é pior que um produto que identifica R$ 400 mil com 80% de conversão."
+> — parecer Manus, rodada Marianas
+
+**Regra de exibição:** o EV líquido aparece em destaque. O **bruto é componente
+subordinado**, exibido sempre ao lado das probabilidades que o reduzem — nunca
+sozinho, nunca maior que o líquido na hierarquia visual.
+
+Isso inverte o instinto comercial de propósito: **o número grande na tela é um
+passivo se não converter.** Vender bruto é o que o mercado faz; é também o que
+produz o falso positivo que gera multa no cliente e ação de regresso na casa.
+
+**As cinco camadas do crédito** (taxonomia do parecer GPT, adotada):
+
+```
+Potential Credit → Eligible Credit → Validated Credit → Recoverable Credit → Recovered Cash
+```
+
+O mercado vende a primeira camada como se fosse a última. O FARO nomeia as cinco e
+diz em qual delas cada ficha está.
+
+**De onde vêm as probabilidades:** enquanto não houver ground truth, são faixas
+declaradas dos pareceres, **com selo `ESTIMATIVA`**. Quando o operador parceiro
+devolver conversão real, passam a ser medidas. Ver
+[`CANAL-OPERADOR-PARCEIRO.md`](./CANAL-OPERADOR-PARCEIRO.md) — ground truth loop.
+
+### 4.2 CAMPO "POR QUE NÃO PERSEGUIR" — o produto de dizer não
+
+*(emenda da rodada Fossa das Marianas — origem: parecer GPT)*
+
+Toda ficha carrega, obrigatoriamente, um campo que argumenta **contra** ela própria.
+
+O funil real do mercado, conforme o parecer GPT:
+
+```
+100.000 empresas prospectadas
+ 10.000 parecem ter oportunidade
+  2.000 realmente têm
+    500 têm documentação suficiente
+    200 conseguem recuperar
+     50 têm ticket economicamente relevante
+```
+
+**0,05% do topo vira negócio relevante.** Num funil assim, o valor de eliminar
+rápido é igual ao valor de encontrar. Daí a pergunta comercial que reposiciona o
+produto:
+
+> **"Quem está disposto a pagar para saber quais oportunidades NÃO devem ser
+> perseguidas? Essa informação vale tanto quanto encontrar dinheiro."**
+> — parecer GPT, rodada Marianas
+
+O campo lista, em texto direto, o que **desaconselha** a caçada: documentação
+provavelmente ausente · período possivelmente prescrito · precedente desfavorável na
+tese · fonte degradada na janela · sinal isolado sem corroboração · porte incompatível
+com o custo do trabalho · **capacidade de utilização do crédito duvidosa** (o ponto
+cego do parecer Manus: sem débito compensável, tributo corrente ou apetite para
+litigar, o valor do alvo é artificial).
+
+**Consequência de arquitetura:** este campo é o que transforma o FARO de gerador de
+leads em **infraestrutura de underwriting** — a síntese do ponto cego triplo da Junta:
+
+> **O produto é confiança subscrita, não lead.**
+
+Ver [`../junta/marianas/QUADRO-DE-VEREDITOS-MARIANAS.md`](../junta/marianas/QUADRO-DE-VEREDITOS-MARIANAS.md) Parte 5.
+
 ---
 
 ## 5. FARO CONFIDENCE POLICY™
@@ -316,6 +411,50 @@ trava de plano.
 | FARO PROOF | Evidências e fontes | Sim |
 | FARO SCORE | Priorizar | Sim |
 | FARO ACTION | Transformar oportunidade em ação comercial | **Não** |
+
+### 8.1 MÓDULO RELÓGIO DA REFORMA
+
+*(emenda da rodada Fossa das Marianas — origem: unanimidade 3×0)*
+
+O Watch não monitora só mudança de estado de **empresa**. Monitora também mudança de
+estado da **norma** — e, na janela 2026–2033, essa é a fonte de evento mais densa que
+existe.
+
+| Evento monitorado | Por que é evento |
+|---|---|
+| Alteração de lei complementar, MP ou instrução normativa | Muda a regra que sustenta a tese |
+| Marco do calendário da transição | 2027 fim do PIS/Cofins · 2029–2032 substituição gradual de ICMS/ISS |
+| Precedente novo em tese do catálogo | Pode nascer, enfraquecer ou **matar** uma tese |
+| Janela de utilização de saldo credor se aproximando | Urgência datada, por empresa |
+| Fonte normativa mudando de versão | Dispara releitura das regras dependentes |
+
+**Por que isto pertence ao Watch e não a um módulo separado:** a unidade de valor do
+FARO é o evento (§2). Uma norma que muda **é** uma mudança de estado — só que atinge
+a carteira inteira de uma vez, em vez de uma empresa.
+
+#### 🔴 A regra dura da vigilância normativa
+
+> **A LC 214/2025 já foi alterada pela LC 227/2026.**
+>
+> O produto lê a **versão VIGENTE**, nunca a decorada. Regra de produto escrita
+> contra texto legal desatualizado é falso positivo com aparência de rigor — o pior
+> tipo, porque passa em revisão.
+
+Consequência para o Source Registry (§7.1): fonte **normativa** entra no registro com
+os mesmos campos das fontes de dado — versão, data de coleta, status e fallback. Um
+texto legal tem versão do mesmo jeito que um cadastro tem data de coleta.
+
+#### Detectar tese morta, não só tese viva
+
+> *"Tese estática = produto fraco. Tese versionada em tempo real = produto forte."*
+> — parecer GPT, rodada Marianas
+
+Na primeira rodada de três juízes sobre o mercado, **três teses do top-8 já estavam
+em disputa**. Por isso o catálogo carrega **estado** (ativa · estudo · segmentada ·
+contraditada · morta) e **data de última verificação** — e o Watch é quem atualiza
+esse estado. Ver [`CATALOGO-DE-TESES-DA-CASA.md`](./CATALOGO-DE-TESES-DA-CASA.md).
+
+**Fora do MVP.** Registrado como o módulo seguinte, não como promessa presente.
 
 ---
 
@@ -547,6 +686,46 @@ Consequências operacionais:
 - O **bloco agro permanece fora do MVP** até existir parecer jurídico e caso de uso específico.
 - O produto nasce com o parecer, não remenda depois (protocolo LEXIS da casa).
 
+### 15.1 A TESE DO ASSINANTE É DO ASSINANTE
+
+*(emenda da rodada Fossa das Marianas — Lei de Dados, aprovada pelo dono)*
+
+A LGPD trata do dado de terceiros. Falta a fronteira do dado **do próprio cliente** —
+e ela é crítica porque a casa faz duas coisas ao mesmo tempo: vende a pá **e**
+garimpa com tenant próprio.
+
+> **Regra de ouro: a tese do assinante é do assinante.** Tenant isolado. A pesquisa
+> do cliente é dele. A ALSHAM nunca vê nem deriva.
+
+Quatro camadas lícitas de aprendizado: **telemetria agregada e anônima** declarada em
+contrato · **catálogo próprio** da casa · **dado público** com auditoria de
+proveniência · **opt-in** declarado como feature contratada.
+
+Linha vermelha: copiar tese individual é concorrência desleal e violação de segredo
+de negócio — **e mata o fosso**, porque um assinante que desconfia da plataforma para
+de julgar, e sem julgamento o Thesis Engine (§10) não gira.
+
+Texto completo, cláusulas-minuta e mecanismos de verificação:
+[`LEI-DE-DADOS.md`](./LEI-DE-DADOS.md).
+
+### 15.2 CLÁUSULA-BLINDAGEM — "sugestão de dados vs. decisão do contribuinte"
+
+*(emenda da rodada Fossa das Marianas — origem: parecer Gemini)*
+
+**O risco concreto:** a Receita Federal tem **5 anos** para homologar uma
+compensação. Se a tecnologia apontar crédito indevido, o contribuinte sofre **multa
+de ofício de 75% a 150%** — e, no mercado real, **processa a consultoria/tech
+exigindo reparação**.
+
+Um erro de score não custa reputação. Custa multa no cliente e ação de regresso na
+casa. Por isso a blindagem não é cláusula de rodapé: aparece **em todo o fluxo** —
+ficha, limite de inferência, dossiê, contratos espelhados e **cabeçalho da exportação
+CSV** (dado que sai da plataforma leva a ressalva junto).
+
+A formulação obrigatória: o FARO apresenta **sugestão de dados**; a **decisão é do
+contribuinte**, assessorado por profissional habilitado. Detalhamento:
+[`CANAL-OPERADOR-PARCEIRO.md`](./CANAL-OPERADOR-PARCEIRO.md).
+
 ---
 
 ## 16. ECONOMIA UNITÁRIA
@@ -739,6 +918,36 @@ O motor não nasce nesta fase. Nasce com o design partner pagante.
 | 22 | Preço Pro R$597 → R$697 | Junta | Adotada (§16.1) |
 
 Detalhe de cada divergência e da síntese: `../junta/QUADRO-DE-VEREDITOS.md`.
+
+### Emendas da 2ª rodada — Fossa das Marianas (17/08/2026)
+
+Rodada sobre **mercado e modelo de negócio**. Consolidação em
+[`MODELO-DE-NEGOCIO.md`](./MODELO-DE-NEGOCIO.md); quadro em
+[`../junta/marianas/QUADRO-DE-VEREDITOS-MARIANAS.md`](../junta/marianas/QUADRO-DE-VEREDITOS-MARIANAS.md).
+
+| # | Emenda | Origem | Status |
+|---|---|---|---|
+| M-01 | Rota (a) núcleo + (b) canal · (c) descartada · (d) horizonte | Junta 3×0 + martelo do dono | `MODELO-DE-NEGOCIO.md` §A |
+| M-02 | Tech nunca divide honorário advocatício (Lei 8.906/94) | Junta 3×0 | `CANAL-OPERADOR-PARCEIRO.md` |
+| M-03 | R$ 250 bi é impacto do Tema 69, não tamanho de mercado | Manus (derruba Gemini) | `MODELO-DE-NEGOCIO.md` §C.1 |
+| M-04 | Piso rigoroso R$ 10–30 bi/ano · honorários R$ 1,5–6 bi/ano | Manus | `MODELO-DE-NEGOCIO.md` §C.1 |
+| M-05 | **EV líquido como número-mestre da ficha** | Manus | **Adotada — §4.1** |
+| M-06 | **Campo "POR QUE NÃO PERSEGUIR"** | GPT | **Adotada — §4.2** |
+| M-07 | **Cláusula-blindagem "sugestão de dados vs. decisão do contribuinte"** | Gemini | **Adotada — §15.2** |
+| M-08 | **Relógio da Reforma como módulo do Watch** | Junta 3×0 | **Adotada — §8.1** |
+| M-09 | **Vigilância normativa: ler a versão VIGENTE (LC 214 ← LC 227/2026)** | Anexo ❔ + Manus + GPT | **Adotada — §8.1** |
+| M-10 | Catálogo com estado e proveniência (detectar tese morta) | GPT + as 3 contradições | `CATALOGO-DE-TESES-DA-CASA.md` |
+| M-11 | Benchmark R$ 2–30k/mês → hipótese linha Operador Profissional | GPT + Manus | `MODELO-DE-NEGOCIO.md` §D.2 |
+| M-12 | Empresa-tipo R$ 100M: usar R$ 500k–1,5M, não R$ 8M | GPT (contra o próprio case) | `MODELO-DE-NEGOCIO.md` §C.2 |
+| M-13 | Ground truth loop pelo operador parceiro | Síntese do ponto cego triplo | `CANAL-OPERADOR-PARCEIRO.md` |
+| M-14 | **Lei de Dados — a tese do assinante é do assinante** | Aprovada pelo dono | **Adotada — §15.1** + `LEI-DE-DADOS.md` |
+| M-15 | Documento sem carimbo de origem não vota | Lição da 1ª rodada, aplicada | `../junta/marianas/README.md` |
+
+**Três contradições diretas entre juízes, declaradas e não arbitradas** (ISS/Tema 118
+· terço constitucional de férias/Tema 985 · monofásico/Tema 1.339): registradas em
+`CATALOGO-DE-TESES-DA-CASA.md` com as teses **bloqueadas ou segmentadas** até parecer
+LEXIS + tributarista habilitado. O canon não arbitra tese jurídica — arbitrar seria
+justamente o ato privativo que a Lei 8.906/94 veda à tecnologia.
 
 ---
 
