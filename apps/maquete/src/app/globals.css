@@ -1,0 +1,73 @@
+@import 'tailwindcss';
+
+/* ============================================================================
+   FARO — SSOT DE COR
+   Fonte única de verdade da maquete. Nenhum componente carrega cor hardcoded.
+   Referência: docs/canon/IDENTIDADE-VISUAL.md
+   ========================================================================== */
+
+@theme {
+  /* GROUND — a tela do instrumento */
+  --color-bg: #06090c;
+  --color-surface: #0c1216;
+  --color-surface-2: #121a20;
+  --color-border: #1c262c;
+  --color-border-strong: #2b383f;
+
+  /* TIPOGRAFIA */
+  --color-text: #e4ebee;
+  --color-text-secondary: #8a9aa3;
+  --color-text-muted: #5a6a73;
+
+  /* SINAL — a única cor de marca. Máx ~10% da área da tela. */
+  --color-signal: #2ed3a3;
+  --color-signal-dim: #177a5e;
+  --color-signal-fg: #04120d;
+
+  /* ESCALA FUNCIONAL — envelhecimento e risco.
+     fresh-ok é o próprio --signal por decisão de design: a cor de marca
+     significa "o sinal está vivo". Ver IDENTIDADE-VISUAL.md §4. */
+  --color-fresh-ok: #2ed3a3;
+  --color-fresh-warn: #d6a93b;
+  --color-fresh-stale: #dc7633;
+  --color-fresh-old: #d7554f;
+
+  /* FONTES */
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    monospace;
+
+  /* FORMA — raio baixo: painel de instrumento, não bolha de app */
+  --radius-instrument: 3px;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Números que se comparam alinham em coluna — regra, não estilo.
+   Ver IDENTIDADE-VISUAL.md §5. */
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background-color: var(--color-signal);
+  color: var(--color-signal-fg);
+}
+
+*:focus-visible {
+  outline: 1px solid var(--color-signal);
+  outline-offset: 2px;
+}
