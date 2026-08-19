@@ -9,7 +9,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "test": "node --test --experimental-strip-types \"src/parser/*.test.ts\"",
     "motor": "node --experimental-strip-types src/cli.ts",
-    "test:banco": "node --test --experimental-strip-types \"src/coleta/*.integracao.test.ts\""
+    "test:banco": "node --test --experimental-strip-types \"src/*/*.integracao.test.ts\""
   },
   "dependencies": {
     "@faro/core": "workspace:*"

@@ -6,7 +6,8 @@ números medidos** — não no começo, com os números pretendidos.
 | Onda | Relatório | Estado |
 |---|---|---|
 | 1 — Fundação | (no corpo do PR #1) | ✅ mesclada |
-| 2 — A jazida viva | [`ONDA-2-JAZIDA.md`](./ONDA-2-JAZIDA.md) | 🔨 PR aberto |
+| 2 — A jazida viva | [`ONDA-2-JAZIDA.md`](./ONDA-2-JAZIDA.md) | ✅ mesclada |
+| 3 — O motor de caça | [`ONDA-3-CACA.md`](./ONDA-3-CACA.md) | 🔨 PR aberto |
 
 ## O que um relatório de Onda tem que ter
 

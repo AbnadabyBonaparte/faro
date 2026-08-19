@@ -8,10 +8,14 @@
  *   node --experimental-strip-types src/cli.ts coletar RFB-CNPJ 2026-08 [--conjunto empresas] [--arquivo Empresas1.zip]
  *   node --experimental-strip-types src/cli.ts local RFB-CNPJ empresas 2026-07 /caminho/arquivo.zip
  *   node --experimental-strip-types src/cli.ts diff <coleta-atual> [coleta-anterior]
+ *   node --experimental-strip-types src/cli.ts cacar <codigo-tese> [--modo inicial|incremental]
+ *   node --experimental-strip-types src/cli.ts publicar <cacada-id> [--limite N]
  */
 
 import { executarColeta, carregarArquivoLocal } from './coleta/index.ts'
 import { executarDiff } from './diff/index.ts'
+import { executarCaca, versaoAtivaDaTese } from './caca/index.ts'
+import { executarPublicacao } from './publica/index.ts'
 import { fonte, FONTES } from './fontes/index.ts'
 import { linhas as consultar } from './infra/pg.ts'
 import { descreverPipeline } from './index.ts'
@@ -105,8 +109,34 @@ async function principal(): Promise<void> {
       return
     }
 
+    case 'cacar': {
+      const [codigo] = args
+      if (codigo === undefined) throw new Error('uso: cacar <codigo-tese> [--modo x]')
+      const versao = versaoAtivaDaTese(codigo)
+      if (versao === null) {
+        throw new Error(`tese ${codigo} nao tem versao ativa — so tese ativa caça`)
+      }
+      const modo = bandeira(args, 'modo')[0] === 'inicial' ? 'inicial' : 'incremental'
+      console.log(JSON.stringify(executarCaca({ teseVersaoId: versao, modo }), null, 2))
+      return
+    }
+
+    case 'publicar': {
+      const [cacadaId] = args
+      if (cacadaId === undefined) throw new Error('uso: publicar <cacada-id> [--limite N]')
+      const l = bandeira(args, 'limite')[0]
+      console.log(
+        JSON.stringify(
+          executarPublicacao({ cacadaId, ...(l === undefined ? {} : { limite: Number(l) }) }),
+          null,
+          2,
+        ),
+      )
+      return
+    }
+
     default:
-      console.error('comandos: pipeline · fontes · coletar · local · diff')
+      console.error('comandos: pipeline · fontes · coletar · local · diff · cacar · publicar')
       process.exitCode = 2
   }
 }

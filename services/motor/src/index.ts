@@ -5,11 +5,14 @@
  *
  *   coleta   · Onda 2 · IMPLEMENTADA
  *   diff     · Onda 2 · IMPLEMENTADA
- *   caca     · Onda 3 · stub declarado
- *   score    · Onda 3 · stub declarado
- *   publica  · Onda 4 · stub declarado
+ *   caca     · Onda 3 · IMPLEMENTADA
+ *   score    · Onda 3 · IMPLEMENTADA
+ *   publica  · Onda 3 · IMPLEMENTADA
  *
- * O pipeline nasceu inteiro na Onda 1 e as etapas vão ficando de pé uma a uma.
+ * O pipeline está inteiro de pé. O que falta não é etapa: é a tela (Onda 4), a
+ * infra real e a fonte que a CCEE bloqueou.
+ *
+ * O pipeline nasceu inteiro na Onda 1 e as etapas foram ficando de pé uma a uma.
  * Isto não é preguiça: é a lei do canon §11 (varredura em LOTE, nunca em tempo
  * real) desenhada antes de qualquer linha rodar, para que nenhuma etapa fosse
  * inventada depois só porque a anterior precisou dela.
@@ -20,8 +23,7 @@
 import { coletar } from './coleta/index.ts'
 import { diferenciar } from './diff/index.ts'
 import { cacar } from './caca/index.ts'
-import { pontuar } from './score/index.ts'
-import { publicar } from './publica/index.ts'
+import { pontuar, publicar } from './publica/index.ts'
 
 /** Erro das etapas que ainda não nasceram. Nunca de coleta nem de diff. */
 export class EtapaNaoImplementada extends Error {
@@ -56,6 +58,8 @@ export function descreverPipeline(): readonly ResultadoEtapa[] {
 export { coletar, diferenciar, cacar, pontuar, publicar }
 export { executarColeta, carregarArquivoLocal, layoutDoBanco } from './coleta/index.ts'
 export { executarDiff, ultimaColeta } from './diff/index.ts'
+export { executarCaca, versaoAtivaDaTese } from './caca/index.ts'
+export { executarPublicacao, publicarCandidato } from './publica/index.ts'
 export { registrarSaude, registrarUsoDaCasa, atrasoDaFonte } from './saude/index.ts'
 export { lerRfb, LayoutDivergente } from './parser/rfb.ts'
 export { lerCsv } from './parser/csv.ts'

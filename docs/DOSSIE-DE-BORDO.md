@@ -638,8 +638,8 @@ dono** — nada avança porque "está pronto tecnicamente".
 | Onda | Escopo | Estado |
 |---|---|---|
 | **Onda 1** | Fundação: monorepo · schema completo do domínio · guardas de CI | ✅ **portão passado** (PR #1 mesclado) |
-| **Onda 2** | A jazida viva: ingestão RFB + CCEE, fontes provadas vivas, diff→eventos | 🔨 **PR aberto, aguardando portão** |
-| **Onda 3** | Motor de caça + score sobre a tese T-04 real | ⏳ |
+| **Onda 2** | A jazida viva: ingestão RFB + CCEE, fontes provadas vivas, diff→eventos | ✅ **portão passado** (PR #2 e #4) |
+| **Onda 3** | Motor de caça + score sobre a tese T-04 real | 🔨 **PR aberto, aguardando portão** |
 | **Onda 4** | Fichas na tela, Tribunal, Watch, onboarding | ⏳ |
 
 **Relatório da Onda 2:** `docs/ondas/ONDA-2-JAZIDA.md`. O achado que mais muda
@@ -654,12 +654,12 @@ na documentação.
 
 | Item | Estado |
 |---|---|
-| Motor de caça — nenhuma varredura roda | 🔨 **coleta e diff de pé na Onda 2**; caça, score e publicação seguem stubs (Ondas 3 e 4) |
+| Motor de caça | 🔨 **o pipeline está inteiro** — coleta, diff, caça, score e publicação. A primeira ficha real existe (Onda 3) |
 | Banco de dados, schema, migrations | 🔨 **12 migrations**, provadas contra Postgres 16 real — falta o projeto Supabase (clique do dono) |
 | Multi-tenant e RLS | 🔨 **no schema, com guarda de CI provando 100%** |
 | `usage_ledger` | 🔨 **com dado real**: volume e duração de coleta, `custo_centavos` NULL = não medido |
 | Coleta de fonte | 🔨 **RFB provada viva e ingerida** (18,5 M linhas reais carregadas em teste) · **CCEE bloqueada pela própria CCEE** (403, chamado é ato do dono) |
-| Score real (o da maquete é derivado de dado fictício) | ❌ **Onda 3** |
+| Score real | 🔨 **existe**: 6 dimensões justificadas, total derivado. O da maquete segue fictício |
 | Telas de produto além do shell | ❌ **Onda 4** |
 | Autenticação funcionando | ❌ shell autenticável existe; auth ligada é Onda 4 |
 | Pagamento, checkout, assinatura | ❌ sem Onda marcada |
@@ -1037,7 +1037,7 @@ Duas coisas correm juntas daqui pra frente, e nenhuma espera a outra:
 > **Trilha comercial:** um cliente pagando · uma tese escolhida · fichas julgadas com motivo
 > registrado · custo por ficha medido.
 >
-> **Trilha de construção:** Onda 1 fundação ✅ → Onda 2 jazida viva 🔨 → Onda 3 motor → Onda 4
+> **Trilha de construção:** Onda 1 fundação ✅ → Onda 2 jazida viva ✅ → Onda 3 motor 🔨 → Onda 4
 > produto. Portão do dono em cada uma.
 
 O contrato da casa não mudou: **o sistema sugere, o humano visa — e nada, nada, sem prova.**
