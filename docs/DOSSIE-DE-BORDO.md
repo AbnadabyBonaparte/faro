@@ -637,10 +637,16 @@ dono** — nada avança porque "está pronto tecnicamente".
 
 | Onda | Escopo | Estado |
 |---|---|---|
-| **Onda 1** | Fundação: monorepo · schema completo do domínio · guardas de CI | 🔨 **em construção** |
-| **Onda 2** | A jazida viva: ingestão RFB + CCEE, fontes provadas vivas, diff→eventos | ⏳ aguarda portão 1 |
+| **Onda 1** | Fundação: monorepo · schema completo do domínio · guardas de CI | ✅ **portão passado** (PR #1 mesclado) |
+| **Onda 2** | A jazida viva: ingestão RFB + CCEE, fontes provadas vivas, diff→eventos | 🔨 **PR aberto, aguardando portão** |
 | **Onda 3** | Motor de caça + score sobre a tese T-04 real | ⏳ |
 | **Onda 4** | Fichas na tela, Tribunal, Watch, onboarding | ⏳ |
+
+**Relatório da Onda 2:** `docs/ondas/ONDA-2-JAZIDA.md`. O achado que mais muda
+plano: a RFB **reparticiona quais CNPJs caem em qual arquivo a cada lote**, e o
+diff entre dois recortes reais pariu 4.256.121 "estabelecimento novo" falsos.
+**O diff só roda sobre a fonte inteira** — isso virou freio no banco, não aviso
+na documentação.
 
 > **O dono é soberano em cada portão.** O executor abre PR e **para**. Merge é clique dele.
 
@@ -648,16 +654,16 @@ dono** — nada avança porque "está pronto tecnicamente".
 
 | Item | Estado |
 |---|---|
-| Motor de caça — nenhuma varredura roda | 🔨 **esqueleto declarado na Onda 1** (`services/motor`, stubs) |
-| Banco de dados, schema, migrations | 🔨 **schema v1 escrito na Onda 1** — falta o projeto Supabase (clique do dono) |
+| Motor de caça — nenhuma varredura roda | 🔨 **coleta e diff de pé na Onda 2**; caça, score e publicação seguem stubs (Ondas 3 e 4) |
+| Banco de dados, schema, migrations | 🔨 **12 migrations**, provadas contra Postgres 16 real — falta o projeto Supabase (clique do dono) |
 | Multi-tenant e RLS | 🔨 **no schema, com guarda de CI provando 100%** |
-| `usage_ledger` | 🔨 **tabela existe desde o dia 1**, sem dado ainda |
-| Coleta de fonte — nada foi coletado de lugar algum | ❌ **Onda 2** |
+| `usage_ledger` | 🔨 **com dado real**: volume e duração de coleta, `custo_centavos` NULL = não medido |
+| Coleta de fonte | 🔨 **RFB provada viva e ingerida** (18,5 M linhas reais carregadas em teste) · **CCEE bloqueada pela própria CCEE** (403, chamado é ato do dono) |
 | Score real (o da maquete é derivado de dado fictício) | ❌ **Onda 3** |
 | Telas de produto além do shell | ❌ **Onda 4** |
 | Autenticação funcionando | ❌ shell autenticável existe; auth ligada é Onda 4 |
 | Pagamento, checkout, assinatura | ❌ sem Onda marcada |
-| Qualquer chamada de rede ou integração externa | ❌ nenhuma na Onda 1 |
+| Qualquer chamada de rede ou integração externa | 🔨 **só a RFB, e só fora do CI** — nenhum job de CI baixa lote |
 
 **Todos os dados da maquete são fictícios e rotulados.** Nenhuma empresa existe; os CNPJs são
 sequenciais e inválidos de propósito (`00.000.00X/0001-00`).
@@ -1030,7 +1036,7 @@ Duas coisas correm juntas daqui pra frente, e nenhuma espera a outra:
 > **Trilha comercial:** um cliente pagando · uma tese escolhida · fichas julgadas com motivo
 > registrado · custo por ficha medido.
 >
-> **Trilha de construção:** Onda 1 fundação → Onda 2 jazida viva → Onda 3 motor → Onda 4
+> **Trilha de construção:** Onda 1 fundação ✅ → Onda 2 jazida viva 🔨 → Onda 3 motor → Onda 4
 > produto. Portão do dono em cada uma.
 
 O contrato da casa não mudou: **o sistema sugere, o humano visa — e nada, nada, sem prova.**
