@@ -401,7 +401,7 @@ prevenção a fraude e regras do mercado de capitais.
 | **Território** | MT/GO como **PESO**, não como corte — mecânica do bonificador da T-04 v1.1 ([`0019_t04_v1_1_territorio_vira_peso.sql`](../../packages/db/migrations/0019_t04_v1_1_territorio_vira_peso.sql)) |
 | **Fonte** | fonte-mãe (RFB Base Aberta CNPJ) — já coletada e provada |
 | **Prova social regional** | casos Fernanda e Bela |
-| **Status** | **aguarda** motor provado no TAX **+** leitura conjunta com o dono |
+| **Status** | `[19/08/2026]` **REGISTRADA NO BANCO** e **caçada rodada** sobre a amostra real — migration [`0020_tese_t_med.sql`](../../packages/db/migrations/0020_tese_t_med.sql). Segue interna: nao vai a cliente, e a T-MED so opera para prospeccao da casa depois de **L6**. |
 
 ### O evento de ouro
 
@@ -423,6 +423,29 @@ RFB — 89,5% de churn aparente entre lotes ([`ondas/ONDA-2-JAZIDA.md`](../ondas
 
 > Isto liga a T-MED à mesma dependência do TAX: **a carga completa**. Não é
 > coincidência; é a razão pela qual a carona funciona.
+
+### 🔨 O que a primeira caçada real acrescentou
+
+A tese saiu do papel em 19/08/2026 e virou **duas versões da mesma tese**, cada
+uma um sub-perfil declarado — o candidato sai carimbado com a versão que o
+produziu, sem coluna nova:
+
+| Versão | Sub-perfil | Caça por | Estado |
+|---|---|---|---|
+| 1 | **B — a clínica estabelecida** | **estoque** (porte ME/EPP, ativa, aberta há mais de 12 meses) | `ativa` |
+| 2 | **A — o recém-chegado** | **evento** (inscrição nova, situação reativada, CNAE alterado para saúde) | `segmentada` |
+
+**A inversão que a T-MED provou.** A T-04 exige porte **05** — fora de ME/EPP —
+porque só a indústria grande tem o crédito. A T-MED exige porte **01/03** —
+ME/EPP — pela razão oposta: clínica grande já tem agência. **Mesmo campo, mesma
+função `fichas.cacar`, leitura invertida, zero linha de código de motor.** É a
+prova operacional do Anti-Viés da casa: vertical é dado, não `if`.
+
+Os pesos também são dados e também inverteram: na T-04 o peso maior é de
+`evidenciaTese`; no perfil B é de `fitEstrutural` (0,35), porque aqui o perfil
+**é** a tese — e `confiancaInferencia` dobra para 0,20, porque o discriminador
+real (não ter site) não está em fonte nenhuma e a honestidade sobre isso tem que
+pesar no número.
 
 ### 🔴 O ponto jurídico que esta tese não resolve
 
