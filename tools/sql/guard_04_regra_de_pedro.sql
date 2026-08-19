@@ -9,6 +9,12 @@
 
 \set ON_ERROR_STOP on
 
+-- 🔴 CORRECAO DA ONDA 2: esta guarda fabrica dados (tenant, fonte SRC-GUARDA,
+-- coleta, evento) e antes os DEIXAVA no banco. Guarda que suja o banco faz a
+-- guarda seguinte reprovar por sujeira alheia — foi exatamente o que aconteceu
+-- com a guarda 06. Agora prova e desfaz.
+BEGIN;
+
 DO $$
 DECLARE
   v_tenant uuid; v_tese uuid; v_versao uuid; v_evento uuid; v_coleta uuid;
@@ -16,6 +22,16 @@ DECLARE
 BEGIN
   INSERT INTO core.tenants (slug, nome) VALUES ('guarda-pedro','Guarda Pedro')
     RETURNING id INTO v_tenant;
+  -- Cada guarda planta o proprio cenario. Depender do que a guarda anterior
+  -- deixou no banco foi o defeito que a Onda 2 corrigiu: a ordem de execucao
+  -- virava dependencia invisivel.
+  INSERT INTO fontes.source_registry
+    (source_id, nome, orgao, forma_de_acesso, tipo, periodicidade, licenca,
+     cobertura, confiabilidade, fallback_declarado)
+  VALUES ('SRC-GUARDA','Fonte de guarda','Orgao ficticio','arquivo','cadastro',
+          'mensal','dados abertos','teste','E1','declarar limitacao')
+  ON CONFLICT (source_id) DO NOTHING;
+
   INSERT INTO jazida.coletas (source_id, collected_at, reference_date, hash)
     VALUES ('SRC-GUARDA', now(), current_date, 'hash-guarda-pedro')
     RETURNING id INTO v_coleta;
@@ -114,3 +130,5 @@ BEGIN
   RAISE NOTICE 'regra de pedro + confidence policy + lei de dados: todas as burlas recusadas ✓';
 END
 $$;
+
+ROLLBACK;

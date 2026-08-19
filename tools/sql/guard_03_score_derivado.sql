@@ -10,6 +10,12 @@
 
 \set ON_ERROR_STOP on
 
+-- 🔴 CORRECAO DA ONDA 2: esta guarda fabrica dados (tenant, fonte SRC-GUARDA,
+-- coleta, evento) e antes os DEIXAVA no banco. Guarda que suja o banco faz a
+-- guarda seguinte reprovar por sujeira alheia — foi exatamente o que aconteceu
+-- com a guarda 06. Agora prova e desfaz.
+BEGIN;
+
 DO $$
 DECLARE
   v_tenant uuid; v_tese uuid; v_versao uuid; v_evento uuid; v_ficha uuid;
@@ -103,3 +109,5 @@ BEGIN
   RAISE NOTICE 'score derivado: INSERT e UPDATE diretos recusados; total = % (soma das parcelas) ✓', v_total;
 END
 $$;
+
+ROLLBACK;

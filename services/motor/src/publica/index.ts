@@ -1,4 +1,4 @@
-import { EtapaNaoImplementada, type ResultadoEtapa } from '../index.js'
+import { EtapaNaoImplementada, type ResultadoEtapa } from '../index.ts'
 
 /**
  * Monta a cadeia de evidencia, o adjacente, o por-que-nao e a acao PREPARADA. Publica a ficha no tenant.

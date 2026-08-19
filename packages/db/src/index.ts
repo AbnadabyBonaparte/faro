@@ -73,8 +73,12 @@ export type Schema = (typeof SCHEMAS)[number]
  */
 export const TRILHAS_APPEND_ONLY = [
   'jazida.coletas',
+  'jazida.coletas_fechamento',
   'jazida.snapshots_default',
+  'jazida.snapshots_rfb_cnpj',
+  'jazida.snapshots_ccee_cl',
   'eventos.eventos',
+  'eventos.execucoes_diff',
   'tribunal.julgamentos',
   'uso.ledger',
 ] as const
