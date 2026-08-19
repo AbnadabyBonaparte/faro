@@ -675,7 +675,7 @@ sequenciais e inválidos de propósito (`00.000.00X/0001-00`).
 | **P1** | **Deploy da maquete** | ❌ **Bloqueado.** Vercel devolve `403 — You don't have permission to create a project`, no team e fora dele. Três tentativas, dois métodos. **Não é problema do código** — o app builda e roda. **Clique do dono:** Vercel → Add New Project → repo `faro` → **Root Directory = `apps/maquete`**. |
 | **P2** | **Martelo da linha Operador Profissional** | Benchmark existe (`ESTIMATIVA: R$ 2–30k/mês`); o valor não. Aguarda dono. |
 | **P3** | **Atribuição dos pareceres da 1ª rodada** | Um bloco chegou **duplicado sob os rótulos "gpt" e "Gemini"**. Se tivesse passado, contaria dois votos onde há um. Registrado como `❔` no cabeçalho de cada arquivo. Aguarda correção do dono. |
-| **P4** | **LEXIS — quatro frentes** | (a) as 3 teses em disputa (C1/C2/C3) · (b) contratos espelhados do canal · (c) cláusulas 1 e 4 da Lei de Dados, marcadas **MINUTA** · (d) `[19/08]` **L5** — o Aceite da Caçada ante o CDC art. 49. |
+| **P4** | **LEXIS — seis frentes** | (a) as 3 teses em disputa (C1/C2/C3) · (b) contratos espelhados do canal · (c) cláusulas 1 e 4 da Lei de Dados, marcadas **MINUTA** · (d) `[19/08]` **L5** — o Aceite da Caçada ante o CDC art. 49 · (e) `[19/08]` **L6** — venda de carteira a terceiros × LGPD/data broker. |
 | **P5** | **WhatsApp + proposta stealth pro irmão** | `PROPOSTA-001-2026-v2`. `[ORDEM 18/08]` — ainda não versionada no repo. |
 | **P6** | **Repo privado?** | Hoje privado. `docs/junta/` e `docs/heranca/` nomeiam fornecedores de IA — necessário pela Lei do Selo, proibido em superfície de cliente. **Voto do guia: manter privado.** Decisão do dono. |
 
@@ -798,6 +798,12 @@ métrica que o canon chama de principal sinal de produto recorrente
 
 Só depois de retenção provada no TAX. Ordem: **M&A → AGRO → ENERGIA → B2B**, mais o vertical
 adormecido **FARO-LICITAÇÕES** (§9). Cada uma exige o mesmo rito: pareceres antes do código.
+
+`[19/08]` A [**Doutrina do Minerador**](./canon/DOUTRINA-DO-MINERADOR.md) entra **ao lado**
+desta fase, não no lugar dela: registra que cada produto da casa pode ganhar uma tese interna
+que caça seus futuros clientes na jazida pública. **A ordem não muda** — o TAX prova o motor
+primeiro, e teses internas pegam carona depois. A tese do Peritus (editais e diários) é o
+mesmo animal que o FARO-LICITAÇÕES do §9: quem pagar a conta de uma paga a da outra.
 
 > **A regra que atravessa as quatro fases:** cada uma tem um portão, e **o portão é do dono**.
 > Nenhuma fase avança porque "está pronto tecnicamente".
@@ -1005,6 +1011,7 @@ motor horizontal, oferta vertical, uma de cada vez.
 | **L3** | **Cláusulas 1 e 4 da Lei de Dados** (telemetria agregada · opt-in de benchmark) | Estão marcadas **MINUTA**. Base legal, titularidade do dado derivado, efeito da revogação, retenção. |
 | **L4** | **Delimitação de responsabilidade por falso positivo** | Multa de ofício de 75% a 150% no cliente, com ação de regresso na casa. |
 | **L5** | 🆕 **O Aceite da Caçada ante o direito de arrependimento** (CDC art. 49) | A Caçada é executada imediatamente após o aceite: a computação acontece e o custo não se desfaz. Falta a **cláusula de execução imediata mediante consentimento expresso** — quem redige, como aparece na tela, e o que se faz se o cliente se arrepender depois da entrega. Ver [`docs/canon/RITUAL-DO-ACEITE.md`](./canon/RITUAL-DO-ACEITE.md) §5. **O ritual não vai ao ar em autoatendimento antes de L5 fechar.** |
+| **L6** | 🆕 **Venda de carteira de leads a terceiros × LGPD / data broker** | Uso **interno** de dado público da RFB para prospecção B2B da casa é interesse legítimo — terreno firme. **Vender a carteira** muda a natureza do negócio: vira tratamento para terceiro, com obrigações próprias, e a casa passa a operar como data broker. Três pontos abertos: (a) empresário individual e MEI são pessoa física com CNPJ, e é exatamente aí que mora o alvo da T-MED; (b) base lícita não legitima disparo — prospectar e abordar são coisas diferentes; (c) o que se pode e o que não se pode ceder. **Até parecer, a carteira é arma da casa e não produto.** Ver [`docs/canon/DOUTRINA-DO-MINERADOR.md`](./canon/DOUTRINA-DO-MINERADOR.md) §4. |
 
 ## ❓ PERGUNTAS QUE NINGUÉM RESPONDEU AINDA
 
