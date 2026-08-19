@@ -8,23 +8,38 @@
 
 ## 🚧 EM CONSTRUÇÃO — LEIA ANTES DE QUALQUER COISA
 
-Este repositório contém, hoje, **duas coisas**: um modelo de produto e uma maquete
-de interface com dados fictícios.
+**Não há produto vendável.** Há canon, maquete, fundação de banco, e as duas
+primeiras etapas do motor de pé.
 
-**Não há produto.** Não há motor, não há coleta de fontes, não há banco de dados,
-não há score real, não há cobrança, não há integração com fornecedor algum.
+A construção corre em **Ondas**, cada uma com portão do dono
+(`docs/DOSSIE-DE-BORDO.md` §6 e §7):
+
+| Onda | Escopo | Estado |
+|---|---|---|
+| 1 | Fundação: monorepo · schema do domínio · guardas de CI | ✅ mesclada |
+| 2 | A jazida viva: fontes provadas, coleta, diff → eventos | 🔨 PR aberto |
+| 3 | Motor de caça + score sobre tese real | ⏳ |
+| 4 | Fichas na tela, Tribunal, Watch, onboarding | ⏳ |
 
 | O que existe | O que NÃO existe |
 |---|---|
-| O canon do produto (modelo v2 consolidado) | Motor de caça — nenhuma varredura roda |
-| Os três pareceres da Junta + quadro de vereditos | Coleta de fonte — nada foi coletado |
-| A identidade visual documentada | Banco de dados, schema, migrations |
-| Uma maquete de 5 telas com dados fictícios | Score real, autenticação, multi-tenant |
-| | Pagamento, checkout, assinatura |
-| | Qualquer chamada de rede ou API externa |
+| O canon do produto (modelo v2 consolidado) | Caça, score e publicação — stubs declarados |
+| Os pareceres da Junta + quadros de vereditos | Ficha real — nenhum evento virou ficha |
+| A identidade visual documentada | Autenticação ligada, multi-tenant em uso |
+| Maquete de 5 telas, dados fictícios e rotulados | Pagamento, checkout, assinatura |
+| 12 migrations, provadas contra Postgres 16 real | Projeto Supabase provisionado |
+| 7 guardas de CI, cada uma com teste de mutação | Deploy da maquete (403 na Vercel) |
+| Coleta e diff funcionando sobre dados reais da RFB | Acesso à CCEE (403 declarado pela CCEE) |
 
-O motor nasce quando existir um **design partner pagante**. Isso é decisão
-registrada, não atraso: a ordem da casa é validar antes de erguer.
+> **A regra "o motor nasce com design partner pagante" foi REVOGADA** pelo dono
+> em 19/08/2026. A construção passou a correr em trilha própria, com portão
+> próprio. O que segue proibido é *prometer ao cliente* o que a máquina ainda
+> não faz.
+
+**O que já rodou sobre dado real** (Onda 2, 19/08/2026): 18,5 milhões de linhas
+da Base Aberta de CNPJ carregadas, e um diff mês a mês que encontrou 351
+mudanças de porte — número conferido por uma segunda implementação
+independente. Relatório: `docs/ondas/ONDA-2-JAZIDA.md`.
 
 ---
 

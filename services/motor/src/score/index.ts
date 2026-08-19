@@ -1,4 +1,4 @@
-import { EtapaNaoImplementada, type ResultadoEtapa } from '../index.js'
+import { EtapaNaoImplementada, type ResultadoEtapa } from '../index.ts'
 
 /**
  * Calcula as 6 dimensoes e grava as PARCELAS. O total cai por trigger — o motor nao digita total.

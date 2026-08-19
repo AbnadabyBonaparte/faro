@@ -1,28 +1,38 @@
 /**
  * @faro/motor — o batch de madrugada.
  *
- * 🔴 ONDA 1: TUDO AQUI É STUB DECLARADO. Nenhuma etapa executa.
+ * Estado por etapa (a própria etapa declara, em `descrever()`):
  *
+ *   coleta   · Onda 2 · IMPLEMENTADA
+ *   diff     · Onda 2 · IMPLEMENTADA
+ *   caca     · Onda 3 · stub declarado
+ *   score    · Onda 3 · stub declarado
+ *   publica  · Onda 4 · stub declarado
+ *
+ * O pipeline nasceu inteiro na Onda 1 e as etapas vão ficando de pé uma a uma.
  * Isto não é preguiça: é a lei do canon §11 (varredura em LOTE, nunca em tempo
- * real) desenhada como pipeline antes de qualquer linha rodar. Cada etapa
- * declara o que fará, o que exige para funcionar e em qual Onda nasce.
+ * real) desenhada antes de qualquer linha rodar, para que nenhuma etapa fosse
+ * inventada depois só porque a anterior precisou dela.
  *
- * Canon: MODELO-FARO-V2.md §11 · ORDEM ONDA 1 §1.1
+ * Canon: MODELO-FARO-V2.md §11 · ORDEM ONDA 1 §1.1 · ORDEM ONDA 2
  */
 
-import { coletar } from './coleta/index.js'
-import { diferenciar } from './diff/index.js'
-import { cacar } from './caca/index.js'
-import { pontuar } from './score/index.js'
-import { publicar } from './publica/index.js'
+import { coletar } from './coleta/index.ts'
+import { diferenciar } from './diff/index.ts'
+import { cacar } from './caca/index.ts'
+import { pontuar } from './score/index.ts'
+import { publicar } from './publica/index.ts'
 
+/** Erro das etapas que ainda não nasceram. Nunca de coleta nem de diff. */
 export class EtapaNaoImplementada extends Error {
-  constructor(
-    readonly etapa: string,
-    readonly onda: number,
-  ) {
-    super(`etapa "${etapa}" nasce na Onda ${onda} — não implementada na Onda 1`)
+  readonly etapa: string
+  readonly onda: number
+
+  constructor(etapa: string, onda: number) {
+    super(`etapa "${etapa}" nasce na Onda ${onda} — ainda não implementada`)
     this.name = 'EtapaNaoImplementada'
+    this.etapa = etapa
+    this.onda = onda
   }
 }
 
@@ -38,9 +48,15 @@ export type ResultadoEtapa = {
   readonly exige: readonly string[]
 }
 
-/** Descreve o pipeline sem executá-lo. É o que a Onda 1 entrega. */
+/** Descreve o pipeline sem executá-lo — inclusive o que ainda não roda. */
 export function descreverPipeline(): readonly ResultadoEtapa[] {
   return [coletar, diferenciar, cacar, pontuar, publicar].map((e) => e.descrever())
 }
 
 export { coletar, diferenciar, cacar, pontuar, publicar }
+export { executarColeta, carregarArquivoLocal, layoutDoBanco } from './coleta/index.ts'
+export { executarDiff, ultimaColeta } from './diff/index.ts'
+export { registrarSaude, registrarUsoDaCasa, atrasoDaFonte } from './saude/index.ts'
+export { lerRfb, LayoutDivergente } from './parser/rfb.ts'
+export { lerCsv } from './parser/csv.ts'
+export { FONTES, RFB_CNPJ, CCEE_CL, fonte } from './fontes/index.ts'

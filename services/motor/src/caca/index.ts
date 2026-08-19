@@ -1,4 +1,4 @@
-import { EtapaNaoImplementada, type ResultadoEtapa } from '../index.js'
+import { EtapaNaoImplementada, type ResultadoEtapa } from '../index.ts'
 
 /**
  * Roda as teses ativas contra os eventos novos e decide quais viram ficha. Lote de madrugada, nunca tempo real.

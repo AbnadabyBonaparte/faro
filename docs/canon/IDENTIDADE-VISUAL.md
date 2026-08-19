@@ -89,6 +89,33 @@ Ele marca **o que importa agora**, não a decoração.
 de ficha (o assinante leva a ficha para reunião) — previsto na estrutura de tokens, não
 implementado na maquete v1. Declarado aqui para não ser esquecido.
 
+### [EMENDA 19/08 — transplante aprovado] Modo claro: papel de cartório
+
+O modo claro deixa de ser "previsto sem valor" e passa a ter tokens declarados. A
+referência não é "o mesmo painel com fundo branco" — é **papel de cartório**: fundo
+levemente creme (não branco de tela), tinta quase-preta, e o sinal **escurecido** para
+sobreviver ao contraste sobre claro e à impressora.
+
+```
+--bg-light        #F6F4EE   creme de papel — nunca #FFFFFF de fundo
+--surface-light   #FFFFFF   a ficha em si, o "papel" sobre a mesa
+--text-light      #10161F   tinta, não preto puro
+--signal-light    #0E7A56   o verde-sinal escurecido: legível sobre claro e no papel
+--border-light    #D8D3C6   traço de grade em tom de papel envelhecido
+```
+
+Por que o `--signal` não atravessa igual: `#2ed3a3` sobre `#F6F4EE` dá contraste baixo
+demais para texto e some na impressão em tons de cinza. `#0E7A56` mantém a **mesma
+identidade cromática** (é o mesmo verde, escurecido) e passa em contraste. A regra de
+área (~10%) continua valendo, e a escala funcional de envelhecimento (§4) precisará do
+mesmo tratamento quando o modo claro sair do papel.
+
+> **Estado: PREVISTO, não implementado.** Estes tokens não existem em
+> `apps/maquete/src/app/globals.css` e não devem ser usados por nenhum componente ainda.
+> A implementação nasce **na onda da impressão de ficha** — antes disso seriam cinco
+> constantes órfãs se descolando do canon. Declarados aqui para que a decisão exista
+> antes da pressa.
+
 ---
 
 ## 4. ESCALA FUNCIONAL (não é marca — é semáforo)

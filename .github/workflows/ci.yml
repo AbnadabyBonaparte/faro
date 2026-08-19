@@ -1,0 +1,161 @@
+name: CI — fundação e jazida
+
+# As guardas nascem COM o banco, não depois dele.
+# Uma guarda que só roda "quando alguém lembra" não guarda nada.
+#
+# Onda 2 acrescentou:
+#   · testes do parser (bytes fabricados, sem rede)
+#   · guarda 05 — o diff pare EXATAMENTE os eventos esperados
+#   · guarda 06 — o registry não promete o que não tem
+#   · guarda 07 — o freio de churn segura (nasceu de um número real: 4.256.121
+#     "estabelecimento novo" falsos num diff entre dois recortes reais da RFB)
+#   · mutação nova: sabotar o diff e exigir que a guarda 05 reprove
+#
+# 🔴 O CI NÃO BATE NA RECEITA FEDERAL. Nenhum job baixa lote. Um CI que depende
+# de fonte externa fica vermelho por causa do dia ruim de outra pessoa, e aí
+# alguém aprende a ignorar o vermelho — que é o pior estado possível de um CI.
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  codigo:
+    name: typecheck · build · testes de domínio
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm build
+      - run: pnpm --filter @faro/core test
+      - run: pnpm --filter @faro/motor test
+
+  guardas:
+    name: guardas de fundação (RLS · imutabilidade · score derivado · Regra de Pedro)
+    runs-on: ubuntu-latest
+
+    # Postgres de verdade. As guardas TENTAM violar as leis e exigem que o
+    # banco recuse — testar a moldura em vez do quadro foi achado real do
+    # Banco de Evolução (ver entrada CIRURGIA 360-PRIMA).
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: postgres
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: instalar cliente psql e unzip
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends postgresql-client unzip
+
+      - name: aplicar migrations e rodar as guardas
+        run: pnpm db:guards
+
+      # O que só existe com banco: idempotência de lote, atomicidade, layout
+      # divergente rebaixando a fonte, ledger da casa sem tenant. Bytes
+      # fabricados — nenhum job desta esteira baixa nada da Receita.
+      - name: coleta e diff contra Postgres de verdade
+        run: pnpm --filter @faro/motor test:banco
+
+      # Guarda da guarda: prova que as guardas REPROVAM quando devem.
+      # Sem isto, uma guarda que sempre passa pareceria saudável.
+      - name: teste de mutação — a guarda pega o defeito?
+        run: |
+          set -e
+          echo "▸ sabotando: tabela sem RLS"
+          psql -q -d faro_guardas -c "CREATE TABLE core.sabotagem_ci (id int);"
+          if psql -v ON_ERROR_STOP=1 -X -q -d faro_guardas -f tools/sql/guard_01_rls.sql >/dev/null 2>&1; then
+            echo "✗ a guarda de RLS NÃO pegou a sabotagem — guarda decorativa"; exit 1
+          fi
+          echo "✓ guarda de RLS reprovou a sabotagem, como deve"
+          psql -q -d faro_guardas -c "DROP TABLE core.sabotagem_ci;"
+
+          echo "▸ sabotando: grant para anon"
+          psql -q -d faro_guardas -c "GRANT SELECT ON fichas.fichas TO anon;"
+          if psql -v ON_ERROR_STOP=1 -X -q -d faro_guardas -f tools/sql/guard_01_rls.sql >/dev/null 2>&1; then
+            echo "✗ a guarda NÃO pegou o grant para anon"; exit 1
+          fi
+          echo "✓ guarda pegou o grant para anon"
+          psql -q -d faro_guardas -c "REVOKE SELECT ON fichas.fichas FROM anon;"
+
+          # ── ONDA 2 ────────────────────────────────────────────────────────
+          # O diff é o coração do produto: é ele que decide o que vira notícia.
+          # Sabotamos a separação por conjunto — o defeito mais provável de
+          # alguém introduzir "simplificando" a query — e exigimos que a guarda
+          # 05 reprove. Sem esta mutação, a guarda 05 poderia estar sempre
+          # passando por acidente.
+          echo "▸ sabotando: o diff ignora o conjunto"
+          psql -q -d faro_guardas -c "CREATE DATABASE faro_mutacao TEMPLATE faro_guardas;"
+          psql -v ON_ERROR_STOP=1 -X -q -d faro_mutacao -c "
+            DO \$\$
+            DECLARE src text;
+            BEGIN
+              SELECT pg_get_functiondef(p.oid) INTO src FROM pg_proc p
+                JOIN pg_namespace n ON n.oid = p.pronamespace
+               WHERE n.nspname = 'eventos' AND p.proname = 'diferenciar';
+              src := replace(src, 'AND b.conjunto  = a.conjunto', '');
+              src := replace(src, 'AND r.conjunto  = a.conjunto', '');
+              EXECUTE src;
+            END \$\$;"
+          if psql -v ON_ERROR_STOP=1 -X -q -d faro_mutacao -f tools/sql/guard_05_diff_fixture.sql >/dev/null 2>&1; then
+            echo "✗ a guarda 05 NÃO pegou o diff sabotado — guarda decorativa"; exit 1
+          fi
+          echo "✓ guarda 05 reprovou o diff que cruza conjuntos"
+          psql -q -d faro_mutacao -c "SELECT 1" >/dev/null
+
+          echo "▸ sabotando: regra de diff apontando para campo inexistente"
+          psql -q -d faro_guardas -c "
+            INSERT INTO eventos.regras_diff (source_id, conjunto, campo, tipo_evento)
+            VALUES ('RFB-CNPJ','empresas','campo_que_nao_existe','porte_alterado');"
+          if psql -v ON_ERROR_STOP=1 -X -q -d faro_guardas -f tools/sql/guard_06_fontes_coerentes.sql >/dev/null 2>&1; then
+            echo "✗ a guarda 06 NÃO pegou a regra órfã — ela nunca dispararia e ninguém saberia"
+            exit 1
+          fi
+          echo "✓ guarda 06 pegou a regra que nunca dispararia"
+
+  maquete:
+    name: maquete intocada
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: a Onda 1 não pode ter tocado apps/maquete
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          if [ -z "$BASE" ]; then echo "sem base de PR — checagem pulada"; exit 0; fi
+          if git diff --name-only "$BASE" HEAD -- apps/maquete | grep -q .; then
+            echo "✗ apps/maquete foi tocada — a Onda 1 declara que ela fica intocada"
+            git diff --name-only "$BASE" HEAD -- apps/maquete
+            exit 1
+          fi
+          echo "✓ apps/maquete intocada"
