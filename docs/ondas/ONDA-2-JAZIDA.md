@@ -1,6 +1,8 @@
 # ONDA 2 — A JAZIDA VIVA
 
-> Relatório de bordo · 19/08/2026 · branch `faro/onda-2-jazida`
+> Relatório de bordo · 19/08/2026 · PR #2, mesclado
+> Atualizações posteriores ao merge entram por PR próprio e ficam datadas no
+> corpo — um relatório que muda sem dizer que mudou não é relatório.
 > A Regra de Pedro vale para este relatório: ele responde com prova, traz o
 > adjacente, argumenta contra si mesmo, e deixa carga reservada esperando o
 > "pode fechar" do dono.
@@ -315,30 +317,80 @@ aprende a ignorar o vermelho.
 | Diff 4,49 M × 4,49 M | **45 s** |
 | Idempotência (recarga do mesmo lote) | **0,19 s**, zero linha nova |
 
-### O que é ESTIMATIVA
+### O que era ESTIMATIVA — e virou medição
 
-> 🟡 **ESTIMATIVA · base declarada:** extrapolação por bytes comprimidos, a
-> partir da densidade medida em `Empresas1` (57.706 linhas/MB) e
-> `Estabelecimentos1` (13.909 linhas/MB), assumindo compressão uniforme entre
-> os dez arquivos de cada conjunto.
+A primeira versão deste relatório extrapolava tudo por bytes comprimidos e
+avisava que o número provavelmente estava alto. Em vez de deixar o aviso, fui
+medir. Os arquivos `0` de cada conjunto são os únicos que a extrapolação não
+cobria bem (`Empresas0` é 7× os outros nove; `Estabelecimentos0` é 6×), então
+são exatamente esses dois que estão sendo contados linha a linha.
 
-| | ESTIMATIVA |
+#### ✅ `empresas` — MEDIDO
+
+| | |
 |---|---:|
-| Linhas por coleta completa | **~170 M** |
-| Jazida por coleta | **~97 GiB** |
-| Jazida com 12 coletas retidas | **~1,17 TiB** |
+| `Empresas0` — membro `K3241.K03200Y0.D60808.EMPRECSV` | **29.069.564 linhas** (medido) |
+| `Empresas1..9` — extrapolado da densidade de `Empresas1` | ~47,08 M |
+| **Total `empresas` por coleta** | **~76,15 M** |
+
+**A extrapolação errou 3,7% para cima** (previa 79,0 M). Errou porque
+`Empresas0` comprime melhor: 52.592 linhas/MB contra 57.706 de `Empresas1` —
+9% de diferença de densidade entre arquivos do mesmo conjunto.
+
+> ✏️ **CORREÇÃO DE UMA AFIRMAÇÃO MINHA.** A versão anterior deste relatório
+> dizia que 79 M "é maior que a base de CNPJs conhecida do país". **Eu não
+> verifiquei isso.** Era palpite com cara de fato — exatamente o que a Lei 7
+> proíbe, escapando dentro do próprio parágrafo em que eu me gabava de aplicá-la.
+> A frase saiu. O que sobra é o que dá para sustentar: a extrapolação errou
+> 3,7% para cima, e a razão é a diferença de densidade entre os arquivos.
+
+#### ✅ `estabelecimentos` — MEDIDO
+
+| | |
+|---|---:|
+| `Estabelecimentos0` — membro `K3241.K03200Y0.D60808.ESTABELE` | **30.008.725 linhas** (medido) |
+| `Estabelecimentos1..9` — extrapolado da densidade de `Estabelecimentos1` | ~43,61 M |
+| **Total `estabelecimentos` por coleta** | **~73,62 M** |
+
+Aqui a extrapolação errou só **0,8% para cima** (previa 74,2 M): a densidade de
+`Estabelecimentos0` é 13.640 linhas/MB contra 13.909 de `Estabelecimentos1` —
+1,9% de diferença, muito menor que os 9% que separavam os dois de `empresas`.
+
+**Método das duas contagens**, para poder ser conferido:
+`curl -C - -o ARQUIVO URL` e depois `unzip -p ARQUIVO | wc -l`. Contagem de
+todas as linhas, não amostragem. Os arquivos foram apagados depois de contados —
+o que importa deles é o número, e são 2,7 GB.
+
+#### Totais
+
+| | |
+|---|---:|
+| `empresas` | 76,15 M |
+| `estabelecimentos` | 73,62 M |
+| `simples` | 🟡 ~17,4 M (ESTIMATIVA — densidade de `empresas` como proxy) |
+| **Linhas por coleta completa** | **~167,2 M** |
+| Jazida por coleta | **~95,6 GiB** |
+| Jazida com 12 coletas retidas | **~1,12 TiB** |
 | Carga sequencial, 1 processo | **~2,0 h** |
 | Carga com 4 processos | **~0,5 h** |
 
-> ⚠️ **CONTRA-ARGUMENTO CONTRA MEU PRÓPRIO NÚMERO.** A extrapolação
-> provavelmente **superestima**. `Empresas0.zip` (552 MB) é 7× maior que os
-> outros nove, e `Estabelecimentos0.zip` (2,2 GiB) é 6× maior — se esses dois
-> comprimem diferente do resto, a densidade medida não vale para eles. O
-> resultado de 79 M linhas de `empresas` é maior que a base de CNPJs conhecida
-> do país, o que é sinal de que o número está alto.
+Os dois arquivos `0` deixaram de ser extrapolação; `Empresas1..9`,
+`Estabelecimentos1..9` e `simples` continuam extrapolados por densidade. Os
+bytes por linha (465 para `empresas` e `simples`, 803 para `estabelecimentos`,
+com índices) e as vazões (31 k e 18 k linhas/s) são medidos.
+
+> ✏️ **PLACAR HONESTO DA MINHA PRÓPRIA ESTIMATIVA.** Eu tinha estimado 170 M e
+> avisado que "provavelmente superestima". O número medido é **167,2 M** — eu
+> errei **1,7% para cima**. O aviso estava certo na direção e **exagerado no
+> tom**: falei como se o número pudesse estar muito errado, e ele estava quase
+> certo. Alarme excessivo também custa: se eu grito a cada número, ninguém
+> escuta quando o número realmente for ruim.
 >
-> A medição direta desses dois arquivos está em curso e entra aqui quando
-> terminar. Enquanto não entrar, **trate 170 M como teto, não como número**.
+> O que a medição ensinou de útil não foi o total — foi que **a densidade varia
+> entre arquivos do mesmo conjunto** (9% em `empresas`, 1,9% em
+> `estabelecimentos`). Extrapolar por bytes funciona, com margem de poucos por
+> cento. Registrado para a próxima estimativa não precisar de 40 minutos de
+> download para valer.
 
 ### O plano de carga — e por que ele não é "roda tudo"
 
