@@ -97,6 +97,13 @@ nunca "elegível", "crédito garantido" ou "direito a R$ X".
 
 ---
 
+## Começa aqui
+
+**[`docs/DOSSIE-DE-BORDO.md`](docs/DOSSIE-DE-BORDO.md)** — o briefing único: gênese, leis,
+estado exato e plano de construção. Auto-contido. Quem chega novo ao FARO lê esse primeiro.
+
+---
+
 ## O canon
 
 Leia nesta ordem:
