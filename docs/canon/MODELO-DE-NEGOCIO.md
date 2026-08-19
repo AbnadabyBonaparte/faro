@@ -489,6 +489,83 @@ e devolve dinheiro; ritual sem preço é conversa.
 
 ---
 
+## D.5 — 🔨 A LEI DO TEMPO DE COZINHA · `[MARTELO DO DONO 19/08/2026]`
+
+> **Investigação não se entrega no ato. Mesmo quando a máquina termina em
+> segundos.**
+
+### A regra
+
+| | |
+|---|---|
+| **SLA da Caçada** | **entre 5 e 10 dias úteis**, conforme o volume do território da tese |
+| **Onde a janela aparece** | no site, **antes** de decidir · e de novo no Aceite, no que se assina |
+| **Meta interna** | entregar no **dia 3 ou 4**. Nunca no limite. |
+| **A exceção** | **alertas correm** — Watch e Eco de 30 dias saem no lote seguinte, sem espera |
+| **Estado** | `HIPÓTESE` até o `uso.ledger` da Fase 1 medir custo e tempo reais |
+
+### Por que a espera é regra e não desleixo
+
+Uma ficha que chega dois minutos depois do pagamento é lida como consulta a
+banco de dados. Uma ficha que chega em quatro dias é lida como **investigação**.
+O conteúdo pode ser idêntico; o valor percebido não é. A literatura de serviços
+chama isso de **labor illusion** — o cliente valoriza o esforço que consegue
+enxergar.
+
+**E é exatamente aqui que a casa pode se sujar, então a linha é rígida:**
+
+> 🔴 **O tempo do FARO é real. A revisão humana é real.** Não existe barra de
+> progresso fingindo trabalho que não acontece, não existe atraso plantado para
+> encenar dificuldade. O que a Esteira mostra são **estados que de fato
+> ocorreram**, com **carimbo de hora verdadeiro**.
+
+A diferença entre as duas coisas é a diferença entre um restaurante com cozinha
+aberta e um restaurante que esconde o micro-ondas. Nós mostramos a cozinha.
+
+**O que realmente acontece nesses dias, e sustenta a janela:**
+
+1. A varredura roda em minutos — isto é máquina, e é honesto dizer que é rápido.
+2. **A revisão humana não roda em minutos.** Alguém lê as fichas candidatas,
+   confere se a evidência sustenta a inferência, escreve o "por que não
+   perseguir" e mata o que não presta. Na Fase 1 isso é feito à mão, e é o
+   gargalo verdadeiro.
+3. Território grande gasta mais das duas coisas. Por isso a janela é **faixa**,
+   não número: 5 dias para uma tese estreita, até 10 para uma que varre o país.
+
+### Por que faixa, e por que a faixa aparece antes da venda
+
+Mesma disciplina do Censo Prévio: **a métrica que informa a decisão não some do
+acordo.** Prazo dito na venda e ausente do Aceite é prazo que ninguém pode
+cobrar. Prazo ausente da venda e presente no Aceite é surpresa.
+
+E a faixa é honesta com a variável que o cliente não vê: o volume do território.
+Prometer "3 dias" para toda tese seria vender o caso fácil e quebrar no difícil.
+
+### A exceção declarada: notícia corre, investigação amadurece
+
+| | Ritmo | Por quê |
+|---|---|---|
+| **Caçada** (investigação) | 5 a 10 dias úteis | tem revisão humana no meio; vale mais madura |
+| **Watch · Eco de 30 dias** (alerta) | lote seguinte, sem espera | evento é **notícia** — segurar alerta é destruir o produto |
+
+Segurar um alerta para "parecer trabalhoso" seria a versão desonesta desta lei.
+Um evento que envelhece perde o valor inteiro: o canon já diz que a unidade de
+valor é a mudança, e mudança tem hora.
+
+### 🟡 O que aqui é hipótese
+
+Os números **5**, **10**, **3** e **4** são `HIPÓTESE` de fundação. Nenhum deles
+foi medido contra o custo real de produzir uma ficha, porque a Fase 1 ainda não
+rodou um ciclo pago inteiro. O `uso.ledger` mede, e a janela se recalibra com
+número real — para cima ou para baixo.
+
+**O risco de errar para baixo:** prometer 5 dias e entregar em 12 mata a
+confiança na primeira venda. **Errar para cima:** prometer 10 e entregar em 2
+faz o cliente perguntar por que esperou. A meta interna de 3–4 dias existe para
+que o erro caia sempre do lado bom.
+
+---
+
 # E) O QUE ESTE DOCUMENTO NÃO DECIDE
 
 | Aberto | Por quê | Quem fecha |
@@ -500,6 +577,7 @@ e devolve dinheiro; ritual sem preço é conversa.
 | Estrutura concreta de remuneração do canal (b) | `NÃO VERIFICADO` nº 10 do GPT | LEXIS + advogado externo |
 | Mecânica dos saldos de PIS/Cofins na transição | Depende da LC 214 **vigente** + regulamentação RFB | Antes de virar regra de produto |
 | Entrada no andar 4 (financeiro) | Exige parceiro regulado | Decisão do dono, com parecer |
+| **A janela de 5 a 10 dias úteis (D.5)** | Escolhida pela percepção de valor, não medida contra o custo real de revisar uma ficha | `uso.ledger` no primeiro ciclo pago |
 
 ---
 

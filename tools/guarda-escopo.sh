@@ -24,6 +24,12 @@
 # pele do produto — hero, OG, favicon, fundos — e portanto mexe na maquete por
 # definição. Mesma regra dos irmãos: libera a maquete, tranca o motor.
 #
+# `faro/tempo-de-cozinha` entrou em 19/08/2026 pela missão do mesmo nome, que
+# escreve o SLA da Caçada no canon E na maquete. É nome literal, não padrão, de
+# propósito: ordem de escopo declarado entra pelo nome exato e sai quando
+# mergeia. Padrão novo só se a casa passar a ter uma FAMÍLIA de branches assim —
+# senão o curinga vira porta aberta para tudo.
+#
 # O segundo sentido é o que impede o ajuste de virar buraco: antes, uma branch
 # de maquete não podia mexer em nada da maquete; agora ela pode, mas em troca
 # não pode mexer no motor. O total de coisas que uma branch pode tocar sem
@@ -59,7 +65,7 @@ tocou() { git diff --name-only "$BASE" HEAD -- "$@" | grep -q .; }
 listar() { git diff --name-only "$BASE" HEAD -- "$@"; }
 
 case "$BRANCH" in
-  faro/comercial-* | faro/maquete-* | faro/visual-*)
+  faro/comercial-* | faro/maquete-* | faro/visual-* | faro/tempo-de-cozinha)
     echo "▸ branch de produto/comercial: \`$BRANCH\`"
     echo "  apps/maquete LIBERADA (exceção declarada — ver cabeçalho deste arquivo)"
     echo "  o motor fica PROTEGIDO nesta branch"

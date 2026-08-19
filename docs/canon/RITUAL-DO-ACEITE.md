@@ -179,6 +179,32 @@ energia"). Categoria, não receita: o método fino é o que se está vendendo.
 tem que reaparecer no que se assina. Métrica que informa a decisão e some do
 acordo é métrica que ninguém pode cobrar depois.
 
+#### 🔨 [EMENDA 19/08/2026 — O PRAZO ENTRA NO ACEITE]
+
+O bloco "o que será entregue" já dizia *prazo*. A palavra estava lá; o número,
+não. Passa a estar, com a mesma disciplina da cadência — **aparece no site antes
+de decidir e reaparece aqui, no que se assina**:
+
+> **Entrega entre 5 e 10 dias úteis.** O prazo respira com o volume de dados
+> minerados no território da sua tese.
+
+**Por que faixa e não data fixa:** território estreito consome menos varredura e
+menos revisão humana; território nacional consome mais. Prometer data única seria
+vender o caso fácil e quebrar no difícil.
+
+**E a exceção, dita no mesmo lugar para não virar letra miúda:**
+
+> Os **alertas** do Watch e do Eco de 30 dias **não esperam** — saem no lote
+> seguinte à detecção. Investigação amadurece; notícia corre.
+
+A lei inteira, com o fundamento e o que nela é hipótese, está em
+[`MODELO-DE-NEGOCIO.md` §D.5](./MODELO-DE-NEGOCIO.md) — **A Lei do Tempo de
+Cozinha**. Em resumo: o tempo é real e a revisão humana é real; o que a Esteira
+mostra ao cliente são estados que aconteceram, com hora verdadeira. Barra de
+progresso encenando trabalho que não existe é proibida.
+
+🟡 **Os prazos são `HIPÓTESE`** até o `uso.ledger` medir um ciclo pago inteiro.
+
 **3 · O que NÃO é** — no mesmo tamanho de fonte que o resto, não em rodapé de
 6pt:
 

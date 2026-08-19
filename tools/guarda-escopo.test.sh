@@ -93,6 +93,15 @@ caso "visual tocando o MOTOR (o mesmo freio dos irmãos)" \
      "faro/visual-abissal" reprovou \
      bash -c 'echo mexido >> services/motor/src/index.ts'
 
+# Nome literal, não padrão: quem entra pelo nome exato também sai pelos dois lados.
+caso "tempo-de-cozinha tocando a maquete (nome declarado, 19/08)" \
+     "faro/tempo-de-cozinha" passou \
+     bash -c 'echo mexido >> apps/maquete/src/page.tsx'
+
+caso "tempo-de-cozinha tocando o MOTOR (o mesmo freio)" \
+     "faro/tempo-de-cozinha" reprovou \
+     bash -c 'echo mexido >> services/motor/src/index.ts'
+
 # Limite ASSUMIDO, não esquecido: a guarda não se protege. Ver o cabeçalho de
 # guarda-escopo.sh — a proteção de `tools/` e `.github/` é o portão do dono.
 caso "comercial mexendo na própria guarda (limite assumido)" \

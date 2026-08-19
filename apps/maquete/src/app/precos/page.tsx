@@ -117,7 +117,20 @@ export default function Page() {
       </header>
 
       {/* ── A PORTA ───────────────────────────────────────────────────────── */}
-      <div className="rounded-[var(--radius-instrument)] border border-signal bg-surface p-5">
+      {/* A capa da Caçada entra como fundo desta carta — é aqui que o produto
+          de entrada aparece com arte própria. O número do prazo vive no HTML
+          por cima dela: a arte segue sem número, como manda a direção. */}
+      <div className="relative overflow-hidden rounded-[var(--radius-instrument)] border border-signal bg-surface">
+        <div
+          className="pointer-events-none absolute inset-0 bg-cover bg-center opacity-70"
+          style={{ backgroundImage: 'url(/brand/rodada-2/capa-cacada-1600x900.svg)' }}
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-0 bg-gradient-to-r from-surface via-surface/90 to-surface/50"
+          aria-hidden
+        />
+        <div className="relative p-5">
         <p className="text-[10px] font-semibold tracking-widest text-signal uppercase">
           {CACADA.selo}
         </p>
@@ -132,6 +145,11 @@ export default function Page() {
             {CACADA.unidade}
           </span>
         </div>
+        <p className="mt-3 border-l border-signal-dim pl-3 text-xs leading-relaxed text-text-secondary">
+          <strong className="text-text">Entrega entre 5 e 10 dias úteis.</strong>{' '}
+          O prazo respira com o volume de dados minerados no território da sua
+          tese. Alertas do Eco não esperam: saem no lote seguinte à detecção.
+        </p>
         <ul className="mt-4 grid gap-1.5 border-t border-border pt-3 sm:grid-cols-2">
           {CACADA.escopo.map((e) => (
             <li
@@ -146,6 +164,7 @@ export default function Page() {
             </li>
           ))}
         </ul>
+        </div>
       </div>
 
       {/* ── OS DEGRAUS ────────────────────────────────────────────────────── */}
