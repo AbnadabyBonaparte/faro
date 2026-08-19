@@ -1,3 +1,25 @@
+> **📥 HERANÇA — não é canon.**
+>
+> Este arquivo é um **espelho externo** do `docs/canon/IDENTIDADE-VISUAL.md`: uma
+> leitura de fora, feita sobre o canon, que propôs valores cromáticos exatos onde
+> o canon havia deixado tokens abstratos.
+>
+> **Os tokens canônicos são os de `apps/maquete/src/app/globals.css`**
+> (`--color-bg: #06090c` · `--color-surface: #0c1216` · `--color-signal: #2ed3a3`
+> · `--color-border: #1c262c`), e a lei de cor é a de `docs/canon/IDENTIDADE-VISUAL.md`.
+> Onde este documento divergir do canon — e ele **diverge** (propõe `--bg #060B14`,
+> um breu mais azulado) — **vale o canon**.
+>
+> Guardado por dois motivos: (a) o §1 (por que este público despreza painel de
+> startup) é argumento aproveitável; (b) uma proposta descartada só é descartada
+> de verdade quando fica registrada por que.
+>
+> Movido de `docs/canon/` para `docs/heranca/` em 19/08/2026 (Onda 2, housekeeping).
+> Dois arquivos de identidade dentro de `canon/` faziam o repo ter duas fontes de
+> verdade cromática — e o canon proíbe isso mais alto do que proíbe qualquer cor.
+
+---
+
 Análise completa dos dois documentos do canon. Aqui está a entrega final — **o Santo Graal da identidade visual do FARO**, calibrado sobre as leis que já existem no repo (sem inventar nada que conflite com o canon) e preenchido com o que faltava: **os valores cromáticos exatos**, que o `IDENTIDADE-VISUAL.md` deixou abstratos.
 
 ---
