@@ -675,7 +675,7 @@ sequenciais e inválidos de propósito (`00.000.00X/0001-00`).
 | **P1** | **Deploy da maquete** | ❌ **Bloqueado.** Vercel devolve `403 — You don't have permission to create a project`, no team e fora dele. Três tentativas, dois métodos. **Não é problema do código** — o app builda e roda. **Clique do dono:** Vercel → Add New Project → repo `faro` → **Root Directory = `apps/maquete`**. |
 | **P2** | **Martelo da linha Operador Profissional** | Benchmark existe (`ESTIMATIVA: R$ 2–30k/mês`); o valor não. Aguarda dono. |
 | **P3** | **Atribuição dos pareceres da 1ª rodada** | Um bloco chegou **duplicado sob os rótulos "gpt" e "Gemini"**. Se tivesse passado, contaria dois votos onde há um. Registrado como `❔` no cabeçalho de cada arquivo. Aguarda correção do dono. |
-| **P4** | **LEXIS — três frentes** | (a) as 3 teses em disputa (C1/C2/C3) · (b) contratos espelhados do canal · (c) cláusulas 1 e 4 da Lei de Dados, marcadas **MINUTA**. |
+| **P4** | **LEXIS — quatro frentes** | (a) as 3 teses em disputa (C1/C2/C3) · (b) contratos espelhados do canal · (c) cláusulas 1 e 4 da Lei de Dados, marcadas **MINUTA** · (d) `[19/08]` **L5** — o Aceite da Caçada ante o CDC art. 49. |
 | **P5** | **WhatsApp + proposta stealth pro irmão** | `PROPOSTA-001-2026-v2`. `[ORDEM 18/08]` — ainda não versionada no repo. |
 | **P6** | **Repo privado?** | Hoje privado. `docs/junta/` e `docs/heranca/` nomeiam fornecedores de IA — necessário pela Lei do Selo, proibido em superfície de cliente. **Voto do guia: manter privado.** Decisão do dono. |
 
@@ -1004,6 +1004,7 @@ motor horizontal, oferta vertical, uma de cada vez.
 | **L2** | **Contratos espelhados do canal** — licença premium e/ou fee por dossiê | A fronteira entre serviço tecnológico, captação e serviço profissional é material. |
 | **L3** | **Cláusulas 1 e 4 da Lei de Dados** (telemetria agregada · opt-in de benchmark) | Estão marcadas **MINUTA**. Base legal, titularidade do dado derivado, efeito da revogação, retenção. |
 | **L4** | **Delimitação de responsabilidade por falso positivo** | Multa de ofício de 75% a 150% no cliente, com ação de regresso na casa. |
+| **L5** | 🆕 **O Aceite da Caçada ante o direito de arrependimento** (CDC art. 49) | A Caçada é executada imediatamente após o aceite: a computação acontece e o custo não se desfaz. Falta a **cláusula de execução imediata mediante consentimento expresso** — quem redige, como aparece na tela, e o que se faz se o cliente se arrepender depois da entrega. Ver [`docs/canon/RITUAL-DO-ACEITE.md`](./canon/RITUAL-DO-ACEITE.md) §5. **O ritual não vai ao ar em autoatendimento antes de L5 fechar.** |
 
 ## ❓ PERGUNTAS QUE NINGUÉM RESPONDEU AINDA
 
