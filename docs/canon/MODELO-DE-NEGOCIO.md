@@ -344,20 +344,97 @@ percentual de honorário. Ver [`CANAL-OPERADOR-PARCEIRO.md`](./CANAL-OPERADOR-PA
 
 # D) PRICING
 
-## D.1 — Tabela atual (mantida como hipótese)
+## D.0 — 🔨 A ESCADA v2 · `[MARTELO DO DONO 19/08/2026]`
 
-| Plano | Hipótese | Status |
+> **A moldura da Lei 7 não muda: tudo abaixo continua HIPÓTESE até o piloto
+> pago.** O que mudou foi *qual* hipótese está registrada. Preço selado pelo dono
+> não é preço validado pelo mercado — é a aposta da casa, escrita para poder ser
+> conferida contra o que o cliente fizer.
+
+| Degrau | Preço | Entrega |
 |---|---|---|
-| FARO Solo | R$ 297/mês | Hipótese de fundação |
-| FARO Pro | R$ 697/mês | Hipótese de fundação |
-| FARO Escritório | R$ 1.497/mês | Hipótese de fundação |
+| **FARO Caçada** — entrada avulsa, **todo cliente começa aqui** | **R$ 997** | 1 tese parametrizada · **os 3 melhores alvos, ranqueados** (ficha completa: EV líquido, fonte+data por linha, "por que não perseguir") · Eco de 30 dias (1 alerta se evento novo bater na tese) · abate 100% no 1º mês do Pro se assinar em 30 dias |
+| **FARO Pro** | **R$ 1.997/mês** | 3 teses vivas · **7 fichas novas/mês** · Watch contínuo · CSV |
+| **FARO Escritório** | **R$ 3.997/mês** | 7 teses vivas · **15 fichas/mês** · multiusuário · curadoria assistida · prioridade |
+| **Operador Profissional** | sob proposta · `ESTIMATIVA: R$ 8–15k/mês` | volume e profundidade sob desenho · contrato próprio · **nunca indexado a êxito** |
+| **Ficha extra** — crédito de investigação | **R$ 349** | acima da franquia de qualquer plano |
 
-Inalterada desde a 1ª rodada. Continua **hipótese**, não tabela — nada vira verdade
-antes do piloto pago de 30 dias. Ver [`MODELO-FARO-V2.md`](./MODELO-FARO-V2.md) §16.1.
+### As três leis da escada
 
-## D.2 — 🆕 NOVA HIPÓTESE: a linha OPERADOR PROFISSIONAL
+**1 · RÉGUA DESCENDENTE.** O R$/ficha cai conforme se sobe, e a ficha extra é
+sempre mais cara que a ficha de plano:
 
-**Benchmark trazido por dois juízes independentes:**
+| Degrau | Fichas | R$/ficha |
+|---|---:|---:|
+| Caçada (R$ 997) | 3 | **332** |
+| Pro (R$ 1.997) | 7 | **285** |
+| Escritório (R$ 3.997) | 15 | **266** |
+| Ficha extra | 1 | **349** |
+
+Sem isso a escada não empurra: se a ficha avulsa saísse mais barata que a de
+plano, o cliente racional ficaria embaixo para sempre, comprando no varejo. A
+régua é o que faz subir valer a pena.
+
+**2 · CADA DEGRAU DOBRA.** 997 → 1.997 → 3.997. Degrau que dobra é degrau que se
+decide; degrau de 20% em 20% vira negociação, e negociação de preço em SaaS
+pequeno consome o tempo que deveria ir para o produto.
+
+**3 · ESCASSEZ É O PRODUTO** — decreto do dono, 19/08/2026.
+
+> *"Não vendemos volume, vendemos pontaria."*
+
+Entregar volume na entrada **mata o retorno**: o cliente que recebe 200 alvos não
+persegue 200, persegue 3 — e conclui que 197 eram lixo. O mesmo cliente que
+recebe 3 alvos ranqueados persegue os 3, e volta. A franquia baixa não é
+limitação técnica disfarçada de plano: é a entrega.
+
+### 🪦 FARO Solo (R$ 297) — MORTO
+
+Removido em 19/08/2026. **Por quê:** convidava o cliente errado. A R$ 297 o FARO
+atrai quem quer testar barato, extrair o que der e sumir — *hit-and-run* — e esse
+cliente custa suporte, custa computação e nunca vira receita. Pior: ele calibra o
+produto para a dor errada, porque é dele que vêm os primeiros pedidos de feature.
+
+A entrada agora é a **Caçada a R$ 997**: avulsa, sem assinatura, sem risco de
+mensalidade — mas cara o bastante para que só compre quem tem uma presa em mente.
+
+### O que nesta escada é hipótese, e o que não é
+
+| Item | Selo |
+|---|---|
+| Os quatro preços (997 · 1.997 · 3.997 · 349) | 🟡 `HIPÓTESE` — martelo do dono, não validação de mercado |
+| Faixa do Operador Profissional | 🟡 `ESTIMATIVA: R$ 8–15k/mês` |
+| **Volumes de ficha (3 · 7 · 15)** | 🟡 `HIPÓTESE A CALIBRAR` — ver abaixo |
+| As três leis da escada | 🔨 decisão estrutural do dono, não número |
+
+> ⚠️ **OS VOLUMES SÃO O NÚMERO MAIS FRÁGIL DESTA TABELA, e é bom que se diga.**
+> 3, 7 e 15 fichas foram escolhidos para fazer a régua descer — não medidos
+> contra o custo real de produzir uma ficha, que ainda **não é conhecido**. O
+> `uso.ledger` existe desde a fundação exatamente para isto: na Fase 1 ele mede
+> quanto custa uma ficha de verdade, e aí os volumes ou se confirmam ou a escada
+> se refaz. Fixar volume antes de medir custo é como precificar frete sem saber o
+> peso.
+
+### O que NÃO mudou
+
+Compromisso trimestral na assinatura fundadora e **gratuidade proibida** seguem
+como estão. Ver [`MODELO-FARO-V2.md`](./MODELO-FARO-V2.md) §16.1.
+
+## D.1 — A tabela anterior, para registro
+
+| Plano | Hipótese anterior | Destino em 19/08 |
+|---|---|---|
+| FARO Solo | R$ 297/mês | 🪦 morto |
+| FARO Pro | R$ 697/mês | ⬆️ R$ 1.997/mês |
+| FARO Escritório | R$ 1.497/mês | ⬆️ R$ 3.997/mês |
+
+Fica aqui porque hipótese descartada só é descartada de verdade quando se
+registra **de onde se saiu**. Sem isto, daqui a seis meses alguém "redescobre"
+R$ 697 sem saber que já foi tentado e por que caiu.
+
+## D.2 — O benchmark que sustentou a subida
+
+**Trazido por dois juízes independentes, na Fossa das Marianas:**
 
 | Juiz | Faixa | Selo |
 |---|---|---|
@@ -366,31 +443,33 @@ antes do piloto pago de 30 dias. Ver [`MODELO-FARO-V2.md`](./MODELO-FARO-V2.md) 
 
 **Faixa consolidada: `ESTIMATIVA: R$ 2–30 mil/mês`.**
 
-### O que isso revela sobre a tabela atual
+Dois juízes que não se falaram disseram que o operador profissional **já paga**
+nessa ordem de grandeza por inteligência. O FARO Escritório a R$ 1.497 estava
+**abaixo da base** dessa faixa — precificava um consultor solo enquanto o
+benchmark descrevia uma operação estruturada que compra inteligência como insumo
+de produção.
 
-O FARO Escritório a R$ 1.497 está **na base** de uma faixa que começa em R$ 2 mil e
-vai a R$ 30 mil. Dois juízes que não se falaram dizem que o operador profissional
-**já paga** nessa ordem de grandeza por inteligência.
-
-Isso não significa "subir o preço". Significa que a tabela atual pode estar mirando
-o comprador errado: ela precifica um consultor solo, enquanto o benchmark descreve
-uma operação estruturada que compra inteligência como insumo de produção.
-
-### Registro da hipótese
-
-> **LINHA OPERADOR PROFISSIONAL** — acima da tabela atual, faixa de referência
-> `ESTIMATIVA: R$ 2–30 mil/mês`, destinada a escritório ou consultoria com operação
-> comercial estruturada.
->
-> **⚖️ MARTELO DO DONO PENDENTE.** Nenhum valor foi fixado. Nenhuma página de preço
-> exibe esta linha. Ela existe aqui como hipótese registrada, para ser testada no
-> piloto — exatamente como a tabela atual.
+A escada v2 responde a isso: R$ 3.997 entra na faixa, e a linha Operador
+Profissional (`ESTIMATIVA: R$ 8–15k`) ocupa o meio dela — mais conservadora que o
+teto de R$ 20–30k que os juízes citaram, porque **o teto de um benchmark é o pior
+lugar para começar a vender**.
 
 ## D.3 — Estrutura de cobrança (inalterada)
 
-**Assinatura + capacidade + consumo**, mais **créditos de investigação** para caçadas
-pesadas, mais **compromisso trimestral** na assinatura fundadora. Gratuidade
-proibida. Ver [`MODELO-FARO-V2.md`](./MODELO-FARO-V2.md) §16.1.
+**Assinatura + capacidade + consumo**, mais **créditos de investigação** (a ficha
+extra a R$ 349) para caçadas pesadas, mais **compromisso trimestral** na
+assinatura fundadora. Gratuidade proibida. Ver
+[`MODELO-FARO-V2.md`](./MODELO-FARO-V2.md) §16.1.
+
+## D.4 — Como se compra
+
+A escada diz *quanto*. O **[`RITUAL-DO-ACEITE.md`](./RITUAL-DO-ACEITE.md)** diz
+*como*: os quatro passos que toda compra atravessa antes de o motor gastar bala —
+a presa em língua de gente, o Espelho do Refinador, o Censo Prévio e o Aceite da
+Caçada.
+
+Os dois documentos são um só produto comercial. Preço sem ritual vende tese ruim
+e devolve dinheiro; ritual sem preço é conversa.
 
 ---
 
@@ -399,7 +478,8 @@ proibida. Ver [`MODELO-FARO-V2.md`](./MODELO-FARO-V2.md) §16.1.
 | Aberto | Por quê | Quem fecha |
 |---|---|---|
 | Tamanho real do mercado | Uma ordem de grandeza entre as três estimativas | Dados do design partner e do operador parceiro |
-| Preço da linha Operador Profissional | Benchmark existe; o valor não | Martelo do dono + piloto pago |
+| Preço da linha Operador Profissional | Faixa `ESTIMATIVA: R$ 8–15k` selada em 19/08; o valor de contrato, não | Proposta caso a caso + piloto pago |
+| **Os volumes de ficha (3 · 7 · 15)** | Escolhidos para a régua descer, não medidos contra o custo de produzir uma ficha | `uso.ledger` na Fase 1 |
 | As três contradições de tese (ISS · terço de férias · monofásico) | Exigem conclusão jurídica | LEXIS + tributarista habilitado |
 | Estrutura concreta de remuneração do canal (b) | `NÃO VERIFICADO` nº 10 do GPT | LEXIS + advogado externo |
 | Mecânica dos saldos de PIS/Cofins na transição | Depende da LC 214 **vigente** + regulamentação RFB | Antes de virar regra de produto |

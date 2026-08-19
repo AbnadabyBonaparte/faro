@@ -143,19 +143,25 @@ jobs:
           fi
           echo "✓ guarda 06 pegou a regra que nunca dispararia"
 
-  maquete:
-    name: maquete intocada
+  escopo:
+    name: escopo por branch (maquete × motor)
     runs-on: ubuntu-latest
+
+    # 🔴 AJUSTE DECLARADO, ordem COMERCIAL de 19/08/2026.
+    # A guarda "maquete intocada" era absoluta e reprovaria a própria ordem que
+    # manda mexer na maquete. Em vez de afrouxar, ficou específica e passou a
+    # valer nos DOIS sentidos: branch de Onda não toca a maquete, branch de
+    # maquete não toca o motor. Ver tools/guarda-escopo.sh.
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
-      - name: a Onda 1 não pode ter tocado apps/maquete
+
+      - name: escopo da branch
         run: |
-          BASE="${{ github.event.pull_request.base.sha }}"
-          if [ -z "$BASE" ]; then echo "sem base de PR — checagem pulada"; exit 0; fi
-          if git diff --name-only "$BASE" HEAD -- apps/maquete | grep -q .; then
-            echo "✗ apps/maquete foi tocada — a Onda 1 declara que ela fica intocada"
-            git diff --name-only "$BASE" HEAD -- apps/maquete
-            exit 1
-          fi
-          echo "✓ apps/maquete intocada"
+          tools/guarda-escopo.sh \
+            "${{ github.event.pull_request.base.sha }}" \
+            "${{ github.head_ref || github.ref_name }}"
+
+      # Guarda da guarda: prova que o ajuste não abriu buraco.
+      - name: teste de mutação — a guarda ainda reprova o que deve?
+        run: tools/guarda-escopo.test.sh

@@ -59,9 +59,11 @@ export default function Page() {
             </p>
             <ul className="space-y-1 text-xs leading-relaxed text-text-secondary">
               <li>· O canon do produto (modelo v2 consolidado)</li>
-              <li>· Os três pareceres da Junta e o quadro de vereditos</li>
+              <li>· Os pareceres da Junta e os quadros de vereditos</li>
               <li>· A identidade visual documentada</li>
               <li>· Esta maquete de interface, com dados fictícios</li>
+              <li>· O schema do banco, com as leis de isolamento provadas</li>
+              <li>· Coleta e diff de fontes públicas — as duas primeiras etapas do motor</li>
             </ul>
           </div>
           <div className="space-y-2 p-4">
@@ -69,18 +71,21 @@ export default function Page() {
               O que NÃO existe hoje
             </p>
             <ul className="space-y-1 text-xs leading-relaxed text-text-secondary">
-              <li>· Motor de caça — nenhuma varredura roda</li>
-              <li>· Coleta de fonte — nada foi coletado de lugar algum</li>
-              <li>· Banco de dados, score real, cobrança, checkout</li>
-              <li>· Qualquer integração ou chamada externa</li>
+              <li>· Caça por tese — nenhuma varredura de cliente roda</li>
+              <li>· Score real — o desta maquete vem de dado fictício</li>
+              <li>· Ficha de verdade — nenhum evento virou ficha ainda</li>
+              <li>· Cobrança, checkout, assinatura</li>
+              <li>· Autenticação ligada</li>
             </ul>
           </div>
         </div>
         <div className="border-t border-border bg-surface-2 px-4 py-3">
           <p className="text-xs leading-relaxed text-text-secondary">
-            O motor só nasce com um <strong className="text-text">design
-            partner pagante</strong>. Isso é decisão registrada, não atraso: a
-            ordem da casa é validar antes de erguer.
+            O motor está{' '}
+            <strong className="text-text">em construção por ondas</strong>, cada
+            uma com escopo fechado e portão. A fundação e a jazida estão de pé;
+            a caça, o score e a ficha na tela não. Este quadro se atualiza
+            conforme o real — ele descreve o que existe, não o que se pretende.
           </p>
         </div>
       </Painel>
