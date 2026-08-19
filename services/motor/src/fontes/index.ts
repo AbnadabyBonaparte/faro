@@ -70,7 +70,14 @@ export const RFB_CNPJ: Fonte = {
       indicesDaChave: [0],
       // Só o que alimenta tese: porte move `porte_alterado`; razão social e
       // natureza jurídica são identificação da ficha.
-      colunasIngeridas: ['cnpj_basico', 'razao_social', 'natureza_juridica', 'porte'],
+      //
+      // `capital_social` entrou em 19/08/2026 pela T-MED: numa clínica pequena
+      // ele é sinal de porte melhor que a faixa declarada, que só tem três
+      // degraus. Uma coluna numérica em 4,5M de linhas é barata; a Lei de Dados
+      // continua satisfeita porque agora existe tese que a justifica.
+      colunasIngeridas: [
+        'cnpj_basico', 'razao_social', 'natureza_juridica', 'capital_social', 'porte',
+      ],
     },
     {
       nome: 'estabelecimentos',

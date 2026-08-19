@@ -111,8 +111,15 @@ async function principal(): Promise<void> {
 
     case 'cacar': {
       const [codigo] = args
-      if (codigo === undefined) throw new Error('uso: cacar <codigo-tese> [--modo x]')
-      const versao = versaoAtivaDaTese(codigo)
+      if (codigo === undefined) {
+        throw new Error('uso: cacar <codigo-tese|--versao uuid> [--modo x]')
+      }
+      // `--versao` roda uma versao ESPECIFICA em vez da ativa. Existe porque uma
+      // tese pode ter sub-perfis vivos ao mesmo tempo (T-MED: estoque e evento),
+      // e `versaoAtivaDaTese` devolve um so. Nao e atalho de teste: sem isto o
+      // sub-perfil segmentado nao teria como ser caçado pela linha de comando.
+      const versaoPedida = bandeira(args, 'versao')[0]
+      const versao = versaoPedida ?? versaoAtivaDaTese(codigo)
       if (versao === null) {
         throw new Error(`tese ${codigo} nao tem versao ativa — so tese ativa caça`)
       }
