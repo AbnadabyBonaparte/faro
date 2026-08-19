@@ -170,12 +170,23 @@ export function FormTese() {
           </fieldset>
 
           <div className="space-y-2 border-t border-border pt-3">
+            {/* Inerte por decisão do dono: sem formulário e sem captura — o
+                stealth segue. A legenda evita a promessa vazia de um botão que
+                parece vivo e não faz nada. */}
             <button
               type="button"
-              className="w-full rounded-[var(--radius-instrument)] bg-signal px-3 py-2 text-xs font-semibold text-signal-fg transition-opacity hover:opacity-90"
+              disabled
+              aria-describedby="salvar-tese-nota"
+              className="w-full cursor-default rounded-[var(--radius-instrument)] border border-border-strong bg-surface-2 px-3 py-2 text-xs text-text-secondary"
             >
               Salvar tese
             </button>
+            <p
+              id="salvar-tese-nota"
+              className="num text-center text-[10px] tracking-widest text-text-muted uppercase"
+            >
+              disponível no lançamento
+            </p>
           </div>
         </div>
 

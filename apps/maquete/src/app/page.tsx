@@ -9,6 +9,7 @@ import { ReguaFreshness } from '@/components/marca/ReguaFreshness'
 import {
   LinkTela, RecorteFicha, RecorteFila, RecorteWatch,
 } from '@/components/marca/FragmentosProduto'
+import { RecorteEsteira } from '@/components/marca/EsteiraCacada'
 
 /*
   A HOME — estrutura tirada da curadoria, não do gosto.
@@ -161,6 +162,41 @@ export default function Page() {
             </p>
             <LinkTela href="/watch">Ver o Watch</LinkTela>
           </div>
+        </div>
+      </Faixa>
+
+      {/* ── A COZINHA ABERTA · a Lei do Tempo de Cozinha na superfície ─────
+          MODELO-DE-NEGOCIO.md §D.5. A janela aparece ANTES de decidir e
+          reaparece no Aceite — métrica que informa e some do acordo é métrica
+          que ninguém pode cobrar depois.                                    */}
+      <Faixa className="bg-bg" miolo="py-14">
+        <div className="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:items-center">
+          <div>
+            <p className="num text-[10px] tracking-[0.22em] text-signal uppercase">
+              A cozinha é aberta
+            </p>
+            <h2 className="mt-3 text-xl leading-snug font-bold text-text sm:text-2xl">
+              Entrega entre 5 e 10 dias úteis.
+            </h2>
+            <p className="mt-3 max-w-md text-sm leading-relaxed text-text-secondary">
+              O prazo respira com o volume de dados minerados no território da
+              sua tese. Enquanto a caçada corre, você acompanha cada etapa com a
+              hora em que ela aconteceu.
+            </p>
+            <p className="mt-4 max-w-md text-xs leading-relaxed text-text-secondary">
+              A varredura é máquina e termina em minutos — isso é fácil de
+              dizer. O que leva dias é a{' '}
+              <strong className="text-text">revisão humana</strong>: alguém lê
+              cada candidato, confere se a evidência sustenta a inferência e mata
+              o que não presta. É esse tempo que você está comprando.
+            </p>
+            <p className="mt-4 max-w-md border-l border-signal-dim pl-3 text-xs leading-relaxed text-text-secondary">
+              <strong className="text-text">Alertas não esperam.</strong> Watch e
+              Eco saem no lote seguinte à detecção. Investigação amadurece;
+              notícia corre.
+            </p>
+          </div>
+          <RecorteEsteira />
         </div>
       </Faixa>
 
