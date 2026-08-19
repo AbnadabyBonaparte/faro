@@ -407,6 +407,14 @@ mensalidade — mas cara o bastante para que só compre quem tem uma presa em me
 | **Volumes de ficha (3 · 7 · 15)** | 🟡 `HIPÓTESE A CALIBRAR` — ver abaixo |
 | As três leis da escada | 🔨 decisão estrutural do dono, não número |
 
+> 🔨 **[EMENDA 19/08 — A FRANQUIA É POR CLIENTE]** As 7 fichas do Pro e as 15 do
+> Escritório são a **soma de todas as teses vivas do assinante**, nunca a
+> promessa de cada uma. O Pro dá 3 teses; se cada uma parir ~1 ficha/mês, o
+> assinante recebe ~3 — abaixo da franquia, e isso é normal. **Franquia é teto de
+> consumo, não piso de entrega.** Prometer 7 por tese seria prometer 21, e
+> nenhuma medição sustenta isso. Ver
+> [`RITUAL-DO-ACEITE.md`](./RITUAL-DO-ACEITE.md) §2.3.
+
 > ⚠️ **OS VOLUMES SÃO O NÚMERO MAIS FRÁGIL DESTA TABELA, e é bom que se diga.**
 > 3, 7 e 15 fichas foram escolhidos para fazer a régua descer — não medidos
 > contra o custo real de produzir uma ficha, que ainda **não é conhecido**. O
@@ -414,6 +422,14 @@ mensalidade — mas cara o bastante para que só compre quem tem uma presa em me
 > quanto custa uma ficha de verdade, e aí os volumes ou se confirmam ou a escada
 > se refaz. Fixar volume antes de medir custo é como precificar frete sem saber o
 > peso.
+>
+> **[19/08] A primeira medição chegou, e ela é de CADÊNCIA, não de custo.** A
+> T-04 v0 pariria 0,06 ficha/mês; a v1.1, com o território virando peso em vez de
+> corte, sobe para ~1/mês (🟡 `ESTIMATIVA`, método em
+> [`ONDA-3-CACA.md`](../ondas/ONDA-3-CACA.md)). Nenhuma das duas chega perto de
+> 7. **A franquia só se sustenta somando teses** — daí a emenda acima. E os
+> eventos que dariam cadência de verdade (~49/mês) dependem da carga completa da
+> jazida, que é decisão de custo do dono.
 
 ### O que NÃO mudou
 

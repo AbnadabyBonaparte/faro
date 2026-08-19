@@ -102,6 +102,68 @@ cliente não vai fazer.
 Vender uma caçada num território vazio é vender uma rede num lago sem peixe. A
 rede funciona. O lago é que não tem peixe.
 
+#### 🔨 [EMENDA 19/08/2026 — A SEGUNDA MÉTRICA DO CENSO]
+
+**Decisão do dono, nascida de uma medição.** A Onda 3 rodou a T-04 sobre dado
+real e descobriu que ela produzia **0,06 ficha por mês** — menos de uma por ano.
+O território existia (82 alvos); o que não existia era **cadência**.
+
+Território e cadência são perguntas diferentes, e o censo só respondia a
+primeira:
+
+| Pergunta | Métrica | O que ela responde |
+|---|---|---|
+| "Existem empresas assim?" | **Território**, em faixa | se o lago tem peixe |
+| "Quantas vão MUDAR?" | **Cadência**, em faixa | se o peixe passa pela rede |
+
+Um lago cheio de peixe parado não alimenta ninguém: o FARO entrega **eventos**,
+e evento é peixe que se move. Uma tese pode ter dez mil alvos e não parir uma
+ficha por trimestre — foi exatamente o caso da T-04 v0.
+
+**O Censo Prévio passa a exibir as DUAS, antes do aceite:**
+
+> **Território estimado:** entre 10.000 e 15.000 empresas compatíveis.
+> **Cadência estimada:** esta tese deve parir **~1 ficha por mês**.
+>
+> *Método: eventos históricos observados nas fontes × tamanho do território.
+> Faixa, não número exato. Recalculado a cada lote.*
+
+**O método é declarado na tela**, não escondido: taxa de evento medida nos lotes
+anteriores, multiplicada pelo território da tese. É uma conta simples, e é
+melhor que ela apareça simples do que pareça precisa.
+
+##### Por que isso é venda, e não engenharia
+
+**Tese de baixa cadência é diagnóstico declarado ANTES de pagar, nunca surpresa
+depois.** O cliente que compra uma Caçada de R$ 997 e recebe 3 alvos está
+satisfeito. O mesmo cliente que assina o Pro esperando 7 fichas por mês e recebe
+uma a cada dois meses cancela no segundo mês — e tem razão.
+
+A cadência baixa **não impede a venda**. Ela muda o que se vende:
+
+- cadência alta → assinatura faz sentido, o fluxo justifica a mensalidade;
+- cadência baixa → **Caçada avulsa**, ou a tese entra somada a outras;
+- cadência quase nula → o sistema recusa, como já recusa território magro.
+
+##### 🔴 A franquia é POR CLIENTE, não por tese
+
+Decisão do dono na mesma data, e ela decorre do que está acima: as **7 fichas do
+Pro e as 15 do Escritório são a SOMA de todas as teses vivas do assinante** —
+nunca a promessa de cada uma.
+
+O Pro dá **3 teses vivas**. Se cada uma parir ~1 ficha por mês, o assinante
+recebe ~3 — abaixo da franquia, e isso é normal: a franquia é **teto de
+consumo**, não piso de entrega. Prometer 7 fichas por tese seria prometer 21, e
+nenhuma medição sustenta isso.
+
+> **O que o vendedor diz, então:** *"o plano comporta até 7 fichas no mês,
+> somando suas teses; estas três teses, pela cadência medida, devem parir cerca
+> de N."* As duas frases juntas, sempre. A primeira sozinha é promessa; a
+> segunda sozinha é desânimo.
+
+Ver [`MODELO-DE-NEGOCIO.md`](./MODELO-DE-NEGOCIO.md) §D.0 e o relatório
+[`ONDA-3-CACA.md`](../ondas/ONDA-3-CACA.md).
+
 ### Passo 4 — O ACEITE DA CAÇADA
 
 Página gerada na hora, com quatro blocos:
@@ -112,6 +174,10 @@ precisa reconhecer a própria intenção no texto.
 **2 · O que será entregue** — quantidade de alvos, prazo, formato, e as fontes
 **em nível de categoria** ("cadastros públicos federais", "dados setoriais de
 energia"). Categoria, não receita: o método fino é o que se está vendendo.
+
+`[EMENDA 19/08]` **E a cadência estimada, repetida aqui.** Ela apareceu no censo;
+tem que reaparecer no que se assina. Métrica que informa a decisão e some do
+acordo é métrica que ninguém pode cobrar depois.
 
 **3 · O que NÃO é** — no mesmo tamanho de fonte que o resto, não em rodapé de
 6pt:
@@ -237,6 +303,8 @@ ter. Automatizar um ritual que nunca foi executado é automatizar um palpite.
 | O limite de 3 censos de cortesia | Calibragem pelo `uso.ledger` na Fase 1 |
 | A largura da faixa do censo ("300–1.000" ou "centenas") | Teste com cliente real |
 | O piso de território que dispara a recusa | Hoje é palpite; vira número quando houver histórico de entrega |
+| O piso de **cadência** que dispara a recusa | Idem. Hoje se sabe que 0,06 ficha/mês é inviável e que ~1/mês vende como Caçada; entre os dois há uma faixa sem nome |
+| A largura da faixa da cadência ("~1 por mês" ou "entre 0 e 3") | Teste com cliente real — faixa larga demais não informa, estreita demais mente |
 
 ---
 

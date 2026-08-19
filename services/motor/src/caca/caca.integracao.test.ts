@@ -148,9 +148,47 @@ test('preparando a base: duas coletas de empresas e uma de estabelecimentos', as
 
 test('varredura inicial: acha o território, e NENHUM candidato tem evento', () => {
   const r = executarCaca({ teseVersaoId: teseV, modo: 'inicial' })
-  // ALFA e BETA: indústria em MT com porte 05. GAMA é comércio, DELTA é SP.
-  assert.equal(r.candidatos, 2)
+  // A T-04 v1.1 é NACIONAL: ALFA e BETA (MT) mais DELTA (SP), todas indústria
+  // ativa com porte 05. GAMA fica fora por ser comércio — critério ainda corta.
+  assert.equal(r.candidatos, 3)
   assert.equal(r.comEvento, 0, 'varredura inicial não olha evento — é perfil, não notícia')
+})
+
+test('o território virou PESO: MT/GO pontua mais, SP continua elegível', () => {
+  // Esta é a diferença entre a v0 e a v1.1, e ela precisa aparecer no número.
+  // Critério corta; bonificador ordena.
+  const bonus = linhas(
+    `SELECT c.cnpj, (x ->> 'casou')
+       FROM fichas.candidatos c
+       JOIN fichas.cacadas ca ON ca.id = c.cacada_id,
+            LATERAL jsonb_array_elements(c.criterios_casados) x
+      WHERE ca.modo = 'inicial' AND x ->> 'especie' = 'BONIFICADOR'
+      ORDER BY c.cnpj`,
+  )
+  assert.equal(bonus.length, 3, 'todo candidato carrega o bonificador, tendo casado ou não')
+  const mapa = Object.fromEntries(bonus.map((b) => [b[0], b[1]]))
+  assert.equal(mapa['11111111000100'], 'true', 'ALFA é MT')
+  assert.equal(mapa['22222222000100'], 'true', 'BETA é MT')
+  assert.equal(mapa['44444444000100'], 'false', 'DELTA é SP — elegível, mas sem o bônus')
+
+  // E o bônus tem que virar PONTO, senão é enfeite.
+  const cands = linhas(
+    `SELECT c.id::text FROM fichas.candidatos c
+       JOIN fichas.cacadas ca ON ca.id = c.cacada_id
+      WHERE ca.modo = 'inicial' ORDER BY c.cnpj`,
+  )
+  const fit = (id: string): number =>
+    Number(
+      valor(
+        `SELECT valor::text FROM fichas.dimensoes_do_candidato(${escapar(id)}::uuid)
+          WHERE dimensao = 'fitEstrutural'`,
+      ),
+    )
+  const alfa = fit(cands[0]?.[0] ?? '')
+  const delta = fit(cands[2]?.[0] ?? '')
+  assert.ok(alfa > delta, `MT (${alfa}) tem que pontuar mais que SP (${delta})`)
+  // Teto de 20 pontos: preferência comercial ordena a fila, não decide quem entra.
+  assert.equal(Math.round(alfa - delta), 20)
 })
 
 test('candidato da varredura inicial NÃO vira ficha — o banco recusa', () => {
