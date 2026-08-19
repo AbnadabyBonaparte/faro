@@ -1,0 +1,7 @@
+# A maquete NAO entra no workspace — ela e um app npm independente e fica
+# intocada por decisao da Onda 1. Ver docs/DOSSIE-DE-BORDO.md §7.
+packages:
+  - "apps/app"
+  - "packages/*"
+  - "services/*"
+  - "tools"

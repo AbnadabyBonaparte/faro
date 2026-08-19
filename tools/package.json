@@ -1,0 +1,12 @@
+{
+  "name": "@faro/tools",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "guards": "node --experimental-strip-types src/guards.ts",
+    "build": "echo tools-noop",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": { "typescript": "^5.9.3", "@types/node": "^22.10.2" }
+}

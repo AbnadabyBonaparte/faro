@@ -11,6 +11,7 @@
 > |---|---|
 > | `[canon: ARQUIVO §X]` | Está escrito no repo, naquele arquivo |
 > | `[ORDEM 18/08]` | Veio da ordem do dono de 18/08/2026 e **ainda não tinha doc próprio no canon** — este dossiê é a primeira gravação |
+> | `[ORDEM 19/08]` | **Override do dono em 19/08/2026** — a construção do motor começou. Onde esta marca aparece, ela **substitui** o que o canon dizia antes |
 > | `[BURACO]` | O canon está em silêncio, em conflito ou em aberto — declarado, não tapado |
 > | `ESTIMATIVA` / `NÃO VERIFICADO` | Selo do juiz que produziu o número. **Nunca vira fato.** |
 >
@@ -623,18 +624,40 @@ diferentes; juntá-los numa tela é criar passivo por conveniência de marketing
 `IDENTIDADE-VISUAL.md` · `DOSSIE-V1.md` (histórico) · `docs/junta/` (1ª rodada, 4 pareceres +
 quadro) · `docs/junta/marianas/` (2ª rodada, 3 pareceres + anexo ❔ + quadro).
 
-## O que NÃO EXISTE — por decisão, não por atraso
+## 🔴 OVERRIDE — A CONSTRUÇÃO COMEÇOU
 
-| Não existe | Nasce quando |
+`[ORDEM 19/08]` **O dono derrubou a regra "o motor nasce com o design partner pagante".**
+A construção do SaaS começa **agora**. O irmão continua sendo a primeira dor e o primeiro
+cliente da Fase 1 — mas **o FARO é produto multi-assinante, construído para muitos**, não
+uma entrega sob medida para um.
+
+**O que muda na governança:** os portões deixam de ser as fases comerciais e passam a ser as
+**Ondas de construção**. Cada Onda tem escopo fechado, proibidos declarados e **portão do
+dono** — nada avança porque "está pronto tecnicamente".
+
+| Onda | Escopo | Estado |
+|---|---|---|
+| **Onda 1** | Fundação: monorepo · schema completo do domínio · guardas de CI | 🔨 **em construção** |
+| **Onda 2** | A jazida viva: ingestão RFB + CCEE, fontes provadas vivas, diff→eventos | ⏳ aguarda portão 1 |
+| **Onda 3** | Motor de caça + score sobre a tese T-04 real | ⏳ |
+| **Onda 4** | Fichas na tela, Tribunal, Watch, onboarding | ⏳ |
+
+> **O dono é soberano em cada portão.** O executor abre PR e **para**. Merge é clique dele.
+
+## O que NÃO EXISTE — estado após o override
+
+| Item | Estado |
 |---|---|
-| Motor de caça — nenhuma varredura roda | **design partner PAGANTE** |
-| Coleta de fonte — nada foi coletado de lugar algum | idem |
-| Banco de dados, schema, migrations | idem |
-| Autenticação, multi-tenant, RLS | idem |
-| Score real (o da maquete é derivado de dado fictício) | idem |
-| Pagamento, checkout, assinatura | idem |
-| `usage_ledger` funcionando | idem |
-| Qualquer chamada de rede ou integração externa | idem |
+| Motor de caça — nenhuma varredura roda | 🔨 **esqueleto declarado na Onda 1** (`services/motor`, stubs) |
+| Banco de dados, schema, migrations | 🔨 **schema v1 escrito na Onda 1** — falta o projeto Supabase (clique do dono) |
+| Multi-tenant e RLS | 🔨 **no schema, com guarda de CI provando 100%** |
+| `usage_ledger` | 🔨 **tabela existe desde o dia 1**, sem dado ainda |
+| Coleta de fonte — nada foi coletado de lugar algum | ❌ **Onda 2** |
+| Score real (o da maquete é derivado de dado fictício) | ❌ **Onda 3** |
+| Telas de produto além do shell | ❌ **Onda 4** |
+| Autenticação funcionando | ❌ shell autenticável existe; auth ligada é Onda 4 |
+| Pagamento, checkout, assinatura | ❌ sem Onda marcada |
+| Qualquer chamada de rede ou integração externa | ❌ nenhuma na Onda 1 |
 
 **Todos os dados da maquete são fictícios e rotulados.** Nenhuma empresa existe; os CNPJs são
 sequenciais e inválidos de propósito (`00.000.00X/0001-00`).
@@ -658,6 +681,45 @@ sequenciais e inválidos de propósito (`00.000.00X/0001-00`).
 
 `[ORDEM 18/08 — o faseamento stealth é decisão do dono, gravada aqui pela primeira vez. Os critérios de MVP e os proibidos vêm do canon.]`
 
+## 🔴 ATUALIZAÇÃO — AS DUAS TRILHAS CORREM JUNTAS
+
+`[ORDEM 19/08]` O override do dono mudou o plano: **a construção não espera mais a Fase 1
+comercial terminar.** As duas trilhas correm em paralelo, e cada uma tem os próprios portões.
+
+| | **TRILHA COMERCIAL** (Fases) | **TRILHA DE CONSTRUÇÃO** (Ondas) |
+|---|---|---|
+| O que é | Vender, entregar, aprender com cliente real | Construir o SaaS multi-assinante |
+| Onde está | Fase 1 — serviço stealth ao irmão | **Onda 1 — fundação (em construção)** |
+| Portão | Dono | Dono |
+| Alimenta | Teses reais, custo por ficha, feedback | Motor que serve **muitos**, não um |
+
+**Por que correm juntas e não em série:** a Fase 1 produz o *conhecimento* (que sinais
+convertem, quanto custa uma ficha, qual formato serve). As Ondas produzem a *máquina*. Esperar
+uma para começar a outra desperdiça os dois lados — o conhecimento esfria e a máquina não
+existe quando o conhecimento chega.
+
+**O que NÃO mudou:** o irmão continua sendo a primeira dor e o primeiro cliente. **O que
+mudou:** o FARO é construído desde já como **produto multi-assinante**, não como entrega sob
+medida que depois "vira produto". Produto que nasce de entrega sob medida herda o formato de
+um cliente só.
+
+### As Ondas de construção
+
+| Onda | Escopo | Proibido nela | Portão |
+|---|---|---|---|
+| **1 — Fundação** 🔨 | Monorepo · schema completo do domínio · guardas de CI | Coleta real · score sobre dado real · telas de produto · pagamento · deploy novo | PR aberto, **merge é clique do dono** |
+| **2 — A jazida viva** | Ingestão RFB Base Aberta + CCEE · fontes provadas vivas · diff→eventos | Score · telas · teses bloqueadas | Dono |
+| **3 — O motor** | Caça + score decomposto sobre a tese **T-04** real | Multi-tese · teses 🔴/🔵 | Dono |
+| **4 — O produto** | Fichas na tela · Tribunal · Watch · onboarding | Pagamento · verticais novas | Dono |
+
+> **O dono é soberano em cada portão.** O executor abre PR e **para**. Nenhuma Onda avança
+> porque "está pronto tecnicamente".
+
+**As três teses bloqueadas (C1/C2/C3) seguem trancadas em todas as Ondas** até parecer LEXIS.
+O override liberou a construção, não a matéria jurídica.
+
+---
+
 ## FASE 1 — O SERVIÇO STEALTH (agora)
 
 **O que é:** vender **serviço** de prospecção tributária ao irmão, entregue a mão, com
@@ -674,7 +736,7 @@ qualidade. Ele paga. Ele não sabe que está alimentando um motor.
 
 **🔴 PROIBIDO nesta fase:**
 
-- construir motor, banco, auth, pagamento ou qualquer código de produto;
+- ~~construir motor, banco, auth, pagamento ou qualquer código de produto~~ — **revogado pelo `[ORDEM 19/08]`**: a construção corre na trilha das Ondas, com portão próprio. O que segue proibido na trilha comercial é *prometer ao cliente* o que a máquina ainda não faz;
 - anunciar o FARO, publicar landing, falar de sistema com o cliente;
 - prometer ao cliente qualquer coisa que só o sistema faria;
 - usar a tese **dele** como semente do catálogo da casa sem certidão limpa (Lei de Dados);
@@ -957,12 +1019,21 @@ motor horizontal, oferta vertical, uma de cada vez.
 
 O FARO é o primeiro produto da casa desenhado por conselho **antes da primeira linha de
 código**. Duas rodadas de juízes externos, dois quadros de vereditos, um canon de quase
-6.000 linhas — e **zero motor**, de propósito.
+6.000 linhas — e só então a obra.
 
-A próxima coisa a acontecer não é técnica. É **um cliente pagando**.
+`[ORDEM 19/08]` **A obra começou.** O conselho terminou o trabalho dele: o que se constrói
+agora tem planta, tem lei e tem portão. A Onda 1 ergue a fundação — monorepo, schema do
+domínio inteiro e as guardas que provam que a fundação é sólida.
 
-> **Próximo marco:** design partner pagante · uma tese escolhida · um primeiro ciclo de fichas
-> julgadas com motivo registrado · custo por ficha medido.
+Duas coisas correm juntas daqui pra frente, e nenhuma espera a outra:
+
+> **Trilha comercial:** um cliente pagando · uma tese escolhida · fichas julgadas com motivo
+> registrado · custo por ficha medido.
+>
+> **Trilha de construção:** Onda 1 fundação → Onda 2 jazida viva → Onda 3 motor → Onda 4
+> produto. Portão do dono em cada uma.
+
+O contrato da casa não mudou: **o sistema sugere, o humano visa — e nada, nada, sem prova.**
 
 ---
 
