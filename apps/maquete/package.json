@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json",
+    "brand:rodada-1": "node --experimental-strip-types scripts/brand/gerar-rodada-1.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
