@@ -317,7 +317,7 @@ aprende a ignorar o vermelho.
 | Diff 4,49 M × 4,49 M | **45 s** |
 | Idempotência (recarga do mesmo lote) | **0,19 s**, zero linha nova |
 
-### O que era ESTIMATIVA — e o que virou medição
+### O que era ESTIMATIVA — e virou medição
 
 A primeira versão deste relatório extrapolava tudo por bytes comprimidos e
 avisava que o número provavelmente estava alto. Em vez de deixar o aviso, fui
@@ -344,50 +344,53 @@ são exatamente esses dois que estão sendo contados linha a linha.
 > A frase saiu. O que sobra é o que dá para sustentar: a extrapolação errou
 > 3,7% para cima, e a razão é a diferença de densidade entre os arquivos.
 
-#### ❔ `estabelecimentos` — CONTAGEM EM CURSO
-
-`Estabelecimentos0.zip` está sendo baixado e contado neste momento. Parcial, com
-o método declarado para poder ser conferido:
+#### ✅ `estabelecimentos` — MEDIDO
 
 | | |
 |---|---:|
-| Tamanho anunciado pela fonte (PROPFIND) | 2.200.116.910 bytes |
-| Baixado às 13:25:16Z | **1.368.600.576 bytes (62,2%)** |
-| Taxa observada | ~896 KB/s |
+| `Estabelecimentos0` — membro `K3241.K03200Y0.D60808.ESTABELE` | **30.008.725 linhas** (medido) |
+| `Estabelecimentos1..9` — extrapolado da densidade de `Estabelecimentos1` | ~43,61 M |
+| **Total `estabelecimentos` por coleta** | **~73,62 M** |
 
-**Método:** `curl -C -` para o disco, depois `unzip -p ARQUIVO | wc -l`. O mesmo
-que já produziu o número de `Empresas0`. Não é amostragem nem estimativa: é a
-contagem de todas as linhas do arquivo.
+Aqui a extrapolação errou só **0,8% para cima** (previa 74,2 M): a densidade de
+`Estabelecimentos0` é 13.640 linhas/MB contra 13.909 de `Estabelecimentos1` —
+1,9% de diferença, muito menor que os 9% que separavam os dois de `empresas`.
 
-Enquanto não terminar, o número de `estabelecimentos` continua sendo
-extrapolação:
+**Método das duas contagens**, para poder ser conferido:
+`curl -C - -o ARQUIVO URL` e depois `unzip -p ARQUIVO | wc -l`. Contagem de
+todas as linhas, não amostragem. Os arquivos foram apagados depois de contados —
+o que importa deles é o número, e são 2,7 GB.
 
-| | |
-|---|---:|
-| 🟡 `estabelecimentos` por coleta (ESTIMATIVA) | ~74,2 M |
-| 🟡 `simples` por coleta (ESTIMATIVA, densidade de `empresas` como proxy) | ~17,4 M |
-
-> ❔ **Se `Estabelecimentos0` comprimir como `Empresas0` comprimiu — melhor que
-> os irmãos — o número real fica ABAIXO de 74,2 M.** É a hipótese que os dados
-> de `empresas` sustentam, e é só isso: hipótese, até a contagem fechar.
-
-#### Totais — o que dá para dizer hoje
+#### Totais
 
 | | |
 |---|---:|
-| Linhas por coleta completa | 🟡 **~167 M** (76,15 M medido + 91 M estimado) |
-| Jazida por coleta | 🟡 **~96 GiB** |
-| Jazida com 12 coletas retidas | 🟡 **~1,13 TiB** |
-| Carga sequencial, 1 processo | 🟡 **~2,0 h** |
-| Carga com 4 processos | 🟡 **~0,5 h** |
+| `empresas` | 76,15 M |
+| `estabelecimentos` | 73,62 M |
+| `simples` | 🟡 ~17,4 M (ESTIMATIVA — densidade de `empresas` como proxy) |
+| **Linhas por coleta completa** | **~167,2 M** |
+| Jazida por coleta | **~95,6 GiB** |
+| Jazida com 12 coletas retidas | **~1,12 TiB** |
+| Carga sequencial, 1 processo | **~2,0 h** |
+| Carga com 4 processos | **~0,5 h** |
 
-Base de cada estimativa: 465 B/linha para `empresas` e `simples`, 803 B/linha
-para `estabelecimentos` (ambos **medidos**, com índices), e as vazões medidas de
-31 k e 18 k linhas/s.
+Os dois arquivos `0` deixaram de ser extrapolação; `Empresas1..9`,
+`Estabelecimentos1..9` e `simples` continuam extrapolados por densidade. Os
+bytes por linha (465 para `empresas` e `simples`, 803 para `estabelecimentos`,
+com índices) e as vazões (31 k e 18 k linhas/s) são medidos.
 
-**Trate ~167 M como teto.** Os dois ajustes conhecidos empurram para baixo: a
-densidade menor dos arquivos `0`, já confirmada em `empresas`, e o proxy de
-`simples`, que usa a densidade de `empresas` sem prova.
+> ✏️ **PLACAR HONESTO DA MINHA PRÓPRIA ESTIMATIVA.** Eu tinha estimado 170 M e
+> avisado que "provavelmente superestima". O número medido é **167,2 M** — eu
+> errei **1,7% para cima**. O aviso estava certo na direção e **exagerado no
+> tom**: falei como se o número pudesse estar muito errado, e ele estava quase
+> certo. Alarme excessivo também custa: se eu grito a cada número, ninguém
+> escuta quando o número realmente for ruim.
+>
+> O que a medição ensinou de útil não foi o total — foi que **a densidade varia
+> entre arquivos do mesmo conjunto** (9% em `empresas`, 1,9% em
+> `estabelecimentos`). Extrapolar por bytes funciona, com margem de poucos por
+> cento. Registrado para a próxima estimativa não precisar de 40 minutos de
+> download para valer.
 
 ### O plano de carga — e por que ele não é "roda tudo"
 
