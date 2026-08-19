@@ -85,6 +85,14 @@ caso "branch não classificada tocando a maquete" \
      "experimento-qualquer" reprovou \
      bash -c 'echo mexido >> apps/maquete/src/page.tsx'
 
+caso "visual tocando a maquete (ORDEM VISUAL, 19/08)" \
+     "faro/visual-abissal" passou \
+     bash -c 'echo mexido >> apps/maquete/src/page.tsx'
+
+caso "visual tocando o MOTOR (o mesmo freio dos irmãos)" \
+     "faro/visual-abissal" reprovou \
+     bash -c 'echo mexido >> services/motor/src/index.ts'
+
 # Limite ASSUMIDO, não esquecido: a guarda não se protege. Ver o cabeçalho de
 # guarda-escopo.sh — a proteção de `tools/` e `.github/` é o portão do dono.
 caso "comercial mexendo na própria guarda (limite assumido)" \

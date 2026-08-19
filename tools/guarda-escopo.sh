@@ -17,7 +17,12 @@
 #   branch `faro/onda-*`        → NÃO pode tocar apps/maquete
 #   branch `faro/comercial-*`   → PODE tocar apps/maquete, e NÃO pode tocar
 #   branch `faro/maquete-*`         o motor (services/ e packages/)
+#   branch `faro/visual-*`
 #   qualquer outra              → trata como Onda (protege a maquete)
+#
+# `faro/visual-*` entrou em 19/08/2026 pela ORDEM VISUAL, que manda produzir a
+# pele do produto — hero, OG, favicon, fundos — e portanto mexe na maquete por
+# definição. Mesma regra dos irmãos: libera a maquete, tranca o motor.
 #
 # O segundo sentido é o que impede o ajuste de virar buraco: antes, uma branch
 # de maquete não podia mexer em nada da maquete; agora ela pode, mas em troca
@@ -54,7 +59,7 @@ tocou() { git diff --name-only "$BASE" HEAD -- "$@" | grep -q .; }
 listar() { git diff --name-only "$BASE" HEAD -- "$@"; }
 
 case "$BRANCH" in
-  faro/comercial-* | faro/maquete-*)
+  faro/comercial-* | faro/maquete-* | faro/visual-*)
     echo "▸ branch de produto/comercial: \`$BRANCH\`"
     echo "  apps/maquete LIBERADA (exceção declarada — ver cabeçalho deste arquivo)"
     echo "  o motor fica PROTEGIDO nesta branch"

@@ -1,0 +1,78 @@
+{
+  "rodada": 1,
+  "gerador": "apps/maquete/scripts/brand/gerar-rodada-1.ts",
+  "assets": [
+    {
+      "arquivo": "a-abissal-hero-2400x1260.svg",
+      "direcao": "A — abissal",
+      "formato": "hero",
+      "largura": 2400,
+      "altura": 1260,
+      "bytes": 49820
+    },
+    {
+      "arquivo": "a-abissal-social-1200x1200.svg",
+      "direcao": "A — abissal",
+      "formato": "social",
+      "largura": 1200,
+      "altura": 1200,
+      "bytes": 35415
+    },
+    {
+      "arquivo": "a-abissal-fundo-1920x1080.svg",
+      "direcao": "A — abissal",
+      "formato": "fundo",
+      "largura": 1920,
+      "altura": 1080,
+      "bytes": 48199
+    },
+    {
+      "arquivo": "b-sonar-hero-2400x1260.svg",
+      "direcao": "B — sonar",
+      "formato": "hero",
+      "largura": 2400,
+      "altura": 1260,
+      "bytes": 13611
+    },
+    {
+      "arquivo": "b-sonar-social-1200x1200.svg",
+      "direcao": "B — sonar",
+      "formato": "social",
+      "largura": 1200,
+      "altura": 1200,
+      "bytes": 12025
+    },
+    {
+      "arquivo": "b-sonar-fundo-1920x1080.svg",
+      "direcao": "B — sonar",
+      "formato": "fundo",
+      "largura": 1920,
+      "altura": 1080,
+      "bytes": 11191
+    },
+    {
+      "arquivo": "c-documental-hero-2400x1260.svg",
+      "direcao": "C — documental",
+      "formato": "hero",
+      "largura": 2400,
+      "altura": 1260,
+      "bytes": 133252
+    },
+    {
+      "arquivo": "c-documental-social-1200x1200.svg",
+      "direcao": "C — documental",
+      "formato": "social",
+      "largura": 1200,
+      "altura": 1200,
+      "bytes": 118333
+    },
+    {
+      "arquivo": "c-documental-fundo-1920x1080.svg",
+      "direcao": "C — documental",
+      "formato": "fundo",
+      "largura": 1920,
+      "altura": 1080,
+      "bytes": 129677
+    }
+  ]
+}
