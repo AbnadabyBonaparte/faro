@@ -1,5 +1,12 @@
 node_modules/
 .next/
+out/
+dist/
+.turbo/
+*.tsbuildinfo
+next-env.d.ts
 .DS_Store
 .vercel
-*.tsbuildinfo
+.env
+.env.local
+.env.*.local

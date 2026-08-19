@@ -1,0 +1,108 @@
+name: CI — fundação
+
+# As guardas nascem COM o banco, não depois dele.
+# Uma guarda que só roda "quando alguém lembra" não guarda nada.
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  codigo:
+    name: typecheck · build · testes de domínio
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm build
+      - run: pnpm --filter @faro/core test
+
+  guardas:
+    name: guardas de fundação (RLS · imutabilidade · score derivado · Regra de Pedro)
+    runs-on: ubuntu-latest
+
+    # Postgres de verdade. As guardas TENTAM violar as leis e exigem que o
+    # banco recuse — testar a moldura em vez do quadro foi achado real do
+    # Banco de Evolução (ver entrada CIRURGIA 360-PRIMA).
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      PGHOST: localhost
+      PGPORT: "5432"
+      PGUSER: postgres
+      PGPASSWORD: postgres
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 10 }
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: instalar cliente psql
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends postgresql-client
+
+      - name: aplicar migrations e rodar as guardas
+        run: pnpm db:guards
+
+      # Guarda da guarda: prova que as guardas REPROVAM quando devem.
+      # Sem isto, uma guarda que sempre passa pareceria saudável.
+      - name: teste de mutação — a guarda pega o defeito?
+        run: |
+          set -e
+          echo "▸ sabotando: tabela sem RLS"
+          psql -q -d faro_guardas -c "CREATE TABLE core.sabotagem_ci (id int);"
+          if psql -v ON_ERROR_STOP=1 -X -q -d faro_guardas -f tools/sql/guard_01_rls.sql >/dev/null 2>&1; then
+            echo "✗ a guarda de RLS NÃO pegou a sabotagem — guarda decorativa"; exit 1
+          fi
+          echo "✓ guarda de RLS reprovou a sabotagem, como deve"
+          psql -q -d faro_guardas -c "DROP TABLE core.sabotagem_ci;"
+
+          echo "▸ sabotando: grant para anon"
+          psql -q -d faro_guardas -c "GRANT SELECT ON fichas.fichas TO anon;"
+          if psql -v ON_ERROR_STOP=1 -X -q -d faro_guardas -f tools/sql/guard_01_rls.sql >/dev/null 2>&1; then
+            echo "✗ a guarda NÃO pegou o grant para anon"; exit 1
+          fi
+          echo "✓ guarda pegou o grant para anon"
+
+  maquete:
+    name: maquete intocada
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - name: a Onda 1 não pode ter tocado apps/maquete
+        run: |
+          BASE="${{ github.event.pull_request.base.sha }}"
+          if [ -z "$BASE" ]; then echo "sem base de PR — checagem pulada"; exit 0; fi
+          if git diff --name-only "$BASE" HEAD -- apps/maquete | grep -q .; then
+            echo "✗ apps/maquete foi tocada — a Onda 1 declara que ela fica intocada"
+            git diff --name-only "$BASE" HEAD -- apps/maquete
+            exit 1
+          fi
+          echo "✓ apps/maquete intocada"
