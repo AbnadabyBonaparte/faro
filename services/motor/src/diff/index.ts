@@ -31,6 +31,32 @@ export type ResultadoDiff = {
 
 export class ErroDeDiff extends Error {}
 
+/**
+ * O freio de churn segurou o par de coletas.
+ *
+ * O banco NÃO levanta exceção nesse caso — ele devolve uma linha
+ * `freio_de_churn` e grava a recusa em `fontes.saude_coleta` (uma exceção
+ * desfaria o próprio registro; ver 0012). Quem chama pelo motor recebe este
+ * erro, porque o batch da madrugada precisa parar e gritar; quem chama por SQL
+ * recebe zero evento, que também é seguro.
+ */
+export class FreioDeChurn extends ErroDeDiff {
+  readonly coletaAtual: string
+  readonly chavesAfetadas: number
+
+  constructor(coletaAtual: string, chavesAfetadas: number) {
+    super(
+      `freio de churn: ${String(chavesAfetadas)} chaves apareceram ou sumiram entre as ` +
+        `duas coletas, acima do limite da fonte. O par ${coletaAtual} NÃO foi ` +
+        `diferenciado e nenhum evento foi gravado. Lote incompleto, recorte parcial ` +
+        `da fonte, ou a fonte mudou de forma — nenhum dos três é notícia.`,
+    )
+    this.name = 'FreioDeChurn'
+    this.coletaAtual = coletaAtual
+    this.chavesAfetadas = chavesAfetadas
+  }
+}
+
 /** A coleta completa mais recente de uma fonte. */
 export function ultimaColeta(sourceId: string): string | null {
   return valor(
@@ -60,6 +86,10 @@ export function executarDiff(p: {
     `SELECT tipo, quantidade::text
        FROM eventos.diferenciar(${escapar(p.coletaAtual)}::uuid, ${anterior})`,
   )
+
+  if (r.length === 1 && r[0]?.[0] === 'freio_de_churn') {
+    throw new FreioDeChurn(p.coletaAtual, Number(r[0]?.[1] ?? '0'))
+  }
 
   const linhaDeBase = r.length === 1 && r[0]?.[0] === 'linha_de_base'
   const eventos: Record<string, number> = {}

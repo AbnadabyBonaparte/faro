@@ -7,6 +7,8 @@ name: CI — fundação e jazida
 #   · testes do parser (bytes fabricados, sem rede)
 #   · guarda 05 — o diff pare EXATAMENTE os eventos esperados
 #   · guarda 06 — o registry não promete o que não tem
+#   · guarda 07 — o freio de churn segura (nasceu de um número real: 4.256.121
+#     "estabelecimento novo" falsos num diff entre dois recortes reais da RFB)
 #   · mutação nova: sabotar o diff e exigir que a guarda 05 reprove
 #
 # 🔴 O CI NÃO BATE NA RECEITA FEDERAL. Nenhum job baixa lote. Um CI que depende
