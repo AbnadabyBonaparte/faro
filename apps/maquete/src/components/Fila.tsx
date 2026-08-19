@@ -9,7 +9,6 @@ import {
   Painel,
   PainelHead,
   ScoreDecomposto,
-  SeloFicticio,
   SeloFreshness,
 } from '@/components/ui'
 import {
@@ -86,11 +85,6 @@ export function Fila() {
             recalibra a tese, e é o único ativo que um concorrente não copia
             junto com a fonte pública.
           </p>
-          <p className="text-[11px] leading-relaxed text-text-muted">
-            Neste protótipo o julgamento vive só na memória da aba: nada é
-            salvo, nada é enviado, nenhuma tese é recalibrada. Recarregar a
-            página zera tudo.
-          </p>
         </div>
       </Painel>
 
@@ -98,7 +92,6 @@ export function Fila() {
         <p className="num text-[11px] text-text-muted">
           ordenado por score decomposto · maior primeiro
         </p>
-        <SeloFicticio />
       </div>
 
       {ordenadas.map((o) => (

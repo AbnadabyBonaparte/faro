@@ -87,7 +87,7 @@ e pela ordem (§0.3).
 | **Rodada / estado** | Rodada 1 · **rascunho, não aprovado** |
 | **Tipografia** | Liberation Sans / Liberation Mono, via as pilhas `--font-sans` e `--font-mono` do SSOT |
 
-**Nenhum hex mora no gerador.** Ele lê os onze tokens de cor do `globals.css` e
+**Nenhum hex mora no gerador.** Ele lê os tokens de cor do `globals.css` e
 **recusa gerar** se qualquer hex fora do SSOT aparecer no desenho pronto — a
 guarda roda a cada execução, sobre a saída, não sobre a intenção.
 
@@ -159,12 +159,118 @@ Fica registrado porque qualquer sombra, brilho ou vinheta futura sobre o breu
 
 ---
 
+---
+
+# RODADA 2 — A DIREÇÃO C APLICADA
+
+> Martelo do dono, 19/08/2026: **direção C — documental**, selada.
+> Segundo martelo, mesmo dia: **"vetor agora, API depois"** — a Rodada 2 sai inteira em
+> vetor e não fica bloqueada esperando credencial.
+> Arte generativa fica para uma **Rodada 3 pontual**, só nas texturas da linguagem A do
+> reveal, quando o dono regerar as chaves e puser na env.
+
+## R2.0 — O QUE MUDOU NO MÉTODO DESDE A RODADA 1
+
+| | Rodada 1 | **Rodada 2** |
+|---|---|---|
+| Texto na arte | `<text>`, dependia da fonte instalada | **contorno (`path`)**, extraído das Liberation por `fontTools` |
+| Estrutura da página | gosto | **curadoria com fonte e data** (`CURADORIA-VISUAL.md`) |
+| Contraste | não aferido | **`npm run contraste`**, sai com erro se reprovar |
+| Guarda do gerador | só paleta | paleta **+ recusa de `<text>`** na saída |
+
+**Como o texto virou contorno:** `apps/maquete/scripts/brand/contornos/gerar-contornos.py`
+lê as Liberation Sans/Mono do sistema e cospe `contornos.ts` — as frases do canon
+pré-compostas e um **atlas monoespaçado** (alfabeto + acentos, avanço fixo) com que o lado
+TypeScript compõe qualquer rótulo novo sem voltar ao Python. O gerador de arte continua com
+**zero dependência de npm**.
+
+## R2.1 — CERTIDÃO COMUM
+
+| | |
+|---|---|
+| **Ferramenta** | gerador próprio, SVG 1.1 em TypeScript · `node --experimental-strip-types` |
+| **Fonte do desenho** | `apps/maquete/scripts/brand/{gerar-rodada-2,pecas,pele,contornos,tokens,svg}.ts` |
+| **Comando** | `npm run brand:rodada-2` (de `apps/maquete`) |
+| **Rasterização** | Chromium headless (`--screenshot`), para PNG de OG, ícone e social |
+| **Paleta** | lida em tempo de geração de `apps/maquete/src/app/globals.css` (SSOT) |
+| **Tipografia** | Liberation Sans Bold / Liberation Mono, **convertidas em contorno** |
+| **Data** | 19/08/2026 · **Rodada 2 · direção C aprovada** |
+| **Custo de API** | **zero** — nenhuma geração por modelo |
+
+## R2.2 — AS PEÇAS
+
+| Arquivo | Bruto | Gzip |
+|---|---:|---:|
+| `rodada-2/banner-precos-2400x760.svg` | 32.9 KB | **3.8 KB** |
+| `rodada-2/capa-cacada-1600x900.svg` | 119.8 KB | **15.1 KB** |
+| `rodada-2/fundo-fila-1920x360.svg` | 13.0 KB | **1.3 KB** |
+| `rodada-2/fundo-fontes-1920x360.svg` | 13.0 KB | **1.3 KB** |
+| `rodada-2/fundo-painel-1920x360.svg` | 13.0 KB | **1.3 KB** |
+| `rodada-2/fundo-teses-1920x360.svg` | 13.0 KB | **1.3 KB** |
+| `rodada-2/fundo-watch-1920x360.svg` | 13.0 KB | **1.3 KB** |
+| `rodada-2/hero-home-2400x1000.svg` | 125.9 KB | **15.9 KB** |
+| `rodada-2/hero-home-mobile-820x760.svg` | 108.7 KB | **13.6 KB** |
+| `rodada-2/icone-512.png` | 10.2 KB | **8.8 KB** |
+| `rodada-2/icone-512.svg` | 0.8 KB | **0.3 KB** |
+| `rodada-2/og-1200x630.png` | 52.2 KB | **50.0 KB** |
+| `rodada-2/og-1200x630.svg` | 132.4 KB | **20.0 KB** |
+
+### Guardadas em `brand/reveal/` — **não publicar, stealth segue**
+
+| Arquivo | Bruto | Gzip |
+|---|---:|---:|
+| `reveal/social-1080x1080.png` | 84.8 KB | **83.9 KB** |
+| `reveal/social-1080x1080.svg` | 120.2 KB | **16.5 KB** |
+| `reveal/social-1080x1920.png` | 97.0 KB | **94.3 KB** |
+| `reveal/social-1080x1920.svg` | 127.6 KB | **17.4 KB** |
+
+Os dois templates sociais trazem um retângulo tracejado com `id="area-de-texto"`: é onde a
+frase da campanha entra. Ele existe no SVG e some do PNG.
+
+**Convenção do App Router:** `src/app/icon.svg`, `src/app/apple-icon.png` e
+`src/app/opengraph-image.png` são cópias/rasterizações destas mesmas peças — o Next as
+detecta por nome de arquivo, sem `<link>` na mão.
+
+## R2.3 — PESO CONTRA O TETO
+
+| Classe | Teto | Pior caso | Folga |
+|---|---:|---:|---:|
+| Hero | 350 KB | 15,9 KB (gzip) · 125,9 KB (bruto) | **22×** |
+| OG | 300 KB | 52,2 KB (PNG servido) | **5,7×** |
+| Fundo de tela | 200 KB | 1,3 KB (gzip) · 13,0 KB (bruto) | **154×** |
+| Ícone | vetorial | 0,8 KB SVG | — |
+
+## R2.4 — CONTRASTE
+
+`npm run contraste` afere 15 pares contra o SSOT e **sai com código 1** se algum reprovar.
+Na primeira execução, três reprovaram. Duas decisões saíram daí:
+
+1. **`--text-muted` subiu de `#5a6a73` para `#708490`** — o antigo dava 3,56:1 e reprovava AA
+   para texto, num token que veste todo rótulo monoespaçado do produto. Emenda registrada em
+   `IDENTIDADE-VISUAL.md` §3.
+2. **A borda decorativa de 1px ficou fora da regra de 3:1**, com o motivo escrito dentro do
+   aferidor: ornamento não é afordância, o painel já se distingue pela superfície, e todo
+   controle operável tem indicador próprio acima de 3:1. Se a borda um dia carregar
+   informação sozinha, entra na lista.
+
+Depois disso: **15/15 passam.**
+
+## R2.5 — DUAS COISAS QUE ESTA GALERIA PRECISA DIZER CONTRA SI MESMA
+
+- 🟡 **As peças da Rodada 1 não foram regeradas** depois da mudança de `--text-muted`. Elas
+  são registro histórico de uma rodada certificada e fechada; rodar `npm run brand:rodada-1`
+  hoje produz diferença. É esperado, e está escrito aqui para ninguém tratar como corrupção.
+- ❔ **O banner ANTI-QUANTUM saiu de todas as telas** por decisão do dono (revogação em
+  `IDENTIDADE-VISUAL.md` §7.3). A mitigação virou humana: quem apresenta é ele. Se a maquete
+  for exposta sem acompanhamento, a lei volta.
+
 ## 6. HISTÓRICO DE RODADAS
 
 | Rodada | Data | Direções | Estado |
 |---|---|---|---|
 | 1 | 19/08/2026 | A · B · C, 3 peças cada | 🛑 **no portão — aguardando o dono** |
-| 2 | — | a escolhida | não começou, e não começa antes do martelo |
+| 2 | 19/08/2026 | **C — documental**, aplicada no site inteiro | 🛑 no portão — aguardando o dono |
+| 3 | — | texturas da linguagem A, por IA, só no reveal | depende das chaves na env |
 
 ---
 

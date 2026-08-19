@@ -1,25 +1,23 @@
-import { Painel, PainelHead, SeloFicticio, SeloFreshness } from '@/components/ui'
+import { HeroPagina } from '@/components/marca/Faixa'
+import { Painel, PainelHead, SeloFreshness } from '@/components/ui'
 import { EVENTOS, TESES, fonte, tese } from '@/data/mock'
 
 export default function Page() {
   const novos = EVENTOS.filter((e) => e.novo).length
 
   return (
-    <div className="space-y-6">
-      <header className="space-y-2">
-        <h1 className="text-xl font-bold text-text">Watch</h1>
-        <p className="max-w-2xl text-sm leading-relaxed text-text-secondary">
-          A unidade de valor do FARO é o{' '}
-          <strong className="text-text">evento</strong>, não a empresa. Uma lista
-          se consome; uma mudança de estado continua acontecendo. É isso — e não
-          uma trava de plano — que justifica a assinatura.
-        </p>
-      </header>
+    <>
+    <HeroPagina
+      selo="PASSO 2 · O SINAL"
+      titulo="Encontrei uma mudança."
+      chamada="O que mudou nas fontes públicas e bateu numa tese viva. A unidade de valor é a mudança — nunca o cadastro parado."
+      fundo="/brand/rodada-2/fundo-watch-1920x360.svg"
+    />
+      <div className="mx-auto max-w-6xl space-y-6 px-4 py-8">
 
       <Painel>
         <PainelHead
           titulo="O que o Watch monitora"
-          acao={<SeloFicticio />}
         />
         <div className="grid gap-0 sm:grid-cols-4">
           {[
@@ -100,7 +98,7 @@ export default function Page() {
       </Painel>
 
       <Painel>
-        <PainelHead titulo="Monitores ativos" acao={<SeloFicticio />} />
+        <PainelHead titulo="Monitores ativos" />
         <ul className="divide-y divide-border">
           {TESES.map((t) => (
             <li
@@ -131,14 +129,8 @@ export default function Page() {
             </li>
           ))}
         </ul>
-        <div className="border-t border-border bg-surface-2 px-4 py-3">
-          <p className="text-[11px] leading-relaxed text-text-secondary">
-            Nenhum monitor roda de verdade. Não há varredura, não há coleta, não
-            há notificação — o feed acima é ilustrativo e existe para mostrar o
-            formato do evento quando o motor existir.
-          </p>
-        </div>
       </Painel>
     </div>
+    </>
   )
 }

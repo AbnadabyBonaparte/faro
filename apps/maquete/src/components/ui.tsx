@@ -238,18 +238,3 @@ export function CaixaLimite({ texto }: { texto: string }) {
     </div>
   )
 }
-
-/* ── Rótulo de dado fictício. Usado em toda superfície com número. ───────── */
-
-export function SeloFicticio({ className }: { className?: string }) {
-  return (
-    <span
-      className={cn(
-        'num rounded-[var(--radius-instrument)] border border-border-strong px-1.5 py-0.5 text-[9px] tracking-widest text-text-muted uppercase',
-        className,
-      )}
-    >
-      fictício
-    </span>
-  )
-}
