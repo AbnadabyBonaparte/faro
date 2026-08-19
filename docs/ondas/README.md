@@ -7,7 +7,8 @@ números medidos** — não no começo, com os números pretendidos.
 |---|---|---|
 | 1 — Fundação | (no corpo do PR #1) | ✅ mesclada |
 | 2 — A jazida viva | [`ONDA-2-JAZIDA.md`](./ONDA-2-JAZIDA.md) | ✅ mesclada |
-| 3 — O motor de caça | [`ONDA-3-CACA.md`](./ONDA-3-CACA.md) | 🔨 PR aberto |
+| 3 — O motor de caça | [`ONDA-3-CACA.md`](./ONDA-3-CACA.md) | ✅ mesclada |
+| — missão curta | [`T-04-V1-1-CADENCIA.md`](./T-04-V1-1-CADENCIA.md) — território vira peso, cadência entra na venda | 🔨 PR aberto |
 
 ## O que um relatório de Onda tem que ter
 
