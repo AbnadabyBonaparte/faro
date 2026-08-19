@@ -34,6 +34,7 @@ Ver [`CANAL-OPERADOR-PARCEIRO.md`](./CANAL-OPERADOR-PARCEIRO.md).
 | 🟡 **SEGMENTADA** | Ativa só em recorte específico; outro recorte enfraquecido |
 | 🔴 **CONTRADITADA** | Juízes divergiram frontalmente — **bloqueada até parecer** |
 | ⚫ **ENFRAQUECIDA/MORTA** | Precedente desfavorável citado por juiz |
+| ⚙️ **INTERNA** | Não é vendida a ninguém: caça clientes de um produto da própria casa. Ver [`DOUTRINA-DO-MINERADOR.md`](./DOUTRINA-DO-MINERADOR.md) |
 
 **Por que existe estado de tese morta:** formulação literal do juiz GPT — *"uma
 plataforma de inteligência deve detectar não somente oportunidades, mas também teses
@@ -377,6 +378,63 @@ prevenção a fraude e regras do mercado de capitais.
 
 ---
 
+# BLOCO III — AS TESES INTERNAS
+
+> Registradas pela [`DOUTRINA-DO-MINERADOR.md`](./DOUTRINA-DO-MINERADOR.md),
+> martelo do dono de 19/08/2026. **Nenhuma opera. Nenhuma está em banco.**
+> Elas não são vendidas: caçam clientes de produtos da própria casa.
+>
+> 🔴 **Nada aqui furou a fila.** A âncora 2 da doutrina é explícita: o TAX prova
+> o motor primeiro — Fase 1, carga completa, cadência real medida. Estas teses
+> existem no papel para que, quando a hora chegar, ninguém precise redescobrir
+> onde procurar.
+
+## T-MED · Profissional de saúde recém-formalizado — `HIPÓTESE v0`
+
+| | |
+|---|---|
+| **Estado** | ⚙️ **INTERNA** · `HIPÓTESE v0` — não registrada em banco |
+| **Produto que abastece** | Conversion OS |
+| **Alvo** | profissionais de saúde recém-formalizados como pessoa jurídica |
+| **Recorte de CNAE** | atividades médicas · odontologia · clínicas e consultórios |
+| **Eventos que dão o timing** | **inscrição nova** (CNPJ que passa a existir) · **`cnae_alterado`** para CNAE de saúde · **situação cadastral reativada** |
+| **Território** | MT/GO como **PESO**, não como corte — mecânica do bonificador da T-04 v1.1 ([`0019_t04_v1_1_territorio_vira_peso.sql`](../../packages/db/migrations/0019_t04_v1_1_territorio_vira_peso.sql)) |
+| **Fonte** | fonte-mãe (RFB Base Aberta CNPJ) — já coletada e provada |
+| **Prova social regional** | casos Fernanda e Bela |
+| **Status** | **aguarda** motor provado no TAX **+** leitura conjunta com o dono |
+
+### O evento de ouro
+
+O timing é **"clínica recém-aberta"**. Um consultório que abriu há três semanas
+tem decisões de aquisição em aberto que um consultório de cinco anos já tomou.
+Esse é exatamente o tipo de janela que a jazida pública datada revela e que uma
+lista comprada por CNAE não revela — a lista diz *quem*, o evento diz *quando*.
+
+### Dois dos três eventos já existem no motor
+
+`cnae_alterado` e `situacao_cadastral_alterada` são tipos de evento **já
+implantados** na Onda 2 e já medidos: 0,0477% e 0,3475% ao mês sobre o universo
+de estabelecimentos ([`ondas/T-04-V1-1-CADENCIA.md`](../ondas/T-04-V1-1-CADENCIA.md) §3).
+
+**A inscrição nova é a que falta**, e ela é o evento principal desta tese. Cai
+sobre a regra de presença, que hoje esbarra no artefato de reparticionamento da
+RFB — 89,5% de churn aparente entre lotes ([`ondas/ONDA-2-JAZIDA.md`](../ondas/ONDA-2-JAZIDA.md) §0).
+**Só o diff da base inteira separa "CNPJ novo" de "CNPJ que mudou de arquivo".**
+
+> Isto liga a T-MED à mesma dependência do TAX: **a carga completa**. Não é
+> coincidência; é a razão pela qual a carona funciona.
+
+### 🔴 O ponto jurídico que esta tese não resolve
+
+O alvo é **profissional liberal recém-PJ** — a faixa em que empresário individual
+e MEI são pessoa física com CNPJ, e em que a fronteira B2B do interesse legítimo
+fica mais fina. Não se arbitra aqui: é a frente **L6** do LEXIS.
+
+Enquanto L6 não fechar, a T-MED **não sai do papel**, mesmo que o motor esteja
+pronto e o território medido.
+
+---
+
 # RESUMO OPERACIONAL
 
 | Tese | Estado | Bloco | Entra no MVP? |
@@ -394,9 +452,13 @@ prevenção a fraude e regras do mercado de capitais.
 | T-10 Readiness CBS/IBS | 🔵 ESTUDO | **Para-brisa** | Não |
 | T-11 Secundário | 🔵 ESTUDO | Financeiro | **Não** — parceiro regulado |
 | T-12 Agro | 🔵 ESTUDO | Financeiro | **Não** — LGPD + regulado |
+| **T-MED** Saúde recém-PJ | ⚙️ **INTERNA** | Teses internas | **Não** — uso da casa, e depende de L6 |
 
 **Contagem:** 5 ativas · 1 segmentada com recorte morto · 1 segmentada com rubrica
 contraditada · 1 contraditada bloqueada · 5 em estudo.
+
+Mais **1 interna** (T-MED), que não conta no catálogo comercial: ela não é vendida
+a ninguém.
 
 **O MVP opera 1 a 3 teses** ([`MODELO-FARO-V2.md`](./MODELO-FARO-V2.md) §12). A
 tese-semente é **T-04**, que casa com o par de fontes de estreia (fonte-mãe + CCEE).
@@ -413,6 +475,7 @@ A escolha final é do **design partner**.
 | Alteração normativa (LC, MP, IN) | Reler a versão **vigente**; revisar T-09 e T-10 |
 | Ground truth do operador parceiro | Recalibrar P(elegibilidade) e P(homologação) com dado observado |
 | Tese nova proposta | **Exigir certidão de proveniência** antes de entrar |
+| Tese **interna** nova proposta | Exigir fonte declarada com evento observável (âncora 1 da doutrina) — e conferir contra a âncora 2 antes de qualquer execução |
 
 **Toda tese nova entra com certidão de proveniência.** Sem certidão, não entra —
 [`LEI-DE-DADOS.md`](./LEI-DE-DADOS.md) camada 3.
