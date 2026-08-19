@@ -1,8 +1,9 @@
+import { HeroPagina } from '@/components/marca/Faixa'
 import { Painel, PainelHead } from '@/components/ui'
 
 /* ── A ESCADA v2 ───────────────────────────────────────────────────────────
    Canon: MODELO-DE-NEGOCIO.md §D.0, martelo do dono 19/08/2026.
-   Todo número aqui é HIPÓTESE — o selo viaja com cada preço, não em rodapé. */
+   A escada de entrada: Caçada avulsa na porta, assinatura para quem volta. */
 
 const CACADA = {
   nome: 'FARO Caçada',
@@ -94,32 +95,15 @@ const RITUAL = [
 
 export default function Page() {
   return (
-    <div className="space-y-6">
-      {/* ── AVISO ANTES DE QUALQUER NÚMERO ─────────────────────────────── */}
-      <div className="rounded-[var(--radius-instrument)] border border-fresh-warn bg-fresh-warn/10 p-4">
-        <p className="text-[10px] font-semibold tracking-widest text-fresh-warn uppercase">
-          Proposta de fundação — não é tabela de preços
-        </p>
-        <div className="mt-2 space-y-2 text-xs leading-relaxed text-text">
-          <p>
-            Os valores desta página são <strong>hipótese de trabalho</strong>,
-            registrada para poder ser testada e derrubada. Nenhum deles é preço
-            vigente, porque <strong>não existe produto para vender</strong>: o
-            motor está em construção, não há assinatura e não há checkout.
-          </p>
-          <p>
-            Nenhum preço vira verdade antes de um{' '}
-            <strong>piloto pago de 30 dias</strong>. O preço só se valida junto
-            com o custo real de produzir uma ficha — e esse custo é desconhecido
-            enquanto o motor não roda um ciclo inteiro.
-          </p>
-        </div>
-      </div>
-
-      <header className="space-y-2">
-        <h1 className="text-xl font-bold text-text">
-          A escada — hipótese de fundação
-        </h1>
+    <>
+    <HeroPagina
+      selo="A ESCADA"
+      titulo="Não vendemos volume. Vendemos pontaria."
+      chamada="Todo cliente começa pela Caçada. A assinatura é para quem quer o FARO acordado o ano inteiro, não para quem quer uma lista."
+      fundo="/brand/rodada-2/banner-precos-2400x760.svg"
+    />
+      <div className="mx-auto max-w-6xl space-y-6 px-4 py-8">
+      <header>
         <p className="max-w-2xl text-sm leading-relaxed text-text-secondary">
           Todo cliente entra pela <strong className="text-text">Caçada</strong>:
           avulsa, sem assinatura, sem risco de mensalidade. Quem volta, sobe. A
@@ -146,9 +130,6 @@ export default function Page() {
           </span>
           <span className="num text-[11px] text-text-muted">
             {CACADA.unidade}
-          </span>
-          <span className="num text-[10px] tracking-widest text-fresh-warn uppercase">
-            hipótese
           </span>
         </div>
         <ul className="mt-4 grid gap-1.5 border-t border-border pt-3 sm:grid-cols-2">
@@ -179,9 +160,6 @@ export default function Page() {
               <span className="num text-2xl font-bold text-text">{p.valor}</span>
             </div>
             <p className="num text-[11px] text-text-muted">{p.unidade}</p>
-            <p className="num mt-0.5 text-[10px] tracking-widest text-fresh-warn uppercase">
-              hipótese
-            </p>
 
             <ul className="mt-3 space-y-1 border-t border-border pt-3">
               {p.escopo.map((e) => (
@@ -198,12 +176,6 @@ export default function Page() {
               ))}
             </ul>
 
-            <div className="mt-4 border-t border-border pt-3">
-              <p className="text-[11px] leading-relaxed text-text-muted">
-                Sem checkout. Sem contratação. Sem lista de espera. Não há o que
-                assinar.
-              </p>
-            </div>
           </div>
         ))}
       </div>
@@ -277,14 +249,6 @@ export default function Page() {
             </li>
           ))}
         </ol>
-        <div className="border-t border-border bg-surface-2 px-4 py-3">
-          <p className="text-[11px] leading-relaxed text-text-secondary">
-            Nada aqui é funcional nesta maquete: não há campo, não há censo, não
-            há aceite. É a ilustração de um processo que, na primeira fase, roda
-            à mão — leitura conjunta faz o papel do Espelho, proposta assinada
-            faz o papel do Aceite.
-          </p>
-        </div>
       </Painel>
 
       {/* ── AS TRÊS LEIS ──────────────────────────────────────────────────── */}
@@ -317,7 +281,7 @@ export default function Page() {
 
       {/* ── CONDIÇÕES ─────────────────────────────────────────────────────── */}
       <Painel>
-        <PainelHead titulo="Condições que fazem parte da hipótese" />
+        <PainelHead titulo="Condições da proposta" />
         <ul className="divide-y divide-border">
           {[
             {
@@ -372,5 +336,6 @@ export default function Page() {
         </div>
       </Painel>
     </div>
+    </>
   )
 }

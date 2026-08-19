@@ -3,12 +3,33 @@ import Link from 'next/link'
 import './globals.css'
 import { Nav } from '@/components/Nav'
 
+/* O cartão de compartilhamento (`opengraph-image.png`) e o ícone (`icon.svg`,
+   `apple-icon.png`) são detectados por convenção de arquivo do App Router.
+   Ambos saem do gerador da marca — ver docs/canon/GALERIA-VISUAL.md.
+
+   `metadataBase` vem do ambiente: o FARO segue em stealth e não tem domínio
+   público selado. Sem env, cai em localhost — nunca num domínio inventado. */
+const BASE = process.env['NEXT_PUBLIC_SITE_URL'] ?? 'http://localhost:3000'
+
+const TITULO = 'FARO™ — Inteligência Contínua de Oportunidades'
+const DESCRICAO =
+  'Você descreve o padrão que procura. O FARO vigia as fontes públicas, ' +
+  'detecta o que mudou e entrega a ficha — com a fonte, a data e o motivo em cada linha.'
+
 export const metadata: Metadata = {
-  title: 'FARO™ — Protótipo de interface',
-  description:
-    'Maquete de interface do FARO. Protótipo com dados ilustrativos: nenhum motor, ' +
-    'nenhuma coleta, nenhum dado real.',
+  metadataBase: new URL(BASE),
+  title: TITULO,
+  description: DESCRICAO,
+  // 🔴 stealth: o reveal ainda não aconteceu. Nada de indexação.
   robots: { index: false, follow: false },
+  openGraph: {
+    type: 'website',
+    locale: 'pt_BR',
+    siteName: 'FARO',
+    title: TITULO,
+    description: DESCRICAO,
+  },
+  twitter: { card: 'summary_large_image', title: TITULO, description: DESCRICAO },
 }
 
 export default function RootLayout({
@@ -19,20 +40,6 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className="min-h-screen bg-bg text-text">
-        {/*
-          ANTI-QUANTUM — lei da casa.
-          Banner permanente, não dismissível, em TODA tela, enquanto o motor não existir.
-          Ver docs/canon/IDENTIDADE-VISUAL.md §7.
-        */}
-        <div
-          role="status"
-          className="sticky top-0 z-50 border-b border-fresh-warn/40 bg-fresh-warn/10 px-4 py-1.5 text-center backdrop-blur"
-        >
-          <p className="num text-[11px] tracking-wide text-fresh-warn">
-            PROTÓTIPO — dados ilustrativos · nenhuma empresa, número ou coleta
-            aqui é real · o motor não existe
-          </p>
-        </div>
 
         <header className="border-b border-border bg-surface">
           <div className="mx-auto flex max-w-6xl flex-wrap items-baseline justify-between gap-2 px-4 py-4">
@@ -48,25 +55,21 @@ export default function RootLayout({
                 Inteligência Contínua de Oportunidades
               </p>
             </div>
-            <p className="num text-[10px] tracking-widest text-text-muted uppercase">
-              maquete v1 · em construção
-            </p>
+            <Link
+              href="/precos"
+              className="rounded-[var(--radius-instrument)] border border-border-strong px-3 py-1.5 text-xs text-text transition-colors hover:border-signal hover:text-signal"
+            >
+              Começar pela Caçada
+            </Link>
           </div>
         </header>
 
         <Nav />
 
-        <main className="mx-auto max-w-6xl px-4 py-6">{children}</main>
+        <main>{children}</main>
 
-        <footer className="mt-12 border-t border-border bg-surface">
+        <footer className="border-t border-border bg-surface">
           <div className="mx-auto max-w-6xl space-y-2 px-4 py-6">
-            <p className="text-[11px] leading-relaxed text-text-secondary">
-              Protótipo de interface. Não há backend, banco de dados, coleta de
-              fontes, score real, cobrança ou integração de qualquer espécie.
-              Todos os nomes de empresa, CNPJs, números e datas de coleta são
-              fictícios e existem apenas para demonstrar o comportamento da
-              interface.
-            </p>
             <p className="text-[11px] leading-relaxed text-text-secondary">
               O FARO organiza evidências para priorizar investigação comercial.
               Não afirma elegibilidade, não garante crédito, não emite parecer

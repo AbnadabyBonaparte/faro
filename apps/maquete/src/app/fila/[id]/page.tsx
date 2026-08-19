@@ -7,7 +7,6 @@ import {
   Painel,
   PainelHead,
   ScoreDecomposto,
-  SeloFicticio,
   SeloFreshness,
   TagCamada,
 } from '@/components/ui'
@@ -95,7 +94,7 @@ export default async function Page({
   ].join('\n')
 
   return (
-    <div className="space-y-6">
+    <div className="mx-auto max-w-6xl space-y-6 px-4 py-8">
       <Link
         href="/fila"
         className="inline-block text-[11px] text-text-secondary transition-colors hover:text-signal"
@@ -109,7 +108,6 @@ export default async function Page({
           <span className="num text-[11px] text-text-muted">{o.id}</span>
           <BadgeGrade grade={o.grade} />
           <SeloFreshness freshness={o.freshness} />
-          <SeloFicticio />
         </div>
         <h1 className="text-xl leading-snug font-bold text-text">
           {o.razaoSocial}

@@ -17,7 +17,12 @@
   /* TIPOGRAFIA */
   --color-text: #e4ebee;
   --color-text-secondary: #8a9aa3;
-  --color-text-muted: #5a6a73;
+  /* [EMENDA 19/08/2026 — Rodada 2] era #5a6a73, que dava 3,56:1 sobre o breu e
+     3,36:1 sobre painel: reprovava AA para texto. Como este token veste TODO
+     rótulo monoespaçado do produto, o problema era estrutural, não de uma tela.
+     #708490 mantém o matiz e passa nas três superfícies (5,13 / 4,84 / 4,51).
+     Aferido por `npm run contraste`. */
+  --color-text-muted: #708490;
 
   /* SINAL — a única cor de marca. Máx ~10% da área da tela. */
   --color-signal: #2ed3a3;

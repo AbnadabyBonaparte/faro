@@ -82,6 +82,16 @@ Zero cor hardcoded em componente. Toda cor entra por CSS variable. O arquivo
 --signal-fg       texto sobre área pintada de sinal
 ```
 
+### [EMENDA 19/08/2026 — Rodada 2] `--text-muted` subiu por contraste
+
+Era `#5a6a73`: **3,56:1** sobre o breu e **3,36:1** sobre painel — reprovava WCAG AA para
+texto, e este token veste **todo** rótulo monoespaçado do produto. Passou a `#708490`, mesmo
+matiz, que dá **5,13 / 4,84 / 4,51** sobre `--bg`, `--surface` e `--surface-2`.
+
+Aferido por `npm run contraste` (em `apps/maquete`), que sai com erro se algum par cair
+abaixo do mínimo. O aferidor também documenta, no próprio código, por que a borda decorativa
+de 1px fica fora da regra de 3:1 — ornamento não é afordância.
+
 **Regra de área:** o `--signal` nunca ocupa mais de ~10% da área visível de uma tela.
 Ele marca **o que importa agora**, não a decoração.
 
@@ -201,10 +211,33 @@ cada afirmação. Se o assinante não distingue dado de inferência olhando, a a
 referência aparecem **na linha**, em `--text-secondary` monoespaçado. Nunca em rodapé, nunca
 em tooltip escondido. Afirmação sem procedência visível é afirmação proibida.
 
-**3. ANTI-QUANTUM (lei da casa).** Enquanto o motor não existe, **toda tela** carrega banner
-permanente: `PROTÓTIPO — dados ilustrativos`. Não é rodapé discreto, não é dismissível, não
-sai da tela ao rolar. Nenhuma tela do protótipo afirma no presente do indicativo função que
-não roda.
+**3. ANTI-QUANTUM — `[REVOGADA PELO DONO EM 19/08/2026]`**
+
+*Texto original, preservado porque lei revogada não se apaga:* "Enquanto o motor não existe,
+**toda tela** carrega banner permanente: `PROTÓTIPO — dados ilustrativos`. Não é rodapé
+discreto, não é dismissível, não sai da tela ao rolar."
+
+**Decisão do dono, palavra dele:** *"tire essas coisas de proposta de fundação e etc.. esse
+ruídos de informação frases internas vazias.. banner indicando que ainda não funciona ou de
+place holder .. que vai apresentar o sistema sou eu e quero ele intacto"*.
+
+O banner, os selos `fictício`, os rótulos "hipótese" ao lado de cada preço, os avisos de
+"nada é salvo" e o quadro "o que existe × o que não existe" saíram da maquete na Rodada 2.
+
+**O que a revogação NÃO alcança, e continua valendo:**
+
+- a maquete segue `noindex` — o reveal não aconteceu;
+- o rodapé mantém a linha de escopo, que não é ruído interno e sim salvaguarda: *"O FARO
+  organiza evidências para priorizar investigação comercial. Não afirma elegibilidade, não
+  garante crédito, não emite parecer tributário e não substitui o profissional habilitado."*;
+- nenhum dado real entrou no lugar do fictício — o que mudou foi o carimbo na tela, não a
+  procedência do dado;
+- os documentos de canon continuam dizendo, sem maquiagem, o que roda e o que não roda.
+
+**O risco assumido, escrito para poder ser cobrado:** sem o carimbo, quem abrir a maquete sem
+o dono junto pode ler protótipo como produto. A mitigação passou a ser **humana** — a
+apresentação é dele — e não mais estrutural. Se a maquete algum dia for exposta sem
+acompanhamento, esta lei volta.
 
 **4. Lei do Motor Interno (canon Apêndice B).** Nenhum nome de fornecedor, modelo ou
 composição de terceiros em qualquer texto visível. O cliente vê **motor ALSHAM**.

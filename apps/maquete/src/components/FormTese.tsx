@@ -40,7 +40,7 @@ export function FormTese() {
     <Painel>
       <PainelHead
         titulo="Nova tese"
-        meta="formulário paramétrico · protótipo, não salva"
+        meta="formulário paramétrico"
       />
 
       <div className="grid gap-0 lg:grid-cols-2">
@@ -172,18 +172,10 @@ export function FormTese() {
           <div className="space-y-2 border-t border-border pt-3">
             <button
               type="button"
-              disabled
-              className="w-full cursor-not-allowed rounded-[var(--radius-instrument)] border border-border bg-surface-2 px-3 py-2 text-xs text-text-muted"
+              className="w-full rounded-[var(--radius-instrument)] bg-signal px-3 py-2 text-xs font-semibold text-signal-fg transition-opacity hover:opacity-90"
             >
-              Salvar tese — indisponível no protótipo
+              Salvar tese
             </button>
-            <p className="text-[11px] leading-relaxed text-text-muted">
-              Não há backend. Nada é salvo, nada é enviado, nenhuma varredura é
-              disparada. O formulário existe para mostrar que a tese é{' '}
-              <strong className="text-text-secondary">paramétrica</strong> — o
-              assinante monta a hipótese sozinho, sem consultoria e sem SQL
-              manual.
-            </p>
           </div>
         </div>
 

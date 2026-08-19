@@ -27,6 +27,10 @@ const EXIGIDOS = [
   'signal',
   'signal-dim',
   'signal-fg',
+  'fresh-ok',
+  'fresh-warn',
+  'fresh-stale',
+  'fresh-old',
 ] as const;
 
 export function lerTokens(): Tokens {

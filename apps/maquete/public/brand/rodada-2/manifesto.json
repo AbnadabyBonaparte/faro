@@ -1,0 +1,72 @@
+{
+  "rodada": 2,
+  "direcao": "C — documental",
+  "gerador": "apps/maquete/scripts/brand/gerar-rodada-2.ts",
+  "assets": [
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "hero-home-2400x1000.svg",
+      "bytes": 128896
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "hero-home-mobile-820x760.svg",
+      "bytes": 111272
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "banner-precos-2400x760.svg",
+      "bytes": 33720
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "capa-cacada-1600x900.svg",
+      "bytes": 122675
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "og-1200x630.svg",
+      "bytes": 135600
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "icone-512.svg",
+      "bytes": 842
+    },
+    {
+      "pasta": "brand/reveal",
+      "arquivo": "social-1080x1080.svg",
+      "bytes": 123113
+    },
+    {
+      "pasta": "brand/reveal",
+      "arquivo": "social-1080x1920.svg",
+      "bytes": 130710
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "fundo-teses-1920x360.svg",
+      "bytes": 13268
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "fundo-fila-1920x360.svg",
+      "bytes": 13309
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "fundo-watch-1920x360.svg",
+      "bytes": 13271
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "fundo-painel-1920x360.svg",
+      "bytes": 13283
+    },
+    {
+      "pasta": "brand/rodada-2",
+      "arquivo": "fundo-fontes-1920x360.svg",
+      "bytes": 13282
+    }
+  ]
+}

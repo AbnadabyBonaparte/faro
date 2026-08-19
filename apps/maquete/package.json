@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "eslint",
     "typecheck": "tsc --noEmit && tsc --noEmit -p scripts/tsconfig.json",
-    "brand:rodada-1": "node --experimental-strip-types scripts/brand/gerar-rodada-1.ts"
+    "brand:rodada-1": "node --experimental-strip-types scripts/brand/gerar-rodada-1.ts",
+    "brand:rodada-2": "node --experimental-strip-types scripts/brand/gerar-rodada-2.ts",
+    "contraste": "node --experimental-strip-types scripts/contraste.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
