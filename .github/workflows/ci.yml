@@ -9,6 +9,11 @@ name: CI — fundação e jazida
 #   · guarda 06 — o registry não promete o que não tem
 #   · guarda 07 — o freio de churn segura (nasceu de um número real: 4.256.121
 #     "estabelecimento novo" falsos num diff entre dois recortes reais da RFB)
+#
+# Onda 3 acrescentou:
+#   · guarda 08 — candidato SEM EVENTO não vira ficha (a fronteira entre o FARO
+#     e uma lista de empresas que batem num filtro), e pesos de tese somam 1
+#   · testes de integração da caça: tese → candidato → score → ficha preparada
 #   · mutação nova: sabotar o diff e exigir que a guarda 05 reprove
 #
 # 🔴 O CI NÃO BATE NA RECEITA FEDERAL. Nenhum job baixa lote. Um CI que depende
@@ -158,6 +163,27 @@ jobs:
             exit 1
           fi
           echo "✓ guarda 06 pegou a regra que nunca dispararia"
+
+          # ── ONDA 3 ────────────────────────────────────────────────────────
+          # A lei que separa o FARO de uma lista: ficha exige evento. Sabotamos
+          # a recusa e exigimos que a guarda 08 pegue.
+          echo "▸ sabotando: publicar aceita candidato sem evento"
+          psql -q -d faro_guardas -c "CREATE DATABASE faro_mut3 TEMPLATE faro_guardas;"
+          psql -v ON_ERROR_STOP=1 -X -q -d faro_mut3 -c "
+            DO \$\$
+            DECLARE src text;
+            BEGIN
+              SELECT pg_get_functiondef(p.oid) INTO src FROM pg_proc p
+                JOIN pg_namespace n ON n.oid = p.pronamespace
+               WHERE n.nspname = 'fichas' AND p.proname = 'publicar';
+              src := replace(src, 'IF v_c.evento_id IS NULL THEN', 'IF false THEN');
+              EXECUTE src;
+            END \$\$;"
+          if psql -v ON_ERROR_STOP=1 -X -q -d faro_mut3 -f tools/sql/guard_08_ficha_exige_evento.sql >/dev/null 2>&1; then
+            echo "✗ a guarda 08 NÃO pegou — ficha sem evento passaria e o produto viraria lista"
+            exit 1
+          fi
+          echo "✓ guarda 08 recusou ficha sem evento"
 
   escopo:
     name: escopo por branch (maquete × motor)
