@@ -1,36 +1,94 @@
 import { Painel, PainelHead } from '@/components/ui'
 
-const PLANOS = [
+/* ── A ESCADA v2 ───────────────────────────────────────────────────────────
+   Canon: MODELO-DE-NEGOCIO.md §D.0, martelo do dono 19/08/2026.
+   Todo número aqui é HIPÓTESE — o selo viaja com cada preço, não em rodapé. */
+
+const CACADA = {
+  nome: 'FARO Caçada',
+  valor: 'R$ 997',
+  unidade: 'avulso',
+  selo: 'A porta — todo cliente começa aqui',
+  escopo: [
+    '1 tese parametrizada',
+    'Os 3 melhores alvos, ranqueados',
+    'Ficha completa: EV líquido, fonte e data por linha, "por que não perseguir"',
+    'Eco de 30 dias — 1 alerta se um evento novo bater na tese',
+    'Abate 100% no 1º mês do Pro, se assinar em 30 dias',
+  ],
+}
+
+const DEGRAUS = [
   {
-    nome: 'FARO Solo',
-    valor: 'R$ 297',
+    nome: 'FARO Pro',
+    valor: 'R$ 1.997',
+    unidade: '/mês',
     escopo: [
-      '3 teses',
-      'Fila limitada de fichas',
-      'Watch básico',
+      '3 teses vivas',
+      '7 fichas novas por mês',
+      'Watch contínuo',
       'Exportação CSV',
     ],
   },
   {
-    nome: 'FARO Pro',
-    valor: 'R$ 697',
-    escopo: [
-      '10 teses',
-      'Watch contínuo',
-      'Evidence Graph completo',
-      'Relatórios por tese',
-    ],
-    destaque: true,
-  },
-  {
     nome: 'FARO Escritório',
-    valor: 'R$ 1.497',
+    valor: 'R$ 3.997',
+    unidade: '/mês',
     escopo: [
+      '7 teses vivas',
+      '15 fichas por mês',
       'Multiusuário',
-      'Teses avançadas',
       'Curadoria assistida',
       'Prioridade de atendimento',
     ],
+  },
+  {
+    nome: 'Operador Profissional',
+    valor: 'sob proposta',
+    unidade: 'ESTIMATIVA: R$ 8–15k/mês',
+    escopo: [
+      'Volume e profundidade sob desenho',
+      'Contrato próprio',
+      'Nunca indexado a êxito',
+    ],
+  },
+]
+
+/* A régua descendente é o argumento da escada — então ela aparece na tela,
+   não se deduz. Canon §D.0, lei 1. */
+const REGUA = [
+  { degrau: 'Caçada', preco: 'R$ 997', fichas: '3', porFicha: 'R$ 332' },
+  { degrau: 'Pro', preco: 'R$ 1.997', fichas: '7', porFicha: 'R$ 285' },
+  { degrau: 'Escritório', preco: 'R$ 3.997', fichas: '15', porFicha: 'R$ 266' },
+  {
+    degrau: 'Ficha extra',
+    preco: 'R$ 349',
+    fichas: '1',
+    porFicha: 'R$ 349',
+    extra: true,
+  },
+]
+
+const RITUAL = [
+  {
+    n: '1',
+    t: 'A presa em língua de gente',
+    d: 'Campo livre: o cliente escreve o que procura como falaria com um sócio. Nada de formulário de trinta campos — formulário longo faz desistir ou mentir.',
+  },
+  {
+    n: '2',
+    t: 'O Espelho do Refinador',
+    d: 'A tese é traduzida em parâmetros e exibida em duas colunas: "o que tu pediste" × "o que dá para caçar COM PROVA". Todo proxy sai declarado como proxy, antes do pagamento. Refino é grátis e ilimitado.',
+  },
+  {
+    n: '3',
+    t: 'O Censo Prévio',
+    d: 'O território é contado ANTES de cobrar e exibido só em faixa. Território magro: o sistema recusa a venda e sugere alargar a tese. É aqui que o reembolso se evita — na contagem, não no jurídico.',
+  },
+  {
+    n: '4',
+    t: 'O Aceite da Caçada',
+    d: 'Tese final por extenso, o que será entregue, e o que NÃO é (não é parecer; não garante conversão). Checkbox, botão "Aprovo esta caçada" — e só então pagamento e execução. O aceite grava quem, quando e qual versão da tese, em trilha imutável.',
   },
 ]
 
@@ -44,49 +102,83 @@ export default function Page() {
         </p>
         <div className="mt-2 space-y-2 text-xs leading-relaxed text-text">
           <p>
-            Os valores desta página são{' '}
-            <strong>hipótese de trabalho</strong>, registrada para poder ser
-            testada e derrubada. Nenhum deles é preço vigente, porque{' '}
-            <strong>não existe produto para vender</strong>: não há motor, não há
-            coleta, não há assinatura, não há checkout.
+            Os valores desta página são <strong>hipótese de trabalho</strong>,
+            registrada para poder ser testada e derrubada. Nenhum deles é preço
+            vigente, porque <strong>não existe produto para vender</strong>: o
+            motor está em construção, não há assinatura e não há checkout.
           </p>
           <p>
             Nenhum preço vira verdade antes de um{' '}
-            <strong>piloto pago de 30 dias</strong> com um design partner. O
-            preço só se valida junto com o custo real de produzir uma ficha — e
-            esse custo é desconhecido enquanto o motor não roda.
+            <strong>piloto pago de 30 dias</strong>. O preço só se valida junto
+            com o custo real de produzir uma ficha — e esse custo é desconhecido
+            enquanto o motor não roda um ciclo inteiro.
           </p>
         </div>
       </div>
 
       <header className="space-y-2">
         <h1 className="text-xl font-bold text-text">
-          Preços — hipótese de fundação
+          A escada — hipótese de fundação
         </h1>
         <p className="max-w-2xl text-sm leading-relaxed text-text-secondary">
-          A estrutura pretendida é{' '}
-          <strong className="text-text">assinatura + capacidade + consumo</strong>
-          . O custo de gerar uma oportunidade varia com a quantidade de fontes e
-          o processamento envolvido, então travar a economia só em &ldquo;número
-          de fichas&rdquo; seria errado.
+          Todo cliente entra pela <strong className="text-text">Caçada</strong>:
+          avulsa, sem assinatura, sem risco de mensalidade. Quem volta, sobe. A
+          estrutura é{' '}
+          <strong className="text-text">
+            assinatura + capacidade + consumo
+          </strong>
+          , porque o custo de gerar uma oportunidade varia com as fontes e o
+          processamento envolvidos.
         </p>
       </header>
 
+      {/* ── A PORTA ───────────────────────────────────────────────────────── */}
+      <div className="rounded-[var(--radius-instrument)] border border-signal bg-surface p-5">
+        <p className="text-[10px] font-semibold tracking-widest text-signal uppercase">
+          {CACADA.selo}
+        </p>
+        <div className="mt-2 flex flex-wrap items-baseline gap-2">
+          <span className="text-base font-semibold text-text">
+            {CACADA.nome}
+          </span>
+          <span className="num text-3xl font-bold text-text">
+            {CACADA.valor}
+          </span>
+          <span className="num text-[11px] text-text-muted">
+            {CACADA.unidade}
+          </span>
+          <span className="num text-[10px] tracking-widest text-fresh-warn uppercase">
+            hipótese
+          </span>
+        </div>
+        <ul className="mt-4 grid gap-1.5 border-t border-border pt-3 sm:grid-cols-2">
+          {CACADA.escopo.map((e) => (
+            <li
+              key={e}
+              className="flex items-start gap-1.5 text-[11px] leading-relaxed text-text-secondary"
+            >
+              <span
+                className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-signal"
+                aria-hidden
+              />
+              {e}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* ── OS DEGRAUS ────────────────────────────────────────────────────── */}
       <div className="grid gap-4 md:grid-cols-3">
-        {PLANOS.map((p) => (
+        {DEGRAUS.map((p) => (
           <div
             key={p.nome}
-            className={
-              p.destaque
-                ? 'rounded-[var(--radius-instrument)] border border-signal bg-surface p-4'
-                : 'rounded-[var(--radius-instrument)] border border-border bg-surface p-4'
-            }
+            className="rounded-[var(--radius-instrument)] border border-border bg-surface p-4"
           >
             <p className="text-sm font-semibold text-text">{p.nome}</p>
             <div className="mt-2 flex items-baseline gap-1.5">
               <span className="num text-2xl font-bold text-text">{p.valor}</span>
-              <span className="num text-[11px] text-text-muted">/mês</span>
             </div>
+            <p className="num text-[11px] text-text-muted">{p.unidade}</p>
             <p className="num mt-0.5 text-[10px] tracking-widest text-fresh-warn uppercase">
               hipótese
             </p>
@@ -116,6 +208,114 @@ export default function Page() {
         ))}
       </div>
 
+      {/* ── A RÉGUA ───────────────────────────────────────────────────────── */}
+      <Painel>
+        <PainelHead titulo="A régua — o R$ por ficha cai conforme se sobe" />
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead>
+              <tr className="border-b border-border text-[10px] tracking-widest text-text-muted uppercase">
+                <th className="px-4 py-2 font-semibold">Degrau</th>
+                <th className="px-4 py-2 text-right font-semibold">Preço</th>
+                <th className="px-4 py-2 text-right font-semibold">Fichas</th>
+                <th className="px-4 py-2 text-right font-semibold">
+                  R$ por ficha
+                </th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-border">
+              {REGUA.map((r) => (
+                <tr key={r.degrau}>
+                  <td className="px-4 py-2 text-text">{r.degrau}</td>
+                  <td className="num px-4 py-2 text-right text-text-secondary">
+                    {r.preco}
+                  </td>
+                  <td className="num px-4 py-2 text-right text-text-secondary">
+                    {r.fichas}
+                  </td>
+                  <td
+                    className={
+                      r.extra
+                        ? 'num px-4 py-2 text-right font-semibold text-fresh-warn'
+                        : 'num px-4 py-2 text-right font-semibold text-signal'
+                    }
+                  >
+                    {r.porFicha}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="border-t border-border bg-surface-2 px-4 py-3">
+          <p className="text-[11px] leading-relaxed text-text-secondary">
+            A ficha extra é sempre mais cara que a ficha de plano. Sem isso a
+            escada não empurra: se a avulsa saísse mais barata, o cliente
+            racional ficaria embaixo para sempre, comprando no varejo.
+          </p>
+        </div>
+      </Painel>
+
+      {/* ── COMO SE COMPRA ────────────────────────────────────────────────── */}
+      <Painel>
+        <PainelHead
+          titulo="Como se compra"
+          meta="ritual do aceite — ilustração, sem formulário"
+        />
+        <ol className="divide-y divide-border">
+          {RITUAL.map((x) => (
+            <li key={x.n} className="flex items-start gap-3 px-4 py-3">
+              <span className="num mt-0.5 w-5 shrink-0 text-xs text-signal">
+                {x.n}
+              </span>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold text-text">{x.t}</p>
+                <p className="mt-0.5 text-xs leading-relaxed text-text-secondary">
+                  {x.d}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div className="border-t border-border bg-surface-2 px-4 py-3">
+          <p className="text-[11px] leading-relaxed text-text-secondary">
+            Nada aqui é funcional nesta maquete: não há campo, não há censo, não
+            há aceite. É a ilustração de um processo que, na primeira fase, roda
+            à mão — leitura conjunta faz o papel do Espelho, proposta assinada
+            faz o papel do Aceite.
+          </p>
+        </div>
+      </Painel>
+
+      {/* ── AS TRÊS LEIS ──────────────────────────────────────────────────── */}
+      <Painel>
+        <PainelHead titulo="As três leis da escada" />
+        <ul className="divide-y divide-border">
+          {[
+            {
+              t: 'Régua descendente',
+              d: 'O R$ por ficha cai subindo (332 → 285 → 266) e a ficha extra custa mais que a de plano. É o que faz subir valer a pena.',
+            },
+            {
+              t: 'Cada degrau dobra',
+              d: '997 → 1.997 → 3.997. Degrau que dobra é degrau que se decide. Degrau de 20% em 20% vira negociação, e negociação consome o tempo que deveria ir para o produto.',
+            },
+            {
+              t: 'Escassez é o produto',
+              d: 'Não vendemos volume, vendemos pontaria. Quem recebe 200 alvos persegue 3 e conclui que 197 eram lixo. Quem recebe 3 alvos ranqueados persegue os 3 — e volta. A franquia baixa é a entrega, não uma limitação disfarçada de plano.',
+            },
+          ].map((x) => (
+            <li key={x.t} className="px-4 py-3">
+              <p className="text-xs font-semibold text-text">{x.t}</p>
+              <p className="mt-0.5 text-xs leading-relaxed text-text-secondary">
+                {x.d}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </Painel>
+
+      {/* ── CONDIÇÕES ─────────────────────────────────────────────────────── */}
       <Painel>
         <PainelHead titulo="Condições que fazem parte da hipótese" />
         <ul className="divide-y divide-border">
@@ -125,8 +325,8 @@ export default function Page() {
               d: 'O plano de entrada, sozinho, atrai quem consome a base e cancela. Quem fecha contrato de recuperação tributária ganha por êxito — o valor do FARO seria o ROI dele, não o preço de uma lista. O compromisso alinha o assinante ao monitoramento contínuo, não ao primeiro download.',
             },
             {
-              t: 'Créditos de investigação',
-              d: 'Para caçadas pesadas, acima do consumo do plano. Uma oportunidade custa mais ou menos conforme fontes e processamento envolvidos.',
+              t: 'Créditos de investigação — a ficha extra a R$ 349',
+              d: 'Para caçadas pesadas, acima da franquia do plano. Uma oportunidade custa mais ou menos conforme fontes e processamento envolvidos.',
             },
             {
               t: 'Desconto de fundador declarado — nunca gratuidade',
@@ -147,13 +347,14 @@ export default function Page() {
         </ul>
       </Painel>
 
+      {/* ── O QUE PRECISA SER PROVADO ─────────────────────────────────────── */}
       <Painel>
         <PainelHead titulo="O que precisa ser provado antes de cobrar" />
         <ol className="divide-y divide-border">
           {[
-            'Que o comprador paga mensalmente por oportunidade qualificada.',
-            'Que a tese produz valor novo depois do primeiro lote — e não esvazia.',
-            'Que o custo por ficha permite margem nestes patamares.',
+            'Que o comprador paga R$ 997 por três alvos ranqueados — e não pede trinta.',
+            'Que a tese produz valor novo depois do primeiro lote, e não esvazia.',
+            'Que o custo por ficha permite margem nestes patamares. Hoje esse custo é desconhecido: os volumes de 3, 7 e 15 foram escolhidos para a régua descer, não medidos contra o custo real de produzir uma ficha.',
           ].map((x, i) => (
             <li key={x} className="flex items-start gap-3 px-4 py-3">
               <span className="num w-4 shrink-0 text-xs text-text-muted">
