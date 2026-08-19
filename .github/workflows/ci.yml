@@ -75,8 +75,24 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
 
-      - name: instalar cliente psql e unzip
-        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends postgresql-client unzip
+      # 🔴 Este passo já travou 9 minutos num `apt-get` que normalmente leva 9
+      # segundos (run 32272165405, 19/08). O runner do GitHub JÁ TRAZ psql e
+      # unzip — instalar por instalar é pagar um mirror lento toda vez, num
+      # passo que não é o objeto do teste. Agora só instala se faltar, e o
+      # timeout transforma travamento silencioso em falha rápida e legível.
+      - name: garantir psql e unzip
+        timeout-minutes: 5
+        run: |
+          faltando=""
+          command -v psql  >/dev/null || faltando="$faltando postgresql-client"
+          command -v unzip >/dev/null || faltando="$faltando unzip"
+          if [ -z "$faltando" ]; then
+            echo "✓ psql $(psql --version | awk '{print $3}') e unzip já presentes"
+            exit 0
+          fi
+          echo "▸ instalando:$faltando"
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends $faltando
 
       - name: aplicar migrations e rodar as guardas
         run: pnpm db:guards
