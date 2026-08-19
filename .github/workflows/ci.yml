@@ -149,12 +149,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with: { fetch-depth: 0 }
-      - name: a Onda 1 não pode ter tocado apps/maquete
+      # A maquete fica intocada até a Onda que a substituir por tela real.
+      # Enquanto isso ela é a referência visual, e mexer nela sem ordem é
+      # mudar a referência no meio da obra.
+      - name: nenhuma Onda pode ter tocado apps/maquete sem ordem
         run: |
           BASE="${{ github.event.pull_request.base.sha }}"
           if [ -z "$BASE" ]; then echo "sem base de PR — checagem pulada"; exit 0; fi
           if git diff --name-only "$BASE" HEAD -- apps/maquete | grep -q .; then
-            echo "✗ apps/maquete foi tocada — a Onda 1 declara que ela fica intocada"
+            echo "✗ apps/maquete foi tocada — ela fica intocada até ordem em contrário"
             git diff --name-only "$BASE" HEAD -- apps/maquete
             exit 1
           fi

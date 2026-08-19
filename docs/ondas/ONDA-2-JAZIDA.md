@@ -1,6 +1,8 @@
 # ONDA 2 — A JAZIDA VIVA
 
-> Relatório de bordo · 19/08/2026 · branch `faro/onda-2-jazida`
+> Relatório de bordo · 19/08/2026 · PR #2, mesclado
+> Atualizações posteriores ao merge entram por PR próprio e ficam datadas no
+> corpo — um relatório que muda sem dizer que mudou não é relatório.
 > A Regra de Pedro vale para este relatório: ele responde com prova, traz o
 > adjacente, argumenta contra si mesmo, e deixa carga reservada esperando o
 > "pode fechar" do dono.
@@ -315,30 +317,77 @@ aprende a ignorar o vermelho.
 | Diff 4,49 M × 4,49 M | **45 s** |
 | Idempotência (recarga do mesmo lote) | **0,19 s**, zero linha nova |
 
-### O que é ESTIMATIVA
+### O que era ESTIMATIVA — e o que virou medição
 
-> 🟡 **ESTIMATIVA · base declarada:** extrapolação por bytes comprimidos, a
-> partir da densidade medida em `Empresas1` (57.706 linhas/MB) e
-> `Estabelecimentos1` (13.909 linhas/MB), assumindo compressão uniforme entre
-> os dez arquivos de cada conjunto.
+A primeira versão deste relatório extrapolava tudo por bytes comprimidos e
+avisava que o número provavelmente estava alto. Em vez de deixar o aviso, fui
+medir. Os arquivos `0` de cada conjunto são os únicos que a extrapolação não
+cobria bem (`Empresas0` é 7× os outros nove; `Estabelecimentos0` é 6×), então
+são exatamente esses dois que estão sendo contados linha a linha.
 
-| | ESTIMATIVA |
+#### ✅ `empresas` — MEDIDO
+
+| | |
 |---|---:|
-| Linhas por coleta completa | **~170 M** |
-| Jazida por coleta | **~97 GiB** |
-| Jazida com 12 coletas retidas | **~1,17 TiB** |
-| Carga sequencial, 1 processo | **~2,0 h** |
-| Carga com 4 processos | **~0,5 h** |
+| `Empresas0` — membro `K3241.K03200Y0.D60808.EMPRECSV` | **29.069.564 linhas** (medido) |
+| `Empresas1..9` — extrapolado da densidade de `Empresas1` | ~47,08 M |
+| **Total `empresas` por coleta** | **~76,15 M** |
 
-> ⚠️ **CONTRA-ARGUMENTO CONTRA MEU PRÓPRIO NÚMERO.** A extrapolação
-> provavelmente **superestima**. `Empresas0.zip` (552 MB) é 7× maior que os
-> outros nove, e `Estabelecimentos0.zip` (2,2 GiB) é 6× maior — se esses dois
-> comprimem diferente do resto, a densidade medida não vale para eles. O
-> resultado de 79 M linhas de `empresas` é maior que a base de CNPJs conhecida
-> do país, o que é sinal de que o número está alto.
->
-> A medição direta desses dois arquivos está em curso e entra aqui quando
-> terminar. Enquanto não entrar, **trate 170 M como teto, não como número**.
+**A extrapolação errou 3,7% para cima** (previa 79,0 M). Errou porque
+`Empresas0` comprime melhor: 52.592 linhas/MB contra 57.706 de `Empresas1` —
+9% de diferença de densidade entre arquivos do mesmo conjunto.
+
+> ✏️ **CORREÇÃO DE UMA AFIRMAÇÃO MINHA.** A versão anterior deste relatório
+> dizia que 79 M "é maior que a base de CNPJs conhecida do país". **Eu não
+> verifiquei isso.** Era palpite com cara de fato — exatamente o que a Lei 7
+> proíbe, escapando dentro do próprio parágrafo em que eu me gabava de aplicá-la.
+> A frase saiu. O que sobra é o que dá para sustentar: a extrapolação errou
+> 3,7% para cima, e a razão é a diferença de densidade entre os arquivos.
+
+#### ❔ `estabelecimentos` — CONTAGEM EM CURSO
+
+`Estabelecimentos0.zip` está sendo baixado e contado neste momento. Parcial, com
+o método declarado para poder ser conferido:
+
+| | |
+|---|---:|
+| Tamanho anunciado pela fonte (PROPFIND) | 2.200.116.910 bytes |
+| Baixado às 13:25:16Z | **1.368.600.576 bytes (62,2%)** |
+| Taxa observada | ~896 KB/s |
+
+**Método:** `curl -C -` para o disco, depois `unzip -p ARQUIVO | wc -l`. O mesmo
+que já produziu o número de `Empresas0`. Não é amostragem nem estimativa: é a
+contagem de todas as linhas do arquivo.
+
+Enquanto não terminar, o número de `estabelecimentos` continua sendo
+extrapolação:
+
+| | |
+|---|---:|
+| 🟡 `estabelecimentos` por coleta (ESTIMATIVA) | ~74,2 M |
+| 🟡 `simples` por coleta (ESTIMATIVA, densidade de `empresas` como proxy) | ~17,4 M |
+
+> ❔ **Se `Estabelecimentos0` comprimir como `Empresas0` comprimiu — melhor que
+> os irmãos — o número real fica ABAIXO de 74,2 M.** É a hipótese que os dados
+> de `empresas` sustentam, e é só isso: hipótese, até a contagem fechar.
+
+#### Totais — o que dá para dizer hoje
+
+| | |
+|---|---:|
+| Linhas por coleta completa | 🟡 **~167 M** (76,15 M medido + 91 M estimado) |
+| Jazida por coleta | 🟡 **~96 GiB** |
+| Jazida com 12 coletas retidas | 🟡 **~1,13 TiB** |
+| Carga sequencial, 1 processo | 🟡 **~2,0 h** |
+| Carga com 4 processos | 🟡 **~0,5 h** |
+
+Base de cada estimativa: 465 B/linha para `empresas` e `simples`, 803 B/linha
+para `estabelecimentos` (ambos **medidos**, com índices), e as vazões medidas de
+31 k e 18 k linhas/s.
+
+**Trate ~167 M como teto.** Os dois ajustes conhecidos empurram para baixo: a
+densidade menor dos arquivos `0`, já confirmada em `empresas`, e o proxy de
+`simples`, que usa a densidade de `empresas` sem prova.
 
 ### O plano de carga — e por que ele não é "roda tudo"
 
