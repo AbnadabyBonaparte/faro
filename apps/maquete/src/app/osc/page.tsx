@@ -7,6 +7,7 @@ import {
   MERCADO,
   OFERTA,
   PARCELAS,
+  PORQUE_SEIS_MIL,
   PRAZOS,
   RAZOES_CONTRA,
 } from '@/data/fundador'
@@ -336,9 +337,26 @@ export default function Page() {
             </p>
           </div>
 
-          <p className="text-xs leading-relaxed text-text-secondary">
-            {OFERTA.condicao}
-          </p>
+          {/* A objeção de preço nasce em quem já viu /precos. Melhor respondê-la
+              aqui, de peito aberto, do que deixá-la crescer calada até virar
+              motivo de não responder. */}
+          <div className="rounded-[var(--radius-instrument)] border border-border bg-surface-2 p-3">
+            <p className="mb-2 text-xs font-semibold text-text">
+              {PORQUE_SEIS_MIL.pergunta}
+            </p>
+            <ol className="space-y-2">
+              {PORQUE_SEIS_MIL.linhas.map((l, i) => (
+                <li key={l} className="flex gap-2">
+                  <span className="num shrink-0 text-[11px] text-text-muted">
+                    {i + 1}
+                  </span>
+                  <span className="text-[11px] leading-relaxed text-text-secondary">
+                    {l}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </div>
 
           <a
             href={OFERTA.ctaUrl}

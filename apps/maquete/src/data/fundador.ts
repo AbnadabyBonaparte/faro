@@ -256,9 +256,40 @@ export const OFERTA = {
   valor: 'R$ 6.000',
   chamadaValor: 'Investimento de partida do motor principal',
   vagas: 1,
-  condicao:
-    'Condição de fundador: o preço fica travado na assinatura futura. Quem ' +
-    'entra agora não paga a tabela que vier depois.',
   cta: 'Aceito — iniciar a mineração',
+  /* 🔴 O NÚMERO AINDA NÃO É O DO DONO — ver o aviso no topo da página. */
   ctaUrl: 'https://wa.me/5566996177710',
+} as const
+
+/* ── A OBJEÇÃO DE PREÇO, RESPONDIDA ANTES DE NASCER ───────────────────────
+   Quem lê /precos vê FARO Pro por R$ 1.997/mês e pergunta, com razão, por que
+   o mês de fundação custa três vezes isso. A resposta não é retórica — as três
+   linhas abaixo são conferíveis:
+
+   · a /precos de fato não tem CTA de compra nenhum (nenhum href, nenhum botão,
+     nenhum checkout) — os planos existem como tabela declarada, não como
+     produto comprável;
+   · "FARO Pro" é o nome exato do degrau de R$ 1.997/mês naquela página;
+   · a mecânica de abater a entrada na assinatura já é canon — a FARO Caçada
+     avulsa abate 100% no 1º mês do Pro (MODELO-DE-NEGOCIO.md §D.0).
+
+   A condição de fundador que antes era um parágrafo solto da oferta foi
+   absorvida na linha 3: dizer "preço travado" duas vezes no mesmo painel não
+   reforça, gasta.
+   ────────────────────────────────────────────────────────────────────────── */
+export const PORQUE_SEIS_MIL = {
+  pergunta: 'Por que R$ 6.000, se a assinatura custará menos?',
+  linhas: [
+    'Os planos da página de preços são o software de autoatendimento — e ele ' +
+      'ainda não está à venda. Não existe botão de compra naquela página: ' +
+      'ninguém consegue contratá-los hoje, nem você.',
+    'O Mês de Fundação é outra coisa. É o fundador operando o motor ' +
+      'pessoalmente para um cliente só: leitura conjunta das três teses, ' +
+      'parametrização, revisão humana de cada ficha e dossiê entregue em mão. ' +
+      'É o trabalho que o mercado precifica como consultoria — a tabela logo ' +
+      'acima — e não como assinatura.',
+    'Condição de fundador: assinando o FARO Pro no lançamento, o primeiro mês ' +
+      'já está incluso neste investimento, e o preço de fundador fica travado. ' +
+      'Quem entra agora não paga a tabela que vier depois.',
+  ],
 } as const
