@@ -29,6 +29,10 @@ export const metadata: Metadata = {
 
 const TOTAL = PARCELAS.reduce((s, p) => s + p.valor * p.peso, 0)
 
+const CTA_HREF = `https://wa.me/${OFERTA.ctaNumero}?text=${encodeURIComponent(
+  OFERTA.ctaTexto,
+)}`
+
 export default function Page() {
   return (
     <div className="mx-auto max-w-3xl space-y-6 px-4 py-10">
@@ -359,7 +363,7 @@ export default function Page() {
           </div>
 
           <a
-            href={OFERTA.ctaUrl}
+            href={CTA_HREF}
             target="_blank"
             rel="noopener noreferrer nofollow"
             className="block w-full rounded-[var(--radius-instrument)] bg-signal px-4 py-3 text-center text-sm font-semibold text-signal-fg transition-opacity hover:opacity-90"

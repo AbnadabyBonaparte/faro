@@ -257,8 +257,15 @@ export const OFERTA = {
   chamadaValor: 'Investimento de partida do motor principal',
   vagas: 1,
   cta: 'Aceito — iniciar a mineração',
-  /* 🔴 O NÚMERO AINDA NÃO É O DO DONO — ver o aviso no topo da página. */
-  ctaUrl: 'https://wa.me/5566996177710',
+  /* O WhatsApp do DONO. O botão é o cliente falando com o vendedor — nunca o
+     contrário. Formato do `wa.me`: código do país + DDD + número, sem sinal,
+     sem espaço, sem parêntese. 55 é o Brasil, 63 é o DDD. */
+  ctaNumero: '5563992428800',
+  /* Texto que já chega escrito na conversa, na voz de QUEM APERTA o botão.
+     Invertê-lo seria o vendedor se respondendo sozinho. Vai cru aqui e é
+     codificado na hora de montar o endereço — hífen longo e acento não
+     sobrevivem colados numa URL escrita à mão. */
+  ctaTexto: 'Aceito a oferta de fundador — vamos iniciar.',
 } as const
 
 /* ── A OBJEÇÃO DE PREÇO, RESPONDIDA ANTES DE NASCER ───────────────────────
