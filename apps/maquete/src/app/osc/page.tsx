@@ -1,5 +1,8 @@
 import type { Metadata } from 'next'
+import { cookies } from 'next/headers'
+import { PortaoOsc } from '@/components/PortaoOsc'
 import { Painel, PainelHead } from '@/components/ui'
+import { COOKIE, chaveDaCasa, selo } from '@/lib/portao'
 import {
   ENTREGAS,
   EVIDENCIAS,
@@ -27,13 +30,51 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false, nocache: true },
 }
 
+/* 🔴 SEM ISTO O PORTÃO NÃO TRANCA. Descoberto testando, não pensando.
+   
+   A conferência da chave mora dentro de um `if`. Quando a build roda sem
+   `OSC_ACCESS_KEY` no ambiente — que é o caso do CI e de qualquer preview —
+   o `if` não entra, `cookies()` nunca é chamado, e o Next pré-renderiza a
+   página como ESTÁTICA. A partir daí o servidor entrega HTML pronto e o
+   código do portão não roda mais nunca: configurar a chave depois não tranca
+   coisa nenhuma, e nada na tela avisa.
+   
+   `force-dynamic` obriga a página a ser montada a cada pedido. O custo é
+   perder o pré-render de uma página que nem indexada é; o ganho é o portão
+   valer em qualquer combinação de build e ambiente, que é o único jeito de um
+   controle de acesso servir para alguma coisa. */
+export const dynamic = 'force-dynamic'
+
 const TOTAL = PARCELAS.reduce((s, p) => s + p.valor * p.peso, 0)
 
 const CTA_HREF = `https://wa.me/${OFERTA.ctaNumero}?text=${encodeURIComponent(
   OFERTA.ctaTexto,
 )}`
 
-export default function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<{ erro?: string }>
+}) {
+  /* O PORTÃO.
+
+     Se `OSC_ACCESS_KEY` não estiver no ambiente, a página fica aberta — é o
+     comportamento de antes, e é o que faz o preview funcionar antes de o dono
+     configurar a chave na Vercel.
+
+     ⚠️ O contrário disso é o risco: com a variável ausente em produção, a
+     página fica pública sem nenhum aviso na tela. O portão é silencioso de
+     propósito (dizer "sem chave configurada" seria entregar o ouro), então a
+     conferência de que a variável está lá é do dono, não da página. */
+  const chave = chaveDaCasa()
+  if (chave !== undefined) {
+    const cookieStore = await cookies()
+    if (cookieStore.get(COOKIE)?.value !== selo(chave)) {
+      const { erro } = await searchParams
+      return <PortaoOsc errou={erro === '1'} />
+    }
+  }
+
   return (
     <div className="mx-auto max-w-3xl space-y-6 px-4 py-10">
       {/* ── a · ABERTURA ──────────────────────────────────────────────── */}
