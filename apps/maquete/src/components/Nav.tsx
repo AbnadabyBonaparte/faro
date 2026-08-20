@@ -11,6 +11,7 @@ const ITENS = [
   { href: '/watch', rotulo: 'Watch' },
   { href: '/painel', rotulo: 'Painel da tese' },
   { href: '/fontes', rotulo: 'Fontes' },
+  { href: '/diario', rotulo: 'Diário' },
   { href: '/precos', rotulo: 'Preços' },
 ]
 
