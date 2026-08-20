@@ -36,8 +36,8 @@ de saúde antes de caçar seria cozinhar o resultado e fotografar a panela.
 |---|---:|
 | Estabelecimentos varridos (agosto) | **600.000** |
 | Empresas cruzadas (agosto) | **590.572** |
-| Fatia do universo nacional | ~**1,3%** `ESTIMATIVA` |
-| Régua da carga completa | ×**75** `ESTIMATIVA` |
+| Fatia do universo nacional | ~**0,8%** — 600 mil de ~73,6 M estabelecimentos |
+| Régua da carga completa | ×**123** |
 
 🟡 Os 7.372 estabelecimentos (1,2%) cuja empresa não está no mesmo arquivo do
 lote ficam sem cruzamento. É o reparticionamento da RFB agindo **entre
@@ -210,7 +210,7 @@ lados — o diff rodou em 963 ms e produziu 421 eventos.
   site. O motor entrega **perfil compatível**; quem confirma é conferência
   humana. Está na ficha, em `confiancaInferencia` e no "por que não perseguir".
 - 🟡 **Os 4 alvos no quintal são poucos porque a amostra é pequena**, não porque
-  o quintal seja magro. Com a base inteira, ×75.
+  o quintal seja magro. Com a base inteira, ×123.
 - ❔ **A T-MED continua travada em L6.** Motor pronto não libera prospecção: a
   fronteira B2B do interesse legítimo some no empresário individual, que é
   exatamente o alvo. Ver `DOUTRINA-DO-MINERADOR.md` §4.
