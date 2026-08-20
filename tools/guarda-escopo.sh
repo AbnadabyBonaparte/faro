@@ -30,6 +30,21 @@
 # mergeia. Padrão novo só se a casa passar a ter uma FAMÍLIA de branches assim —
 # senão o curinga vira porta aberta para tudo.
 #
+# `faro/esteira-real` e `faro/pagina-fundador` entraram em 20/08/2026 pelas duas
+# ordens da demo: o Diário de Mineração (a corrida real virando página) e a
+# página do Operador Fundador. As duas são ordens DE maquete, e as duas nasceram
+# com nome fora do padrão — a guarda as reprovou por fazerem exatamente o que
+# foram mandadas fazer, que é o mesmo caso do `faro/tempo-de-cozinha`.
+#
+# Entram pelo MESMO mecanismo: nome literal, não curinga. O curinga
+# `faro/esteira-*` ou `faro/pagina-*` seria a porta aberta que o parágrafo acima
+# manda evitar — e duas ordens não fazem família.
+#
+# E entram pelo caminho completo, não pela metade: ao cair no caso
+# comercial/maquete elas ganham a maquete e PERDEM o motor. Nenhuma das duas
+# toca `services/` ou `packages/`, então a troca é real e o total de coisas que
+# uma branch pode tocar sem ordem continua o mesmo.
+#
 # O segundo sentido é o que impede o ajuste de virar buraco: antes, uma branch
 # de maquete não podia mexer em nada da maquete; agora ela pode, mas em troca
 # não pode mexer no motor. O total de coisas que uma branch pode tocar sem
@@ -65,7 +80,8 @@ tocou() { git diff --name-only "$BASE" HEAD -- "$@" | grep -q .; }
 listar() { git diff --name-only "$BASE" HEAD -- "$@"; }
 
 case "$BRANCH" in
-  faro/comercial-* | faro/maquete-* | faro/visual-* | faro/tempo-de-cozinha)
+  faro/comercial-* | faro/maquete-* | faro/visual-* \
+  | faro/tempo-de-cozinha | faro/esteira-real | faro/pagina-fundador)
     echo "▸ branch de produto/comercial: \`$BRANCH\`"
     echo "  apps/maquete LIBERADA (exceção declarada — ver cabeçalho deste arquivo)"
     echo "  o motor fica PROTEGIDO nesta branch"
