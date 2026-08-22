@@ -10,3 +10,6 @@ next-env.d.ts
 .env
 .env.local
 .env.*.local
+
+# SEGURANÇA (censo 22/08/2026): documento interno de avaliacao nao vai em public/.
+apps/maquete/public/**/*.html

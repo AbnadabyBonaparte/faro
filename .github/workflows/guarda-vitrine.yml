@@ -1,0 +1,18 @@
+name: Guarda de vitrine
+
+# public/ e servido ao mundo. Este check falha o build quando um documento
+# interno (proposta, relatorio, planilha, credencial) volta para la.
+# Censo 22/08/2026 — nasceu de dois vazamentos reais em producao.
+
+on:
+  push:
+    branches: [main, "claude/**", "mae/**"]
+  pull_request:
+
+jobs:
+  guarda-vitrine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: public/ nao pode conter documento interno
+        run: bash ./scripts/guarda-vitrine.sh
